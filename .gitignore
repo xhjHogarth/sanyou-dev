@@ -1,0 +1,7 @@
+# Project exclude paths
+/mybatis-generatorConfig/target/
+/sanyou-dev-api/target/
+/sanyou-dev-common/target/
+/sanyou-dev-mapper/target/
+/sanyou-dev-pojo/target/
+/sanyou-dev-service/target/
