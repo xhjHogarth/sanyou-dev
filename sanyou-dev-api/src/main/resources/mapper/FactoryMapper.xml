@@ -7,16 +7,18 @@
     -->
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="factory_name" property="factoryName" jdbcType="VARCHAR" />
+    <result column="layer" property="layer" jdbcType="TINYINT" />
+    <result column="parentId" property="parentId" jdbcType="VARCHAR" />
     <result column="delete_mark" property="deleteMark" jdbcType="TINYINT" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="deletetime" property="deletetime" jdbcType="TIMESTAMP" />
   </resultMap>
 
-  <select id="query" parameterType="String" resultMap="BaseResultMap">
-    select id,factory_name,delete_mark,createtime,updatetime,deletetime
+  <select id="query" parameterType="String" resultType="com.sanyou.pojo.vo.FactoryVo">
+    select id,factory_name as factoryName,layer, parentId,delete_mark as deleteMark,createtime,updatetime,deletetime
     from factory
-    where 1=1 and delete_mark=0
+    where 1=1 and delete_mark=0 and layer=1
     <if test="factoryName != null and factoryName != ''">
       and factory_name like '%${factoryName}%'
     </if>

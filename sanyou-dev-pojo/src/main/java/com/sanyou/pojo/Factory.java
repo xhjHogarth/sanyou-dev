@@ -18,6 +18,13 @@ public class Factory {
     @Column(name = "factory_name")
     private String factoryName;
 
+    @ApiModelProperty(value = "层级", name = "layer",example = "1")
+    private Byte layer;
+
+    @ApiModelProperty(value = "上级id", name = "parentId",example = "1")
+    @Column(name = "parentId")
+    private String parentId;
+
     @ApiModelProperty(value = "删除标志", name = "deleteMark",example = "0")
     @Column(name = "delete_mark")
     private Byte deleteMark;
@@ -113,5 +120,21 @@ public class Factory {
      */
     public void setDeletetime(Date deletetime) {
         this.deletetime = deletetime;
+    }
+
+    public Byte getLayer() {
+        return layer;
+    }
+
+    public void setLayer(Byte layer) {
+        this.layer = layer;
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 }

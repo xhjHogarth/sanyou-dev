@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50729
 File Encoding         : 65001
 
-Date: 2021-06-01 15:24:38
+Date: 2021-06-05 02:53:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,6 +22,8 @@ DROP TABLE IF EXISTS `factory`;
 CREATE TABLE `factory` (
   `id` varchar(20) NOT NULL,
   `factory_name` varchar(100) NOT NULL,
+  `layer` tinyint(4) DEFAULT NULL,
+  `parentId` varchar(20) DEFAULT NULL,
   `delete_mark` tinyint(4) DEFAULT NULL,
   `createtime` datetime DEFAULT NULL,
   `updatetime` datetime DEFAULT NULL,
@@ -32,8 +34,15 @@ CREATE TABLE `factory` (
 -- ----------------------------
 -- Records of factory
 -- ----------------------------
-INSERT INTO `factory` VALUES ('2105261HWC2S51P0', '金冠铜业', '0', '2021-05-26 02:14:44', '2021-05-26 02:14:44', null);
-INSERT INTO `factory` VALUES ('2105268394P0Y8M8', '杭州铜业', '0', '2021-05-26 11:22:33', '2021-05-26 11:22:33', null);
+INSERT INTO `factory` VALUES ('1', 'aaa', '2', '210602DK3F951DD4', '0', '2021-06-02 19:29:19', null, null);
+INSERT INTO `factory` VALUES ('2105261HWC2S51P0', '金冠铜业', '1', null, '0', '2021-05-26 02:14:44', '2021-06-02 20:45:47', '2021-06-02 20:45:47');
+INSERT INTO `factory` VALUES ('2105268394P0Y8M8', '杭州铜业', '1', null, '0', '2021-05-26 11:22:33', '2021-06-02 20:45:52', '2021-06-02 20:45:52');
+INSERT INTO `factory` VALUES ('210602DK3F951DD4', 'xsxxx', '1', null, '0', '2021-06-02 19:04:20', '2021-06-02 20:45:54', '2021-06-02 20:45:54');
+INSERT INTO `factory` VALUES ('210602F5ZC5K7DYW', 'aaaaa', '1', null, '0', '2021-06-02 19:54:56', '2021-06-02 19:54:56', null);
+INSERT INTO `factory` VALUES ('210602F67XB7FBXP', '2222', '1', null, '0', '2021-06-02 19:55:51', '2021-06-02 19:55:51', null);
+INSERT INTO `factory` VALUES ('210602F6D5DP18H0', 'aasdasd', '1', null, '0', '2021-06-02 19:56:25', '2021-06-02 19:56:25', null);
+INSERT INTO `factory` VALUES ('210602F6G4703N54', 'saacxc', '1', null, '0', '2021-06-02 19:56:37', '2021-06-02 19:56:37', null);
+INSERT INTO `factory` VALUES ('210602FCP1S8ACH0', '1111', '2', '2105261HWC2S51P0', '0', '2021-06-02 20:15:10', '2021-06-02 20:15:10', null);
 
 -- ----------------------------
 -- Table structure for resource
@@ -98,7 +107,7 @@ CREATE TABLE `role` (
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES ('210526G6A5T5WNXP', 'client', '客户', '2021-05-26 21:20:10', '2021-05-31 19:32:32', null, '0');
+INSERT INTO `role` VALUES ('210526G6A5T5WNXP', 'client', '客户', '2021-05-26 21:20:10', '2021-06-01 16:57:34', null, '0');
 INSERT INTO `role` VALUES ('210531APA38M4T54', 'test', '测试', '2021-05-31 15:01:50', '2021-05-31 19:32:32', null, '0');
 
 -- ----------------------------
@@ -116,10 +125,10 @@ CREATE TABLE `role_resource` (
 -- ----------------------------
 -- Records of role_resource
 -- ----------------------------
-INSERT INTO `role_resource` VALUES ('2105270YH5SYS51P', '210526G6A5T5WNXP', '210526FB6N5D9Z54', '2021-05-27 01:19:48');
-INSERT INTO `role_resource` VALUES ('2105270YH5W4XFCH', '210526G6A5T5WNXP', '210526FBMBTWXZF8', '2021-05-27 01:19:48');
-INSERT INTO `role_resource` VALUES ('2105270YH5WBPH94', '210526G6A5T5WNXP', '210526FBRX6DW5GC', '2021-05-27 01:19:48');
-INSERT INTO `role_resource` VALUES ('2105270YH5WMGM5P', '210526G6A5T5WNXP', '210526FC6R5M3YA8', '2021-05-27 01:19:48');
+INSERT INTO `role_resource` VALUES ('210601C2T0APC4X4', '210526G6A5T5WNXP', '210526FB6N5D9Z54', '2021-06-01 16:57:19');
+INSERT INTO `role_resource` VALUES ('210601C2T0AZ76RP', '210526G6A5T5WNXP', '210526FBMBTWXZF8', '2021-06-01 16:57:19');
+INSERT INTO `role_resource` VALUES ('210601C2T0B628M8', '210526G6A5T5WNXP', '210526FBRX6DW5GC', '2021-06-01 16:57:19');
+INSERT INTO `role_resource` VALUES ('210601C2T0BCXAFW', '210526G6A5T5WNXP', '210526FC6R5M3YA8', '2021-06-01 16:57:19');
 
 -- ----------------------------
 -- Table structure for user
@@ -127,28 +136,99 @@ INSERT INTO `role_resource` VALUES ('2105270YH5WMGM5P', '210526G6A5T5WNXP', '210
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` varchar(20) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `realname` varchar(50) DEFAULT NULL,
-  `sex` tinyint(4) DEFAULT NULL,
-  `mobile` varchar(50) DEFAULT NULL,
-  `qq` varchar(50) DEFAULT NULL,
-  `wechat` varchar(50) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `province` varchar(50) DEFAULT NULL,
-  `city` varchar(50) DEFAULT NULL,
-  `area` varchar(50) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
-  `enable_mark` tinyint(4) DEFAULT '1',
-  `delete_mark` tinyint(4) DEFAULT '0',
-  `createtime` datetime DEFAULT NULL,
-  `updatetime` datetime DEFAULT NULL,
-  `deletetime` datetime DEFAULT NULL,
+  `username` varchar(50) NOT NULL COMMENT '用户名',
+  `password` varchar(50) NOT NULL COMMENT '密码',
+  `realname` varchar(50) DEFAULT NULL COMMENT '真名',
+  `sex` tinyint(4) DEFAULT NULL COMMENT '性别(保密：1，男：2，女：3)',
+  `mobile` varchar(50) DEFAULT NULL COMMENT '手机',
+  `qq` varchar(50) DEFAULT NULL COMMENT 'qq',
+  `wechat` varchar(50) DEFAULT NULL COMMENT '微信',
+  `email` varchar(100) DEFAULT NULL COMMENT '电子邮件',
+  `province` varchar(50) DEFAULT NULL COMMENT '省',
+  `city` varchar(50) DEFAULT NULL COMMENT '市',
+  `area` varchar(50) DEFAULT NULL COMMENT '区',
+  `address` varchar(255) DEFAULT NULL COMMENT '详细住址',
+  `enable_mark` tinyint(4) DEFAULT '1' COMMENT '启用禁用标志',
+  `delete_mark` tinyint(4) DEFAULT '0' COMMENT '删除标志',
+  `createtime` datetime DEFAULT NULL COMMENT '创建时间',
+  `updatetime` datetime DEFAULT NULL COMMENT '修改时间',
+  `deletetime` datetime DEFAULT NULL COMMENT '删除时间',
+  `regist_ip` varchar(50) DEFAULT NULL COMMENT '注册ip',
+  `last_login_ip` varchar(50) DEFAULT NULL COMMENT '最后登录ip',
+  `last_login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
+  `factory_id` varchar(20) DEFAULT NULL COMMENT '厂家id',
+  `sub_factory_id` varchar(20) DEFAULT NULL COMMENT '子厂家id',
+  `depart` varchar(50) DEFAULT NULL COMMENT '部门',
+  `position` varchar(50) DEFAULT NULL COMMENT '职位',
+  `group_id` varchar(20) DEFAULT NULL COMMENT '用户组id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('2105260FBK56RZTC', 'xhj', '4QrcOUm6Wau+VuBX8g+IPg==', null, '0', '21312', null, null, null, null, null, null, null, '1', '0', '2021-05-26 00:43:17', null, null);
+INSERT INTO `user` VALUES ('2105260FBK56RZTC', 'xhj', '4QrcOUm6Wau+VuBX8g+IPg==', 'asdja', '2', '21312', '的eawda', 'adadasd', 'dasda', null, null, null, '12d12dqwd', '1', '0', '2021-05-26 00:43:17', '2021-06-05 02:03:55', '2021-06-05 01:13:36', null, null, null, '210602DK3F951DD4', '1', '休假回家啊', 'ceo', '2');
+INSERT INTO `user` VALUES ('210603ASC488YB7C', 'ceshi', 'xMpCOKC5I4INzFCab3WEmw==', 'hhhhhh', '1', '21312', '', '', '', null, null, null, '', '0', '0', '2021-06-03 15:08:04', '2021-06-05 02:04:16', '2021-06-05 01:13:36', null, null, null, '', '', '', '', '1');
+INSERT INTO `user` VALUES ('210603ATX2HX8MK4', 'zz', 's928UC4wdmXzRsvW5SzBDQ==', '嘻嘻嘻嘻嘻', '3', '21312', '312', '321', '12313', null, null, null, '312', '0', '0', '2021-06-03 15:12:27', '2021-06-05 02:04:44', '2021-06-05 00:50:02', null, null, null, '2105261HWC2S51P0', '210602FCP1S8ACH0', '3123', '13123', null);
+
+-- ----------------------------
+-- Table structure for usergroup
+-- ----------------------------
+DROP TABLE IF EXISTS `usergroup`;
+CREATE TABLE `usergroup` (
+  `id` varchar(20) NOT NULL,
+  `group_name` varchar(50) NOT NULL,
+  `group_type` tinyint(4) NOT NULL,
+  `group_level` tinyint(4) NOT NULL,
+  `createtime` datetime DEFAULT NULL,
+  `updatetime` datetime DEFAULT NULL,
+  `deletetime` datetime DEFAULT NULL,
+  `delete_mark` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of usergroup
+-- ----------------------------
+INSERT INTO `usergroup` VALUES ('1', '超管', '1', '1', '2021-06-01 20:58:30', null, null, '0');
+INSERT INTO `usergroup` VALUES ('2', '客户', '1', '1', '2021-06-01 20:58:48', '2021-06-01 23:56:52', null, '0');
+INSERT INTO `usergroup` VALUES ('210601G2GMANCY3C', 'test嘻嘻嘻嘻嘻嘻嘻', '2', '1', '2021-06-01 21:08:44', '2021-06-01 23:50:54', null, '0');
+INSERT INTO `usergroup` VALUES ('210601G3XRDMCFNC', 'test2shkdhaksdhakj', '2', '1', '2021-06-01 21:12:49', '2021-06-01 23:57:09', null, '0');
+INSERT INTO `usergroup` VALUES ('210601G48WK6TDKP', 'test4', '2', '3', '2021-06-01 21:14:01', '2021-06-01 21:35:22', null, '0');
+INSERT INTO `usergroup` VALUES ('210601G534GCK9WH', '111', '2', '1', '2021-06-01 21:16:24', '2021-06-01 21:35:20', null, '0');
+INSERT INTO `usergroup` VALUES ('210601G55837CPX4', '111111', '2', '2', '2021-06-01 21:16:38', '2021-06-01 21:35:18', null, '0');
+INSERT INTO `usergroup` VALUES ('210601G5778729KP', '23123', '2', '2', '2021-06-01 21:16:50', '2021-06-01 21:35:09', null, '0');
+INSERT INTO `usergroup` VALUES ('210601GF9PG4CZ2W', '111', '2', '1', '2021-06-01 21:44:08', '2021-06-01 21:44:10', null, '0');
+INSERT INTO `usergroup` VALUES ('210601HPZB523R40', '测试', '2', '1', '2021-06-01 23:28:07', null, null, '0');
+INSERT INTO `usergroup` VALUES ('210601HRAKBG63C0', '啊啊啊', '2', '1', '2021-06-01 23:29:19', null, null, '0');
+INSERT INTO `usergroup` VALUES ('210601HRZDR9846W', '啊啊是', '2', '1', '2021-06-01 23:31:07', null, null, '0');
+INSERT INTO `usergroup` VALUES ('210601HTB3K7DHBC', '对格式', '2', '1', '2021-06-01 23:35:22', null, null, '0');
+INSERT INTO `usergroup` VALUES ('210601HZXR0XD968', 'test夏华军', '2', '1', '2021-06-01 23:48:57', null, null, '0');
+INSERT INTO `usergroup` VALUES ('3', '普通用户', '1', '2', '2021-06-01 20:59:03', null, null, '0');
+INSERT INTO `usergroup` VALUES ('4', '数据上传', '1', '2', '2021-06-01 20:59:23', null, null, '0');
+
+-- ----------------------------
+-- Table structure for usergroup_role
+-- ----------------------------
+DROP TABLE IF EXISTS `usergroup_role`;
+CREATE TABLE `usergroup_role` (
+  `id` varchar(20) NOT NULL,
+  `usergroupId` varchar(20) NOT NULL,
+  `roleId` varchar(20) NOT NULL,
+  `createtime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of usergroup_role
+-- ----------------------------
+INSERT INTO `usergroup_role` VALUES ('1', '1', '210526G6A5T5WNXP', '2021-06-02 14:29:54');
+INSERT INTO `usergroup_role` VALUES ('2', '1', '210531APA38M4T54', '2021-06-02 14:29:58');
+INSERT INTO `usergroup_role` VALUES ('210602C59G35DNMW', '3', '210526G6A5T5WNXP', '2021-06-02 17:04:53');
+INSERT INTO `usergroup_role` VALUES ('210602C5BTH63TR4', '210601G48WK6TDKP', '210531APA38M4T54', '2021-06-02 17:05:07');
+INSERT INTO `usergroup_role` VALUES ('210602C9GX18DH28', '2', '210526G6A5T5WNXP', '2021-06-02 17:17:34');
+INSERT INTO `usergroup_role` VALUES ('210602C9HYMB3NF8', '210601HRAKBG63C0', '210531APA38M4T54', '2021-06-02 17:17:41');
+INSERT INTO `usergroup_role` VALUES ('210602C9KGBFZRS8', '210601HPZB523R40', '210526G6A5T5WNXP', '2021-06-02 17:17:45');
+INSERT INTO `usergroup_role` VALUES ('210602C9KWT6A98H', '210601GF9PG4CZ2W', '210526G6A5T5WNXP', '2021-06-02 17:17:47');
+INSERT INTO `usergroup_role` VALUES ('210602C9KWZAAD68', '210601GF9PG4CZ2W', '210531APA38M4T54', '2021-06-02 17:17:47');
 SET FOREIGN_KEY_CHECKS=1;

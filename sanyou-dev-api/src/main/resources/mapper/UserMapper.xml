@@ -23,5 +23,32 @@
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
     <result column="deletetime" property="deletetime" jdbcType="TIMESTAMP" />
+    <result column="regist_ip" property="registIp" jdbcType="VARCHAR" />
+    <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="factory_id" property="factoryId" jdbcType="VARCHAR" />
+    <result column="sub_factory_id" property="subFactoryId" jdbcType="VARCHAR" />
+    <result column="depart" property="depart" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="VARCHAR" />
   </resultMap>
+
+  <select id="query" parameterType="com.sanyou.pojo.vo.UserVo" resultType="com.sanyou.pojo.vo.UserVo">
+    select id,username,realname,sex,mobile,qq,wechat,email,province,city,area,address,enable_mark as enableMark,
+           delete_mark as deleteMark,createtime,updatetime,deletetime,regist_ip as registIp,last_login_ip as lastLoginIp,
+           last_login_time as lastLoginTime,factory_id as factoryId,sub_factory_id as subFactoryId,depart,position,group_id as groupId
+    from user where 1=1 and delete_mark=0
+    <if test="user.enableMark != null">
+        and enable_mark=#{user.enableMark}
+    </if>
+    <if test="user.groupId != null and user.groupId != ''">
+        and group_id=#{user.groupId}
+    </if>
+    <if test="user.factoryId != null and user.factoryId != ''">
+      and factory_id=#{user.factoryId}
+    </if>
+    <if test="user.query != null and user.query != ''">
+      and ${user.queryLabel} like CONCAT('%',#{user.query},'%')
+    </if>
+  </select>
 </mapper>

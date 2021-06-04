@@ -29,11 +29,12 @@
                              type="XMLMAPPER"/>
 
 
-<!--        <table tableName="user"></table>-->
+        <table tableName="user"></table>
 <!--        <table tableName="factory"></table>-->
 <!--        <table tableName="resource"></table>-->
 <!--        <table tableName="role"></table>-->
-        <table tableName="role_resource"></table>
-
+<!--        <table tableName="role_resource"></table>-->
+<!--        <table tableName="userGroup"></table>-->
+<!--        <table tableName="usergroup_role"></table>-->
     </context>
 </generatorConfiguration>

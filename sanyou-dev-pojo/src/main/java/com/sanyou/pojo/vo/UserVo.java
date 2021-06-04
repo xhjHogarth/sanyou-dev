@@ -2,7 +2,6 @@ package com.sanyou.pojo.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Column;
 import java.util.Date;
 
 /**
@@ -22,6 +21,7 @@ public class UserVo {
     private String realname;
 
     private Byte sex;
+    private String sexName;
 
     private String mobile;
 
@@ -48,6 +48,77 @@ public class UserVo {
     private Date deletetime;
 
     private Date updatetime;
+
+    private String registIp;
+
+    private String lastLoginIp;
+
+    private Date lastLoginTime;
+
+    private String factoryId;
+    private String factoryName;
+
+    private String subFactoryId;
+    private String subFactoryName;
+
+    private String depart;
+
+    private String position;
+
+    private String groupId;
+    private String groupName;
+
+    private String queryLabel;
+
+    private String query;
+
+    public String getSexName() {
+        return sexName;
+    }
+
+    public void setSexName(String sexName) {
+        this.sexName = sexName;
+    }
+
+    public String getFactoryName() {
+        return factoryName;
+    }
+
+    public void setFactoryName(String factoryName) {
+        this.factoryName = factoryName;
+    }
+
+    public String getSubFactoryName() {
+        return subFactoryName;
+    }
+
+    public void setSubFactoryName(String subFactoryName) {
+        this.subFactoryName = subFactoryName;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public String getQueryLabel() {
+        return queryLabel;
+    }
+
+    public void setQueryLabel(String queryLabel) {
+        this.queryLabel = queryLabel;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
 
     public String getId() {
         return id;
@@ -191,5 +262,69 @@ public class UserVo {
 
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
+    }
+
+    public String getRegistIp() {
+        return registIp;
+    }
+
+    public void setRegistIp(String registIp) {
+        this.registIp = registIp;
+    }
+
+    public String getLastLoginIp() {
+        return lastLoginIp;
+    }
+
+    public void setLastLoginIp(String lastLoginIp) {
+        this.lastLoginIp = lastLoginIp;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getFactoryId() {
+        return factoryId;
+    }
+
+    public void setFactoryId(String factoryId) {
+        this.factoryId = factoryId;
+    }
+
+    public String getSubFactoryId() {
+        return subFactoryId;
+    }
+
+    public void setSubFactoryId(String subFactoryId) {
+        this.subFactoryId = subFactoryId;
+    }
+
+    public String getDepart() {
+        return depart;
+    }
+
+    public void setDepart(String depart) {
+        this.depart = depart;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 }

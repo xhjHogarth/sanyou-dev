@@ -1,6 +1,7 @@
 package com.sanyou.service;
 
 import com.sanyou.pojo.Factory;
+import com.sanyou.utils.PagedResult;
 
 import java.util.List;
 
@@ -28,9 +29,9 @@ public interface FactoryService {
 
     /**
      * 新增厂家
-     * @param factoryName 厂家名
+     * @param factory 厂家
      */
-    void addFactory(String factoryName);
+    void addFactory(Factory factory);
 
     /**
      * 修改厂家信息
@@ -40,8 +41,24 @@ public interface FactoryService {
 
     /**
      * 查询厂家
-     * @param factoryName
+     * @param query
+     * @param page
+     * @param pageSize
      * @return
      */
-    List<Factory> query(String factoryName);
+    PagedResult query(String query, Integer page, Integer pageSize);
+
+    /**
+     * 查询下级公司或部门
+     * @param parentId
+     * @return
+     */
+    List<Factory> querySubFactory(String parentId);
+
+    /**
+     * 查询所有厂家
+     * @return
+     */
+    List<Factory> getAll();
+
 }

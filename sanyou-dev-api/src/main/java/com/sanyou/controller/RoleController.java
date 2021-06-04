@@ -69,9 +69,9 @@ public class RoleController {
             dataType = "string", paramType = "query"),
             @ApiImplicitParam(name="page",value = "分页数",required = true,
                     dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页条书", required = false,
+            @ApiImplicitParam(name = "pageSize", value = "每页条数", required = false,
                     dataType = "int", paramType = "query")})
-    @ApiOperation(value = "查看资源列表", notes = "查看资源列表")
+    @ApiOperation(value = "查看角色列表", notes = "查看角色列表")
     @GetMapping("/query")
     public JSONResult query(String query, Integer page, Integer pageSize){
         if(page == null)
@@ -86,6 +86,20 @@ public class RoleController {
     }
 
 
+    @ApiImplicitParam(name="roleId",value = "角色id",required = true,
+            dataType = "string", paramType = "query")
+    @ApiOperation(value = "获取角色权限", notes = "获取角色权限")
+    @GetMapping("/queryAuth")
+    public JSONResult queryAuth(String roleId){
+
+        if(StringUtils.isBlank(roleId))
+            return JSONResult.errorMsg("角色id为空");
+
+        List<Resource> list = roleService.queryAuth(roleId);
+
+        return JSONResult.ok(list);
+    }
+
     @ApiImplicitParam(name = "roleId", value = "角色id", required = true,
             dataType = "string", paramType = "query")
     @ApiOperation(value = "分配角色权限", notes = "分配角色权限")
@@ -95,11 +109,17 @@ public class RoleController {
         if(StringUtils.isBlank(roleId))
             return JSONResult.errorMsg("角色id为空!");
 
-        if(resources == null || resources.size() == 0)
-            return JSONResult.ok();
-
         roleService.assignAuth(resources, roleId);
 
         return JSONResult.ok();
+    }
+
+    @ApiOperation(value = "获取所有角色", notes = "获取所有角色")
+    @GetMapping("/getAll")
+    public JSONResult getAll(){
+
+        List<Role> list = roleService.getAll();
+
+        return JSONResult.ok(list);
     }
 }

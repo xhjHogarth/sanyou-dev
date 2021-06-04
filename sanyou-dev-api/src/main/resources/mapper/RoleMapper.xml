@@ -22,4 +22,12 @@
       and (role_code like '%${query}%' or title like '%${query}%')
     </if>
   </select>
+
+  <select id="queryAuth" parameterType="String" resultType="com.sanyou.pojo.Resource">
+    select r.id,r.res_code as resCode,r.title,r.layer,r.parent_id as parentId,r.createtime,
+           r.updatetime,r.deletetime,r.delete_mark as deleteMark
+    from role_resource rr
+        left join resource r on rr.resourceId=r.id
+    where rr.roleId=#{roleId}
+  </select>
 </mapper>

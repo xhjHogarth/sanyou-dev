@@ -63,7 +63,7 @@ public class ResourceController {
                     dataType = "string", paramType = "query"),
             @ApiImplicitParam(name="page",value = "分页数",required = true,
                     dataType = "int", paramType = "query"),
-            @ApiImplicitParam(name = "pageSize", value = "每页条书", required = false,
+            @ApiImplicitParam(name = "pageSize", value = "每页条数", required = false,
                     dataType = "int", paramType = "query")})
     @ApiOperation(value = "查看资源列表", notes = "查看资源列表")
     @GetMapping("/query")

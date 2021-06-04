@@ -90,6 +90,15 @@ public class RoleServiceImpl implements RoleService {
         return pagedResult;
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<Resource> queryAuth(String roleId) {
+
+        List<Resource> list = roleMapper.queryAuth(roleId);
+
+        return list;
+    }
+
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void assignAuth(List<Resource> resources, String roleId) {
@@ -112,5 +121,17 @@ public class RoleServiceImpl implements RoleService {
             roleResource.setCreatetime(new Date());
             roleResourceMapper.insert(roleResource);
         }
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<Role> getAll() {
+
+        Example example = new Example(Role.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("deleteMark",0);
+        List<Role> roles = roleMapper.selectByExample(example);
+
+        return roles;
     }
 }

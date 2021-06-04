@@ -1,6 +1,11 @@
 package com.sanyou.service;
 
+
 import com.sanyou.pojo.User;
+import com.sanyou.pojo.vo.UserVo;
+import com.sanyou.utils.PagedResult;
+
+import java.util.List;
 
 /**
  * User: asus
@@ -40,8 +45,22 @@ public interface UserService {
 
     /**
      * 修改用户信息
-     * @param user 用户信息
-     * @return 返回修改之后的用户信息
      */
-    public User updateUserInfo(User user);
+    void updateUserInfo(List<User> users);
+
+    /**
+     * 分页查询用户列表
+     * @param userVo
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    PagedResult query(UserVo userVo, Integer page, Integer pageSize);
+
+    /**
+     * 根据用户id判断用户是否存在
+     * @param id 用户id
+     * @return
+     */
+    boolean queryIsExist(String id);
 }

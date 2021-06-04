@@ -5,6 +5,7 @@ import com.sanyou.pojo.vo.UserVo;
 import com.sanyou.service.UserService;
 import com.sanyou.utils.JSONResult;
 import com.sanyou.utils.MD5Utils;
+import com.sanyou.utils.PagedResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -15,6 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
+
+import static com.sanyou.controller.BasicController.PAGE_SIZE;
 
 /**
  * User: asus
@@ -103,22 +107,33 @@ public class UserController {
             dataType = "object", paramType = "body")})
     @ApiOperation(value = "修改用户信息",notes = "修改用户信息")
     @PostMapping("/updateUserInfo")
-    public JSONResult updateUserInfo(@RequestBody User user){
+    public JSONResult updateUserInfo(@RequestBody List<User> users){
 
-        if(user == null || StringUtils.isBlank(user.getId())){
-            return JSONResult.errorMsg("用户id不能为空!");
+        if(users == null || users.size() == 0){
+            return JSONResult.ok();
         }
 
-        boolean usernameIsExist = userService.queryUsernameIsExist(user.getUsername());
-        if(usernameIsExist){
-            user.setUpdatetime(new Date());
-            User newUser = userService.updateUserInfo(user);
-            UserVo userVo = new UserVo();
-            BeanUtils.copyProperties(newUser,userVo);
-            return JSONResult.ok(userVo);
-        }else{
-            return JSONResult.errorMsg("用户不存在!");
-        }
+        userService.updateUserInfo(users);
+
+        return JSONResult.ok();
     }
 
+    @ApiImplicitParams({@ApiImplicitParam(name="page",value = "分页数",required = true,
+                    dataType = "int", paramType = "query"),
+            @ApiImplicitParam(name = "pageSize", value = "每页条数", required = false,
+                    dataType = "int", paramType = "query")})
+    @ApiOperation(value = "查看厂家列表", notes = "查看厂家列表")
+    @PostMapping("/query")
+    public JSONResult query(@RequestBody UserVo userVo, Integer page, Integer pageSize){
+
+        if(page == null)
+            page = 1;
+
+        if(pageSize == null)
+            pageSize = PAGE_SIZE;
+
+        PagedResult pagedResult = userService.query(userVo,page,pageSize);
+
+        return JSONResult.ok(pagedResult);
+    }
 }

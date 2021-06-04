@@ -43,9 +43,22 @@ public interface RoleService {
     PagedResult query(String query, Integer page, Integer pageSize);
 
     /**
+     * 获取角色权限
+     * @param roleId
+     * @return
+     */
+    List<Resource> queryAuth(String roleId);
+
+    /**
      * 分配角色权限
      * @param resources 权限
      * @param roleId 角色id
      */
     void assignAuth(List<Resource> resources, String roleId);
+
+    /**
+     * 获取所有的角色
+     * @return
+     */
+    List<Role> getAll();
 }
