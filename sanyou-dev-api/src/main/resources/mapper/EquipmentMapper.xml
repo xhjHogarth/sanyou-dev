@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sanyou.mapper.EquipmentMapper" >
+  <resultMap id="BaseResultMap" type="com.sanyou.pojo.Equipment" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="equip_no" property="equipNo" jdbcType="VARCHAR" />
+    <result column="factory_id" property="factoryId" jdbcType="VARCHAR" />
+    <result column="sub_factory_id" property="subFactoryId" jdbcType="VARCHAR" />
+    <result column="equip_status" property="equipStatus" jdbcType="TINYINT" />
+    <result column="equip_online_time" property="equipOnlineTime" jdbcType="TIMESTAMP" />
+    <result column="equip_cycle" property="equipCycle" jdbcType="DOUBLE" />
+    <result column="equip_health_limit" property="equipHealthLimit" jdbcType="DOUBLE" />
+    <result column="equip_subhealth_limit" property="equipSubhealthLimit" jdbcType="DOUBLE" />
+    <result column="equip_address" property="equipAddress" jdbcType="VARCHAR" />
+    <result column="equip_lat" property="equipLat" jdbcType="DOUBLE" />
+    <result column="equip_lng" property="equipLng" jdbcType="DOUBLE" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="deletetime" property="deletetime" jdbcType="TIMESTAMP" />
+    <result column="delete_mark" property="deleteMark" jdbcType="TINYINT" />
+    <result column="enable_mark" property="enableMark" jdbcType="TINYINT" />
+  </resultMap>
+
+  <select id="query" parameterType="com.sanyou.pojo.vo.EquipmentVo" resultType="com.sanyou.pojo.vo.EquipmentVo">
+    select id,equip_no as equipNo,factory_id as factoryId,sub_factory_id as subFactoryId,equip_status as equipStatus,
+           equip_online_time as equipOnlineTime,equip_cycle as equipCycle,equip_health_limit as equipHealthLimit,
+           equip_subhealth_limit as equipSubhealthLimit,equip_address as equipAddress,equip_lat as equipLat,
+           equip_lng as equipLng,createtime,updatetime,deletetime,delete_mark as deleteMark,enable_mark as enableMark
+    from equipment
+    where 1=1 and delete_mark=0
+    <if test="equip.factoryId != null and equip.factoryId != ''">
+      and factory_id=#{equip.factoryId}
+    </if>
+    <if test="equip.equipStatus != null and equip.equipStatus != '' and equip.equipStatus>0">
+      and equip_status=#{equip.equipStatus}
+    </if>
+    <if test="equip.query != null and equip.query != ''">
+      and equip_no like CONCAT('%',#{equip.query},'%')
+    </if>
+  </select>
+  <select id="getFactoryList" resultType="com.sanyou.pojo.vo.EquipmentVo">
+--     select  e.id,e.equip_no as equipNo,e.factory_id as factoryId,e.sub_factory_id as subFactoryId,e.equip_status as equipStatus,
+--             e.equip_online_time as equipOnlineTime,e.equip_cycle as equipCycle,e.equip_health_limit as equipHealthLimit,
+--             e.equip_subhealth_limit as equipSubhealthLimit,e.equip_address as equipAddress,e.equip_lat as equipLat,
+--             e.equip_lng as equipLng,e.createtime,e.updatetime,e.deletetime,e.delete_mark as deleteMark,e.enable_mark as enableMark,
+--             f.factory_name as label
+--     from equipment e left join factory f on e.factory_id=f.id
+--     where 1=1 and e.delete_mark=0 and e.enable_mark=1
+
+    select DISTINCT e.factory_id as id,f.factory_name as label
+    from equipment e left join factory f on e.factory_id=f.id
+    where e.delete_mark=0 and e.enable_mark=1
+
+  </select>
+  <select id="getSubFactoryList" parameterType="String" resultType="com.sanyou.pojo.vo.EquipmentVo">
+
+    select DISTINCT e.sub_factory_id as id,f.factory_name as label
+    from equipment e left join factory f on e.sub_factory_id=f.id
+    where e.delete_mark=0 and e.enable_mark=1 and e.factory_id=#{factoryId}
+
+  </select>
+</mapper>

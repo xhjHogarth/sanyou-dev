@@ -51,17 +51,17 @@ public class User {
     /**
      * 省
      */
-    private String province;
+    private Integer province;
 
     /**
      * 市
      */
-    private String city;
+    private Integer city;
 
     /**
      * 区
      */
-    private String area;
+    private Integer area;
 
     /**
      * 详细住址
@@ -314,7 +314,7 @@ public class User {
      *
      * @return province - 省
      */
-    public String getProvince() {
+    public Integer getProvince() {
         return province;
     }
 
@@ -323,7 +323,7 @@ public class User {
      *
      * @param province 省
      */
-    public void setProvince(String province) {
+    public void setProvince(Integer province) {
         this.province = province;
     }
 
@@ -332,7 +332,7 @@ public class User {
      *
      * @return city - 市
      */
-    public String getCity() {
+    public Integer getCity() {
         return city;
     }
 
@@ -341,7 +341,7 @@ public class User {
      *
      * @param city 市
      */
-    public void setCity(String city) {
+    public void setCity(Integer city) {
         this.city = city;
     }
 
@@ -350,7 +350,7 @@ public class User {
      *
      * @return area - 区
      */
-    public String getArea() {
+    public Integer getArea() {
         return area;
     }
 
@@ -359,7 +359,7 @@ public class User {
      *
      * @param area 区
      */
-    public void setArea(String area) {
+    public void setArea(Integer area) {
         this.area = area;
     }
 

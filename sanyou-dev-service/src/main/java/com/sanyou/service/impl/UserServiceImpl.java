@@ -3,12 +3,8 @@ package com.sanyou.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sanyou.mapper.FactoryMapper;
-import com.sanyou.mapper.UserMapper;
-import com.sanyou.mapper.UsergroupMapper;
-import com.sanyou.pojo.Factory;
-import com.sanyou.pojo.User;
-import com.sanyou.pojo.Usergroup;
+import com.sanyou.mapper.*;
+import com.sanyou.pojo.*;
 import com.sanyou.pojo.vo.UserVo;
 import com.sanyou.service.UserService;
 import com.sanyou.utils.PagedResult;
@@ -40,6 +36,12 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private FactoryMapper factoryMapper;
+
+    @Autowired
+    private SAdministrativeDivisionsMapper divisionsMapper;
+
+    @Autowired
+    private UserEquipmentMapper userEquipmentMapper;
 
     @Autowired
     private Sid sid;
@@ -145,6 +147,12 @@ public class UserServiceImpl implements UserService {
                     vo.setSexName("女");
                 }
             }
+
+            if(vo.getArea() != null){
+                SAdministrativeDivisions administrativeDivisions = divisionsMapper.selectByPrimaryKey(vo.getArea());
+                String fullname = administrativeDivisions.getFullname();
+                vo.setAdministration(fullname.replace('/',','));
+            }
         }
 
         PageInfo<UserVo> pageList = new PageInfo<>(list);
@@ -163,5 +171,21 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectByPrimaryKey(id);
 
         return user==null?false:true;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void assignEquip(List<UserEquipment> userEquipments,String userId) {
+
+        Example example = new Example(UserEquipment.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("userId",userId);
+        userEquipmentMapper.deleteByExample(example);
+
+        for (UserEquipment userEquipment : userEquipments) {
+            userEquipment.setCreatetime(new Date());
+        }
+        userEquipmentMapper.insertList(userEquipments);
+
     }
 }

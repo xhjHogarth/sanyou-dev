@@ -1,6 +1,7 @@
 package com.sanyou.controller;
 
 import com.sanyou.pojo.User;
+import com.sanyou.pojo.UserEquipment;
 import com.sanyou.pojo.vo.UserVo;
 import com.sanyou.service.UserService;
 import com.sanyou.utils.JSONResult;
@@ -15,6 +16,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,7 +45,7 @@ public class UserController {
             @ApiImplicitParam(name="password",value = "密码",required = true,
                     dataType = "String", paramType = "query")})
     @PostMapping("/login")
-    public JSONResult login(String username,String password) throws Exception {
+    public JSONResult login(String username,String password, HttpServletRequest request) throws Exception {
 
         if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
             return JSONResult.errorMsg("用户名或密码不能为空");
@@ -51,6 +54,16 @@ public class UserController {
         User user = userService.queryUserForLogin(username, MD5Utils.getMD5Str(password));
 
         if(user != null){
+            String remoteAddr = request.getRemoteAddr();
+            User updateUser = new User();
+            updateUser.setId(user.getId());
+            updateUser.setLastLoginIp(remoteAddr);
+            updateUser.setLastLoginTime(new Date());
+
+            List<User> userList = new ArrayList<>();
+            userList.add(updateUser);
+            userService.updateUserInfo(userList);
+
             UserVo userVo = new UserVo();
             BeanUtils.copyProperties(user,userVo);
             return JSONResult.ok(userVo);
@@ -63,8 +76,8 @@ public class UserController {
                     dataType = "object", paramType = "body")})
     @ApiOperation(value = "创建用户", notes = "创建用户")
     @PostMapping("/add")
-    public JSONResult addUser(@RequestBody User user) throws Exception {
-
+    public JSONResult addUser(@RequestBody User user, HttpServletRequest request) throws Exception {
+        //TODO 用户注册ip
         if(user == null)
             return JSONResult.errorMsg("用户对象为空");
 
@@ -74,6 +87,9 @@ public class UserController {
 
         boolean usernameIsExist = userService.queryUsernameIsExist(user.getUsername());
         if(!usernameIsExist){
+            String remoteAddr = request.getRemoteAddr();
+
+            user.setRegistIp(remoteAddr);
             user.setPassword(MD5Utils.getMD5Str(user.getPassword()));
             user.setEnableMark((byte) 1);
             user.setDeleteMark((byte)0);
@@ -122,7 +138,7 @@ public class UserController {
                     dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页条数", required = false,
                     dataType = "int", paramType = "query")})
-    @ApiOperation(value = "查看厂家列表", notes = "查看厂家列表")
+    @ApiOperation(value = "查看用户列表", notes = "查看用户列表")
     @PostMapping("/query")
     public JSONResult query(@RequestBody UserVo userVo, Integer page, Integer pageSize){
 
@@ -135,5 +151,20 @@ public class UserController {
         PagedResult pagedResult = userService.query(userVo,page,pageSize);
 
         return JSONResult.ok(pagedResult);
+    }
+
+
+    @ApiImplicitParam(name = "userId", value = "用户id", required = true,
+            dataType = "string", paramType = "query")
+    @ApiOperation(value = "分配用户设备权限", notes = "分配用户设备权限")
+    @PostMapping("/assignEquip")
+    public JSONResult assignEquip(@RequestBody List<UserEquipment> userEquipments,String userId){
+
+        if(StringUtils.isBlank(userId))
+            return JSONResult.errorMsg("用户id为空!");
+
+        userService.assignEquip(userEquipments,userId);
+
+        return JSONResult.ok();
     }
 }

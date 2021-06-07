@@ -2,6 +2,7 @@ package com.sanyou.service;
 
 
 import com.sanyou.pojo.User;
+import com.sanyou.pojo.UserEquipment;
 import com.sanyou.pojo.vo.UserVo;
 import com.sanyou.utils.PagedResult;
 
@@ -63,4 +64,11 @@ public interface UserService {
      * @return
      */
     boolean queryIsExist(String id);
+
+    /**
+     * 分配用户设备权限
+     * @param userEquipments
+     * @param userId
+     */
+    void assignEquip(List<UserEquipment> userEquipments,String userId);
 }

@@ -14,9 +14,9 @@
     <result column="qq" property="qq" jdbcType="VARCHAR" />
     <result column="wechat" property="wechat" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="province" property="province" jdbcType="VARCHAR" />
-    <result column="city" property="city" jdbcType="VARCHAR" />
-    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="INTEGER" />
+    <result column="area" property="area" jdbcType="INTEGER" />
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="enable_mark" property="enableMark" jdbcType="TINYINT" />
     <result column="delete_mark" property="deleteMark" jdbcType="TINYINT" />

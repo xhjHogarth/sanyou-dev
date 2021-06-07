@@ -31,11 +31,13 @@ public class UserVo {
 
     private String email;
 
-    private String province;
+    private Integer province;
 
-    private String city;
+    private Integer city;
 
-    private String area;
+    private Integer area;
+
+    private String administration;
 
     private String address;
 
@@ -71,6 +73,14 @@ public class UserVo {
     private String queryLabel;
 
     private String query;
+
+    public String getAdministration() {
+        return administration;
+    }
+
+    public void setAdministration(String administration) {
+        this.administration = administration;
+    }
 
     public String getSexName() {
         return sexName;
@@ -192,27 +202,27 @@ public class UserVo {
         this.email = email;
     }
 
-    public String getProvince() {
+    public Integer getProvince() {
         return province;
     }
 
-    public void setProvince(String province) {
+    public void setProvince(Integer province) {
         this.province = province;
     }
 
-    public String getCity() {
+    public Integer getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(Integer city) {
         this.city = city;
     }
 
-    public String getArea() {
+    public Integer getArea() {
         return area;
     }
 
-    public void setArea(String area) {
+    public void setArea(Integer area) {
         this.area = area;
     }
 
