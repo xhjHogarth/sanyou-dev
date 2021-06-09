@@ -10,6 +10,7 @@
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="layer" property="layer" jdbcType="TINYINT" />
     <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
     <result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
     <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
@@ -19,7 +20,7 @@
 
   <select id="queryResources" parameterType="String" resultMap="BaseResultMap">
     select r.id,r.res_code,r.title,r.layer,r.parent_id,r.createtime,r.updatetime,r.deletetime,
-           r.delete_mark,r2.res_code as parent_code
+           r.delete_mark,r2.res_code as parent_code,r.url as url
     from resource r left JOIN resource r2 on r.parent_id=r2.id
     where 1=1 and r.delete_mark=0
     <if test="query != null and query != ''">

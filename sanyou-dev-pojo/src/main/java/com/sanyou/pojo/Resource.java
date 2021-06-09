@@ -28,6 +28,9 @@ public class Resource {
     @Column(name = "parent_id")
     private String parentId;
 
+    @ApiModelProperty(value = "请求的url地址", name = "url",example = "/resource")
+    private String url;
+
     private Date createtime;
 
     private Date updatetime;
@@ -105,6 +108,14 @@ public class Resource {
      */
     public void setParentId(String parentId) {
         this.parentId = parentId;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**

@@ -10,4 +10,11 @@
     <result column="resourceId" property="resourceid" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <select id="checkAuth" parameterType="String" resultMap="BaseResultMap">
+    select rr.id,rr.resourceId,rr.roleId,rr.createtime
+    from role_resource rr left JOIN resource r on rr.resourceId=r.id
+    where r.url=#{url} and
+        rr.roleId in (select ur.roleId from usergroup_role ur where ur.usergroupId=(select group_id from user where id=#{userId}))
+  </select>
 </mapper>

@@ -134,6 +134,23 @@ public class UserController {
         return JSONResult.ok();
     }
 
+    @ApiImplicitParams({@ApiImplicitParam(name = "user", value = "用户", required = true,
+            dataType = "object", paramType = "body")})
+    @ApiOperation(value = "删除用户",notes = "删除用户")
+    @PostMapping("/deleteUser")
+    public JSONResult deleteUser(@RequestBody List<User> users){
+
+        if(users == null || users.size() == 0){
+            return JSONResult.ok();
+        }
+
+        userService.updateUserInfo(users);
+
+        return JSONResult.ok();
+    }
+
+
+
     @ApiImplicitParams({@ApiImplicitParam(name="page",value = "分页数",required = true,
                     dataType = "int", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页条数", required = false,
@@ -164,6 +181,21 @@ public class UserController {
             return JSONResult.errorMsg("用户id为空!");
 
         userService.assignEquip(userEquipments,userId);
+
+        return JSONResult.ok();
+    }
+
+
+    @ApiImplicitParam(name = "userId", value = "用户id", required = true,
+            dataType = "string", paramType = "query")
+    @ApiOperation(value = "下载用户信息", notes = "下载用户信息")
+    @PostMapping("/downloadUserInfo")
+    public JSONResult downloadUserInfo(String userId){
+
+        if(StringUtils.isBlank(userId))
+            return JSONResult.errorMsg("用户id为空!");
+
+        // TODO 用户资料下载的具体实现
 
         return JSONResult.ok();
     }

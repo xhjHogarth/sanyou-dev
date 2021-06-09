@@ -15,6 +15,8 @@ public class ResourceVo {
 
     private String parentId;
 
+    private String url;
+
     private String parentCode;
 
     private Date createtime;
@@ -167,5 +169,13 @@ public class ResourceVo {
 
     public void setChildren(List<ResourceVo> children) {
         this.children = children;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

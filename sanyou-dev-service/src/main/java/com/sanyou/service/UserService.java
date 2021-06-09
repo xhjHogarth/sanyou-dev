@@ -71,4 +71,12 @@ public interface UserService {
      * @param userId
      */
     void assignEquip(List<UserEquipment> userEquipments,String userId);
+
+    /**
+     * 判断当前用户是否有权限
+     * @param userId
+     * @param url
+     * @return
+     */
+    boolean checkAuth(String userId, String url);
 }

@@ -38,7 +38,7 @@ public class ResourceController {
     @PostMapping("/addResource")
     public JSONResult addResource(@RequestBody Resource resource,String parentCode){
         if(resource == null || StringUtils.isBlank(resource.getResCode()) || StringUtils.isBlank(resource.getTitle()))
-            return JSONResult.errorMsg("资源编码或标题不能为空!");
+            return JSONResult.errorMsg("资源编码或名称不能为空!");
 
         Resource resource1 = resourceService.findByName(resource.getResCode());
         if(resource1 == null){
@@ -47,7 +47,7 @@ public class ResourceController {
                 if(resource2 != null){
                     resource.setParentId(resource2.getId());
                 }else{
-                    return JSONResult.errorMsg("分组错误,请正确填写分组!");
+                    return JSONResult.errorMsg("父编码错误,请正确填写父编码!");
                 }
             }
             resourceService.addResource(resource);

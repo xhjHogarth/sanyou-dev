@@ -44,6 +44,9 @@ public class UserServiceImpl implements UserService {
     private UserEquipmentMapper userEquipmentMapper;
 
     @Autowired
+    private RoleResourceMapper roleResourceMapper;
+
+    @Autowired
     private Sid sid;
 
     @Override
@@ -187,5 +190,17 @@ public class UserServiceImpl implements UserService {
         }
         userEquipmentMapper.insertList(userEquipments);
 
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public boolean checkAuth(String userId, String url) {
+
+        List<RoleResource> auths = roleResourceMapper.checkAuth(userId,url);
+
+        if(auths != null && auths.size() > 0)
+            return true;
+
+        return false;
     }
 }

@@ -1,15 +1,10 @@
 package com.sanyou.interceptor;
 
-import com.sanyou.utils.JSONResult;
-import com.sanyou.utils.JsonUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 
 /**
  * User: asus
@@ -41,26 +36,26 @@ public class LoginInterceptor implements HandlerInterceptor {
         //     return false;
         // }
 
-        System.out.println("LoginInterceptor");
+        // System.out.println("LoginInterceptor");
         return true;
 
     }
 
-    public void returnErrorResponse(HttpServletResponse response, JSONResult result)
-            throws IOException, UnsupportedEncodingException {
-        OutputStream out=null;
-        try{
-            response.setCharacterEncoding("utf-8");
-            response.setContentType("text/json");
-            out = response.getOutputStream();
-            out.write(JsonUtils.objectToJson(result).getBytes("utf-8"));
-            out.flush();
-        } finally{
-            if(out!=null){
-                out.close();
-            }
-        }
-    }
+    // public void returnErrorResponse(HttpServletResponse response, JSONResult result)
+    //         throws IOException, UnsupportedEncodingException {
+    //     OutputStream out=null;
+    //     try{
+    //         response.setCharacterEncoding("utf-8");
+    //         response.setContentType("text/json");
+    //         out = response.getOutputStream();
+    //         out.write(JsonUtils.objectToJson(result).getBytes("utf-8"));
+    //         out.flush();
+    //     } finally{
+    //         if(out!=null){
+    //             out.close();
+    //         }
+    //     }
+    // }
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {

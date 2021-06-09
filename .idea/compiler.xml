@@ -24,4 +24,13 @@
       <module name="sanyou-dev-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="sanyou-dev-api" options="-parameters" />
+      <module name="sanyou-dev-common" options="-parameters" />
+      <module name="sanyou-dev-mapper" options="-parameters" />
+      <module name="sanyou-dev-pojo" options="-parameters" />
+      <module name="sanyou-dev-service" options="-parameters" />
+    </option>
+  </component>
 </project>

@@ -90,7 +90,7 @@ public class ResourceServiceImpl implements ResourceService {
             Example.Criteria criteria = example.createCriteria();
             criteria.andEqualTo("id",resource.getId());
 
-            if(resource.getDeleteMark() == 1)
+            if(resource.getDeleteMark() != null && resource.getDeleteMark() == 1)
                 resource.setDeletetime(new Date());
             resource.setUpdatetime(new Date());
             resourceMapper.updateByExampleSelective(resource,example);
