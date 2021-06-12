@@ -92,6 +92,18 @@ public class ResourceController {
         return JSONResult.ok();
     }
 
+    @ApiOperation(value = "删除资源", notes = "删除资源")
+    @PostMapping("/deleteResources")
+    public JSONResult deleteResources(@RequestBody List<Resource> list){
+
+        if(list == null || list.size() == 0)
+            return JSONResult.ok();
+
+        resourceService.updateResource(list);
+
+        return JSONResult.ok();
+    }
+
     @ApiOperation(value = "获取资源列表", notes = "获取资源列表")
     @GetMapping("/getAll")
     public JSONResult getAll(){

@@ -98,6 +98,22 @@ public class UserGroupController {
         return JSONResult.ok();
     }
 
+    @ApiOperation(value = "删除用户组", notes = "删除用户组")
+    @PostMapping("/deleteUserGroup")
+    public JSONResult deleteUserGroup(@RequestBody Usergroup usergroup){
+
+        if(usergroup == null || StringUtils.isBlank(usergroup.getId()))
+            return JSONResult.errorMsg("用户组id为空!");
+
+        if(usergroup.getGroupType() == 1 && usergroup.getDeleteMark() != null &&
+                usergroup.getDeleteMark() == 1)
+            return JSONResult.errorMsg("系统组用户不允许删除!");
+
+        userGroupService.updateUserGroup(usergroup);
+
+        return JSONResult.ok();
+    }
+
     @ApiImplicitParam(name="groupId",value = "用户组id",required = true,
             dataType = "string", paramType = "query")
     @ApiOperation(value = "分配用户组角色", notes = "分配用户组角色")

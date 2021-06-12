@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static com.sanyou.controller.BasicController.PAGE_SIZE;
@@ -39,12 +38,28 @@ public class FactoryController {
         if(factory == null || StringUtils.isBlank(factory.getFactoryName()))
             return JSONResult.errorMsg("厂家名不能为空!");
 
-        Factory existFactory = factoryService.findByName(factory.getFactoryName());
+        Factory existFactory = factoryService.findByName(factory.getFactoryName(),factory.getParentId());
         if(existFactory == null){
             factoryService.addFactory(factory);
             return JSONResult.ok();
         }else{
-            return JSONResult.errorMsg("厂家已存在!");
+            return JSONResult.errorMsg("厂家名已存在!");
+        }
+
+    }
+
+    @ApiOperation(value = "新增下级部门", notes = "新增下级部门")
+    @PostMapping("/addSubFactory")
+    public JSONResult addSubFactory(@RequestBody Factory factory){
+        if(factory == null || StringUtils.isBlank(factory.getFactoryName()))
+            return JSONResult.errorMsg("厂家名不能为空!");
+
+        Factory existFactory = factoryService.findByName(factory.getFactoryName(),factory.getParentId());
+        if(existFactory == null){
+            factoryService.addFactory(factory);
+            return JSONResult.ok();
+        }else{
+            return JSONResult.errorMsg("厂家名已存在!");
         }
 
     }
@@ -52,6 +67,25 @@ public class FactoryController {
     @ApiOperation(value = "修改厂家信息", notes = "修改厂家信息")
     @PostMapping("/updateFactoryInfo")
     public JSONResult updateFactoryInfo(@RequestBody Factory factory){
+        if(factory == null || StringUtils.isBlank(factory.getId()))
+            return JSONResult.errorMsg("厂家ID为空!");
+
+        Factory findFactory = factoryService.findById(factory.getId());
+        if(findFactory == null)
+            return JSONResult.errorMsg("厂家不存在!");
+
+        Factory existFactory = factoryService.findByName(factory.getFactoryName(),findFactory.getParentId());
+        if(existFactory != null)
+            return JSONResult.errorMsg("厂家名已存在!");
+
+        factoryService.updateFactoryInfo(factory);
+        return JSONResult.ok();
+
+    }
+
+    @ApiOperation(value = "删除厂家", notes = "删除厂家")
+    @PostMapping("/deleteFactory")
+    public JSONResult deleteFactory(@RequestBody Factory factory){
         if(factory == null || StringUtils.isBlank(factory.getId()))
             return JSONResult.errorMsg("厂家ID为空!");
 
@@ -102,9 +136,7 @@ public class FactoryController {
 
     @ApiOperation(value = "查询所有厂家", notes = "查询所有厂家")
     @GetMapping("/getAll")
-    public JSONResult getAll(HttpServletRequest request){
-
-        String remoteAddr = request.getRemoteAddr();
+    public JSONResult getAll(){
 
         List<Factory> factoryList = factoryService.getAll();
 

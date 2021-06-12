@@ -65,6 +65,18 @@ public class RoleController {
         return JSONResult.ok();
     }
 
+    @ApiOperation(value = "删除角色", notes = "删除角色")
+    @PostMapping("/deleteRoles")
+    public JSONResult deleteRoles(@RequestBody List<Role> roles){
+
+        if(roles == null || roles.size() == 0)
+            return JSONResult.ok();
+
+        roleService.updateRoles(roles);
+
+        return JSONResult.ok();
+    }
+
     @ApiImplicitParams({@ApiImplicitParam(name="query",value = "查询条件",required = false,
             dataType = "string", paramType = "query"),
             @ApiImplicitParam(name="page",value = "分页数",required = true,

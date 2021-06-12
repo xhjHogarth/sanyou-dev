@@ -16,9 +16,10 @@ public interface FactoryService {
     /**
      * 根据厂家名查找厂家
      * @param factoryName 厂家名
+     * @param factoryName 上级id
      * @return
      */
-    Factory findByName(String factoryName);
+    Factory findByName(String factoryName,String parentId);
 
     /**
      * 根据厂家id查找厂家

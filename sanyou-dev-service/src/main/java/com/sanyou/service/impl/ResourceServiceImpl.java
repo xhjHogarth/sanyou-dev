@@ -114,4 +114,18 @@ public class ResourceServiceImpl implements ResourceService {
 
         return result;
     }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public Resource findByUrl(String url) {
+
+        Example example = new Example(Resource.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("url",url);
+        criteria.andEqualTo("deleteMark",0);
+
+        Resource resource = resourceMapper.selectOneByExample(example);
+
+        return resource;
+    }
 }

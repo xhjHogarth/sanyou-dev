@@ -1,7 +1,6 @@
 package com.sanyou;
 
-import com.sanyou.interceptor.AuthInterceptor;
-import com.sanyou.interceptor.LoginInterceptor;
+import com.sanyou.interceptor.LogInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -25,16 +24,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public LoginInterceptor loginInterceptor(){
-        return new LoginInterceptor();
+    public LogInterceptor logInterceptor(){
+        return new LogInterceptor();
     }
-
-    @Bean
-    public AuthInterceptor authInterceptor(){return new AuthInterceptor();}
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor()).addPathPatterns("/**");
-        registry.addInterceptor(authInterceptor()).addPathPatterns("/resource/**");
+        registry.addInterceptor(logInterceptor()).addPathPatterns("/**");
     }
 }

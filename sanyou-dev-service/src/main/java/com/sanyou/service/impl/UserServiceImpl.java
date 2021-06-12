@@ -50,15 +50,14 @@ public class UserServiceImpl implements UserService {
     private Sid sid;
 
     @Override
-    public boolean queryUsernameIsExist(String username) {
+    public User queryUsernameIsExist(String username) {
         Example userExample = new Example(User.class);
         Example.Criteria criteria = userExample.createCriteria();
         criteria.andEqualTo("username",username);
         criteria.andEqualTo("deleteMark",0);
         User user = userMapper.selectOneByExample(userExample);
-        if(user != null)
-            return true;
-        return false;
+
+        return user;
     }
 
     @Transactional(propagation = Propagation.REQUIRED)

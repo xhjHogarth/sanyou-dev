@@ -47,4 +47,11 @@ public interface ResourceService {
      * @return
      */
     List<ResourceVo> getAll();
+
+    /**
+     * 根据接口地址查找资源
+     * @param url
+     * @return
+     */
+    Resource findByUrl(String url);
 }

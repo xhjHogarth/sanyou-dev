@@ -21,39 +21,8 @@ public class FilterConfig{
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(new UserFilter());
         bean.setOrder(1);
-        bean.setUrlPatterns(Arrays.asList("/user/*"));
+        bean.setUrlPatterns(Arrays.asList("/user/*","/factory/*","/userGroup/*","/role/*","/resource/*","/userLog/*"));
         return bean;
     }
-
-    // @Override
-    // public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-    //     AnnotationConfigEmbeddedWebApplicationContext ac = (AnnotationConfigEmbeddedWebApplicationContext) applicationContext;
-    //     FilterRegistrationBean bean = new FilterRegistrationBean();
-    //     bean.setFilter(new UserFilter());
-    //     bean.setOrder(1);
-    //     bean.setUrlPatterns(Arrays.asList("/user/*"));
-    //     GenericBeanDefinition bd = new GenericBeanDefinition();
-    //     bd.setBeanClass(FilterRegistrationBean.class);
-    //     ac.getBeanFactory().registerSingleton("filterRegistrationBean",bean);
-    // }
-
-
-    // @Bean
-    // FilterRegistrationBean filterRegistrationBean2(){
-    //     FilterRegistrationBean bean = new FilterRegistrationBean();
-    //     bean.setFilter(new FactoryFilter());
-    //     bean.setOrder(2);
-    //     bean.setUrlPatterns(Arrays.asList("/factory/*"));
-    //     return bean;
-    // }
-    //
-    // @Bean
-    // FilterRegistrationBean filterRegistrationBean3(){
-    //     FilterRegistrationBean bean = new FilterRegistrationBean();
-    //     bean.setFilter(new UserGroupFilter());
-    //     bean.setOrder(3);
-    //     bean.setUrlPatterns(Arrays.asList("/userGroup/*"));
-    //     return bean;
-    // }
 
 }

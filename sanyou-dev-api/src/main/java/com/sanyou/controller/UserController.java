@@ -2,8 +2,10 @@ package com.sanyou.controller;
 
 import com.sanyou.pojo.User;
 import com.sanyou.pojo.UserEquipment;
+import com.sanyou.pojo.UserSession;
 import com.sanyou.pojo.vo.UserVo;
 import com.sanyou.service.UserService;
+import com.sanyou.service.UserSessionService;
 import com.sanyou.utils.JSONResult;
 import com.sanyou.utils.MD5Utils;
 import com.sanyou.utils.PagedResult;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import static com.sanyou.controller.BasicController.PAGE_SIZE;
 
@@ -38,34 +41,44 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserSessionService userSessionService;
+
 
     @ApiOperation(value = "用户登录", notes = "用户登录")
-    @ApiImplicitParams({@ApiImplicitParam(name="username",value = "用户名",required = true,
-            dataType = "String", paramType = "query"),
-            @ApiImplicitParam(name="password",value = "密码",required = true,
-                    dataType = "String", paramType = "query")})
     @PostMapping("/login")
-    public JSONResult login(String username,String password, HttpServletRequest request) throws Exception {
+    public JSONResult login(@RequestBody User user, HttpServletRequest request) throws Exception {
 
-        if(StringUtils.isBlank(username) || StringUtils.isBlank(password)){
+        if(user == null || StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())){
             return JSONResult.errorMsg("用户名或密码不能为空");
         }
 
-        User user = userService.queryUserForLogin(username, MD5Utils.getMD5Str(password));
+        //判断用户名和密码是否正确
+        User loginUser = userService.queryUserForLogin(user.getUsername(), MD5Utils.getMD5Str(user.getPassword()));
 
-        if(user != null){
+        if(loginUser != null){
+            if(loginUser.getEnableMark() == 0)
+                return JSONResult.errorMsg("当前用户已被禁用!");
+
             String remoteAddr = request.getRemoteAddr();
-            User updateUser = new User();
-            updateUser.setId(user.getId());
-            updateUser.setLastLoginIp(remoteAddr);
-            updateUser.setLastLoginTime(new Date());
+            loginUser.setLastLoginIp(remoteAddr);
+            loginUser.setLastLoginTime(new Date());
 
             List<User> userList = new ArrayList<>();
-            userList.add(updateUser);
+            userList.add(loginUser);
             userService.updateUserInfo(userList);
 
+            //如果session存在,则更新session;如果session不存在,则创建session
+            UserSession userSession = new UserSession();
+            userSession.setUserId(loginUser.getId());
+            userSession.setCreatetime(new Date());
+            String session = loginUser.getId() + "_" + UUID.randomUUID();
+            userSession.setSession(session);
+            userSessionService.updateSession(userSession);
+
             UserVo userVo = new UserVo();
-            BeanUtils.copyProperties(user,userVo);
+            BeanUtils.copyProperties(loginUser,userVo);
+            userVo.setSession(session);
             return JSONResult.ok(userVo);
         }else{
             return JSONResult.errorMsg("用户名或密码不正确,请重试!");
@@ -77,7 +90,6 @@ public class UserController {
     @ApiOperation(value = "创建用户", notes = "创建用户")
     @PostMapping("/add")
     public JSONResult addUser(@RequestBody User user, HttpServletRequest request) throws Exception {
-        //TODO 用户注册ip
         if(user == null)
             return JSONResult.errorMsg("用户对象为空");
 
@@ -85,8 +97,8 @@ public class UserController {
             return JSONResult.errorMsg("用户名或密码不能为空");
 
 
-        boolean usernameIsExist = userService.queryUsernameIsExist(user.getUsername());
-        if(!usernameIsExist){
+        User usernameIsExist = userService.queryUsernameIsExist(user.getUsername());
+        if(usernameIsExist == null){
             String remoteAddr = request.getRemoteAddr();
 
             user.setRegistIp(remoteAddr);

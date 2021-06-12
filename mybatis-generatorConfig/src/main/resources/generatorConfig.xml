@@ -39,6 +39,9 @@
 <!--        <table tableName="equipment"></table>-->
 <!--        <table tableName="equipment_records"></table>-->
 <!--        <table tableName="s_administrative_divisions"></table>-->
-        <table tableName="user_equipment"></table>
+<!--        <table tableName="user_equipment"></table>-->
+
+<!--        <table tableName="user_log"></table>-->
+        <table tableName="user_session"></table>
     </context>
 </generatorConfiguration>

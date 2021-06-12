@@ -21,7 +21,7 @@ public interface UserService {
      * @param username 用户名
      * @return
      */
-    boolean queryUsernameIsExist(String username);
+    User queryUsernameIsExist(String username);
 
     /**
      * 新增用户

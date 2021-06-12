@@ -7,6 +7,7 @@ import com.sanyou.pojo.Factory;
 import com.sanyou.pojo.vo.FactoryVo;
 import com.sanyou.service.FactoryService;
 import com.sanyou.utils.PagedResult;
+import org.apache.commons.lang3.StringUtils;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,11 +35,19 @@ public class FactoryServiceImpl implements FactoryService {
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public Factory findByName(String factoryName) {
+    public Factory findByName(String factoryName,String parentId) {
         Example example = new Example(Factory.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("factoryName",factoryName);
         criteria.andEqualTo("deleteMark", 0);
+
+        if(StringUtils.isNotBlank(parentId)){
+            criteria.andEqualTo("parentId", parentId);
+            criteria.andEqualTo("layer", 2);
+        }else{
+            criteria.andEqualTo("layer", 1);
+        }
+
 
         return factoryMapper.selectOneByExample(example);
     }
@@ -105,8 +114,9 @@ public class FactoryServiceImpl implements FactoryService {
             criteria.andEqualTo("parentId",factoryVo.getId());
             criteria.andEqualTo("deleteMark",0);
             criteria.andEqualTo("layer",2);
-            Factory factory = factoryMapper.selectOneByExample(example);
-            if(factory != null){
+            List<Factory> factoryList1 = factoryMapper.selectByExample(example);
+
+            if(factoryList1 != null && factoryList1.size() > 0){
                 factoryVo.setHasChildren(true);
             }else{
                 factoryVo.setHasChildren(false);

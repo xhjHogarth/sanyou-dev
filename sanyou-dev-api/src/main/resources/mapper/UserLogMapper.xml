@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sanyou.mapper.UserLogMapper" >
+  <resultMap id="BaseResultMap" type="com.sanyou.pojo.UserLog" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="VARCHAR" />
+    <result column="module" property="module" jdbcType="VARCHAR" />
+    <result column="action" property="action" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="deletetime" property="deletetime" jdbcType="TIMESTAMP" />
+    <result column="delete_mark" property="deleteMark" jdbcType="TINYINT" />
+  </resultMap>
+
+  <select id="query" parameterType="com.sanyou.pojo.vo.UserLogVo" resultType="com.sanyou.pojo.vo.UserLogVo">
+    select ul.id,ul.userId,ul.module,ul.action,ul.ip,ul.createtime,ul.url,ul.deletetime,ul.delete_mark as deleteMark,u.username
+    from user_log  ul left join user u on ul.userId=u.id
+    where ul.delete_mark=0
+    <if test="userLogVo.createtime != null and userLogVo.endTime != null">
+      AND ul.createtime BETWEEN #{userLogVo.createtime} AND #{userLogVo.endTime}
+    </if>
+    <if test="userLogVo.query != null and userLogVo.query != ''">
+      and ((u.username like CONCAT('%',#{userLogVo.query},'%')) or (ul.action like CONCAT('%',#{userLogVo.query},'%')) or
+           (ul.url like CONCAT('%',#{userLogVo.query},'%')))
+    </if>
+    order by ul.createtime desc
+  </select>
+</mapper>

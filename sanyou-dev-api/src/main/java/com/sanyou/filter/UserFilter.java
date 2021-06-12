@@ -33,7 +33,14 @@ public class UserFilter implements Filter {
         ApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(context);
         userService = ac.getBean(UserService.class);
 
-        excludesPath = Arrays.asList("/factory/getAll");
+        excludesPath = Arrays.asList(
+                "/factory/getAll","/factory/querySubFactory",
+                "/userGroup/queryRoles","/userGroup/getAll",
+                "/role/getAll","/role/queryAuth",
+                "/resource/getAll",
+                "/equipment/getEquipmentTree","/equipment/getUserEquip",
+                "/userLog/download","/user/login"
+        );
 
     }
 
@@ -47,7 +54,7 @@ public class UserFilter implements Filter {
 
         System.out.println("UserFilter:" + url);
 
-        if(excludesPath.indexOf(url)>0){
+        if(excludesPath.indexOf(url)>-1){
             filterChain.doFilter(servletRequest,servletResponse);
             return;
         }
