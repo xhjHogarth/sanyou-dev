@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50729
 File Encoding         : 65001
 
-Date: 2021-06-09 15:05:03
+Date: 2021-06-12 21:48:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -85,15 +85,25 @@ CREATE TABLE `factory` (
 -- ----------------------------
 -- Records of factory
 -- ----------------------------
-INSERT INTO `factory` VALUES ('1', 'aaa', '2', '210602DK3F951DD4', '0', '2021-06-02 19:29:19', null, null);
+INSERT INTO `factory` VALUES ('1', 'wrw', '2', '210602DK3F951DD4', '0', '2021-06-02 19:29:19', '2021-06-09 17:34:18', null);
 INSERT INTO `factory` VALUES ('2105261HWC2S51P0', '金冠铜业', '1', null, '0', '2021-05-26 02:14:44', '2021-06-02 20:45:47', '2021-06-02 20:45:47');
-INSERT INTO `factory` VALUES ('2105268394P0Y8M8', '杭州铜业', '1', null, '0', '2021-05-26 11:22:33', '2021-06-02 20:45:52', '2021-06-02 20:45:52');
-INSERT INTO `factory` VALUES ('210602DK3F951DD4', 'xsxxx', '1', null, '0', '2021-06-02 19:04:20', '2021-06-02 20:45:54', '2021-06-02 20:45:54');
+INSERT INTO `factory` VALUES ('2105268394P0Y8M8', '杭州铜业', '1', null, '0', '2021-05-26 11:22:33', '2021-06-09 17:33:51', '2021-06-02 20:45:52');
+INSERT INTO `factory` VALUES ('210602DK3F951DD4', 'test1', '1', null, '0', '2021-06-02 19:04:20', '2021-06-12 21:29:11', '2021-06-02 20:45:54');
 INSERT INTO `factory` VALUES ('210602F5ZC5K7DYW', 'aaaaa', '1', null, '0', '2021-06-02 19:54:56', '2021-06-02 19:54:56', null);
 INSERT INTO `factory` VALUES ('210602F67XB7FBXP', '2222', '1', null, '0', '2021-06-02 19:55:51', '2021-06-02 19:55:51', null);
 INSERT INTO `factory` VALUES ('210602F6D5DP18H0', 'aasdasd', '1', null, '0', '2021-06-02 19:56:25', '2021-06-02 19:56:25', null);
-INSERT INTO `factory` VALUES ('210602F6G4703N54', 'saacxc', '1', null, '0', '2021-06-02 19:56:37', '2021-06-02 19:56:37', null);
+INSERT INTO `factory` VALUES ('210602F6G4703N54', 'saacxc', '1', null, '1', '2021-06-02 19:56:37', '2021-06-09 17:37:19', '2021-06-09 17:37:19');
 INSERT INTO `factory` VALUES ('210602FCP1S8ACH0', '1111', '2', '2105261HWC2S51P0', '0', '2021-06-02 20:15:10', '2021-06-02 20:15:10', null);
+INSERT INTO `factory` VALUES ('210609C90H2WSYK4', '2222', '2', '2105261HWC2S51P0', '0', '2021-06-09 17:15:55', '2021-06-09 17:15:55', null);
+INSERT INTO `factory` VALUES ('210609CAWTPYAFFW', '221', '2', '2105261HWC2S51P0', '0', '2021-06-09 17:21:32', '2021-06-09 17:21:32', null);
+INSERT INTO `factory` VALUES ('210609CBCX9SASA8', 'rrr', '2', '2105261HWC2S51P0', '0', '2021-06-09 17:23:15', '2021-06-09 17:23:15', null);
+INSERT INTO `factory` VALUES ('210609CCMBY4S70H', '222222222', '2', '2105261HWC2S51P0', '1', '2021-06-09 17:26:51', '2021-06-12 21:20:57', '2021-06-12 21:20:57');
+INSERT INTO `factory` VALUES ('210609CCSND0A3C0', 'test', '1', null, '1', '2021-06-09 17:27:18', '2021-06-12 21:31:13', '2021-06-12 21:31:13');
+INSERT INTO `factory` VALUES ('210609CGHHTTCPX4', '222', '2', '210602F6G4703N54', '1', '2021-06-09 17:35:39', '2021-06-09 17:35:46', '2021-06-09 17:35:46');
+INSERT INTO `factory` VALUES ('210609CGTD73DG2W', 'adad', '2', '210602F6G4703N54', '1', '2021-06-09 17:36:24', '2021-06-09 17:36:43', '2021-06-09 17:36:43');
+INSERT INTO `factory` VALUES ('210609CGZ5221AFW', 'test1', '2', '210602F6G4703N54', '1', '2021-06-09 17:36:48', '2021-06-09 17:37:01', null);
+INSERT INTO `factory` VALUES ('210609CHA4M2XCDP', 'test', '2', '210609CCSND0A3C0', '1', '2021-06-09 17:37:58', '2021-06-12 21:31:09', '2021-06-12 21:31:09');
+INSERT INTO `factory` VALUES ('210609CHB19AN44H', 'test2', '2', '210609CCSND0A3C0', '1', '2021-06-09 17:38:04', '2021-06-09 17:38:04', null);
 
 -- ----------------------------
 -- Table structure for resource
@@ -125,6 +135,35 @@ INSERT INTO `resource` VALUES ('2106090BTK5P64BC', 'user_list_edit', '编辑用�
 INSERT INTO `resource` VALUES ('2106090C60G36KS8', 'user_list_authEquip', '分配设备权限', '2', '210608DTND75F79P', '/user/assignEquip', '2021-06-09 00:36:41', '2021-06-09 00:36:41', null, '0');
 INSERT INTO `resource` VALUES ('2106090CPK6MN828', 'user_list_enable', '启用/禁用用户', '2', '210608DTND75F79P', '/user/enableOrUnEnableUser', '2021-06-09 00:38:14', '2021-06-09 00:38:14', null, '0');
 INSERT INTO `resource` VALUES ('2106091D57Z6W3XP', 'user_list_download', '用户资料下载', '2', '210608DTND75F79P', '/user/downloadUserInfo', '2021-06-09 02:03:40', '2021-06-09 02:03:40', null, '0');
+INSERT INTO `resource` VALUES ('210609AZG3FWKP94', 'factory_manage', '厂家管理', '1', '210608DTG892TXAW', '', '2021-06-09 15:23:23', '2021-06-09 15:23:23', null, '0');
+INSERT INTO `resource` VALUES ('210609B1X10M4280', 'factory_manage_add', '添加厂家', '2', '210609AZG3FWKP94', '/factory/addFactory', '2021-06-09 15:30:27', '2021-06-09 15:30:27', null, '0');
+INSERT INTO `resource` VALUES ('210609B31NSTKPM8', 'factory_manage_query', '查看厂家', '2', '210609AZG3FWKP94', '/factory/query', '2021-06-09 15:33:58', '2021-06-09 15:33:58', null, '0');
+INSERT INTO `resource` VALUES ('210609C2MTC43N54', 'factory_manage_delete', '删除厂家', '2', '210609AZG3FWKP94', '/factory/deleteFactory', '2021-06-09 16:56:52', '2021-06-09 16:56:52', null, '0');
+INSERT INTO `resource` VALUES ('210609C3209Y6CX4', 'factory_manage_edit', '编辑厂家', '2', '210609AZG3FWKP94', '/factory/updateFactoryInfo', '2021-06-09 16:58:04', '2021-06-09 16:58:04', null, '0');
+INSERT INTO `resource` VALUES ('210609C8Y60RRB54', 'factory_manage_addSub', '添加下级', '2', '210609AZG3FWKP94', '/factory/addSubFactory', '2021-06-09 17:15:40', '2021-06-09 17:15:40', null, '0');
+INSERT INTO `resource` VALUES ('210609CKRPZR4PX4', 'auth_manage', '权限管理', '0', null, '', '2021-06-09 17:42:13', '2021-06-09 17:42:13', null, '0');
+INSERT INTO `resource` VALUES ('210609CM5MYYN5D4', 'usergroup_manage', '用户组管理', '1', '210609CKRPZR4PX4', '', '2021-06-09 17:43:30', '2021-06-09 17:43:30', null, '0');
+INSERT INTO `resource` VALUES ('210609CNR334T168', 'usergroup_manage_add', '添加用户组', '2', '210609CM5MYYN5D4', '/userGroup/addGroup', '2021-06-09 17:48:09', '2021-06-09 17:48:09', null, '0');
+INSERT INTO `resource` VALUES ('210609CP04XC5WH0', 'usergroup_manage_query', '查看用户组', '2', '210609CM5MYYN5D4', '/userGroup/query', '2021-06-09 17:48:55', '2021-06-09 17:48:55', null, '0');
+INSERT INTO `resource` VALUES ('210609CP8BSRBS3C', 'usergroup_manage_delete', '删除用户组', '2', '210609CM5MYYN5D4', '/userGroup/deleteUserGroup', '2021-06-09 17:49:48', '2021-06-09 17:49:48', null, '0');
+INSERT INTO `resource` VALUES ('210609CPK90TYS14', 'usergroup_manage_edit', '编辑用户组', '2', '210609CM5MYYN5D4', '/userGroup/updateUserGroup', '2021-06-09 17:50:45', '2021-06-09 17:50:45', null, '0');
+INSERT INTO `resource` VALUES ('210609CR4T8XCH94', 'usergroup_manage_assign', '分配角色', '2', '210609CM5MYYN5D4', '/userGroup/assignRoles', '2021-06-09 17:52:25', '2021-06-09 17:52:25', null, '0');
+INSERT INTO `resource` VALUES ('210609CZ9NP4A0SW', 'role_manage', '角色管理', '1', '210609CKRPZR4PX4', '', '2021-06-09 18:10:57', '2021-06-09 18:10:57', null, '0');
+INSERT INTO `resource` VALUES ('210609CZZMN1SWZC', 'role_manage_add', '添加角色', '2', '210609CZ9NP4A0SW', '/role/addRole', '2021-06-09 18:12:52', '2021-06-09 18:12:52', null, '0');
+INSERT INTO `resource` VALUES ('210609D0AW3YZT2W', 'role_manage_query', '查看角色', '2', '210609CZ9NP4A0SW', '/role/query', '2021-06-09 18:14:05', '2021-06-09 18:14:05', null, '0');
+INSERT INTO `resource` VALUES ('210609DBKMCP3N54', 'role_manage_delete', '删除角色', '2', '210609CZ9NP4A0SW', '/role/deleteRoles', '2021-06-09 18:47:50', '2021-06-09 18:47:50', null, '0');
+INSERT INTO `resource` VALUES ('210609DBTXM21AFW', 'role_manage_edit', '编辑角色', '2', '210609CZ9NP4A0SW', '/role/updateRoles', '2021-06-09 18:48:30', '2021-06-09 18:48:30', null, '0');
+INSERT INTO `resource` VALUES ('210609DC8D9617XP', 'role_manage_assign', '分配权限', '2', '210609CZ9NP4A0SW', '/role/assignAuth', '2021-06-09 18:49:51', '2021-06-09 18:49:51', null, '0');
+INSERT INTO `resource` VALUES ('210609DN7BS16SA8', 'resource_manage', '资源管理', '1', '210609CKRPZR4PX4', '', '2021-06-09 19:10:45', '2021-06-09 19:10:45', null, '0');
+INSERT INTO `resource` VALUES ('210609DNC1F0N3F8', 'resource_manage_add', '添加资源', '2', '210609DN7BS16SA8', '/resource/addResource', '2021-06-09 19:11:15', '2021-06-09 19:11:15', null, '0');
+INSERT INTO `resource` VALUES ('210609DNKAM93P4H', 'resource_manage_query', '查看资源', '2', '210609DN7BS16SA8', '/resource/query', '2021-06-09 19:11:49', '2021-06-09 19:11:49', null, '0');
+INSERT INTO `resource` VALUES ('210609DNYZ4D78PH', 'resource_manage_delete', '删除资源', '2', '210609DN7BS16SA8', '/resource/deleteResources', '2021-06-09 19:12:51', '2021-06-09 19:12:51', null, '0');
+INSERT INTO `resource` VALUES ('210609DP3CY1F79P', 'resource_manage_edit', '编辑资源', '2', '210609DN7BS16SA8', '/resource/updateResources', '2021-06-09 19:13:20', '2021-06-09 19:13:20', null, '0');
+INSERT INTO `resource` VALUES ('210610F7ZW2AZHH0', 'log_manage', '操作日志', '0', null, '', '2021-06-10 20:00:59', '2021-06-10 20:02:18', null, '0');
+INSERT INTO `resource` VALUES ('210610F8PPG3X86W', 'operate_log', '后台操作日志', '1', '210610F7ZW2AZHH0', '', '2021-06-10 20:03:13', '2021-06-10 20:03:13', null, '0');
+INSERT INTO `resource` VALUES ('210610F8Y9KH7F80', 'operate_log_query', '查看日志', '2', '210610F8PPG3X86W', '/userLog/query', '2021-06-10 20:03:50', '2021-06-10 20:03:50', null, '0');
+INSERT INTO `resource` VALUES ('210610F93ZKDP6FW', 'operate_log_delete', '删除日志', '2', '210610F8PPG3X86W', '/userLog/deleteUserLog', '2021-06-10 20:04:26', '2021-06-10 20:04:26', null, '0');
+INSERT INTO `resource` VALUES ('210610F9KY7TAWM8', 'operate_log_download', '下载日志', '2', '210610F8PPG3X86W', '/userLog/downloadUserLog', '2021-06-10 20:05:56', '2021-06-10 20:05:56', null, '0');
 
 -- ----------------------------
 -- Table structure for role
@@ -146,6 +185,13 @@ CREATE TABLE `role` (
 -- ----------------------------
 INSERT INTO `role` VALUES ('210526G6A5T5WNXP', 'client', '客户', '2021-05-26 21:20:10', '2021-06-01 16:57:34', null, '0');
 INSERT INTO `role` VALUES ('210531APA38M4T54', 'test', '测试', '2021-05-31 15:01:50', '2021-05-31 19:32:32', null, '0');
+INSERT INTO `role` VALUES ('210609DG9WKMNK68', '1', '1', '2021-06-09 18:59:00', '2021-06-09 19:02:52', null, '1');
+INSERT INTO `role` VALUES ('210609DHSZBR9BF8', '222', '222', '2021-06-09 19:03:25', '2021-06-09 19:03:27', null, '1');
+INSERT INTO `role` VALUES ('210609DHW08KHZ2W', '2221', '111', '2021-06-09 19:03:31', '2021-06-09 19:03:40', null, '1');
+INSERT INTO `role` VALUES ('210609DHWG6T80ZC', '213', '1231', '2021-06-09 19:03:35', '2021-06-09 19:03:40', null, '1');
+INSERT INTO `role` VALUES ('210609DHYKD6MKS8', 'aaadsd', 'dasd12d', '2021-06-09 19:03:48', '2021-06-11 22:04:25', null, '1');
+INSERT INTO `role` VALUES ('210609DHZ49PH6FW', '2d1dasda', 'dasdda21', '2021-06-09 19:03:52', '2021-06-11 22:04:23', null, '1');
+INSERT INTO `role` VALUES ('210612GC5NC1N0H0', 'test2', '测试2', '2021-06-12 21:37:41', null, null, '0');
 
 -- ----------------------------
 -- Table structure for role_resource
@@ -162,8 +208,42 @@ CREATE TABLE `role_resource` (
 -- ----------------------------
 -- Records of role_resource
 -- ----------------------------
-INSERT INTO `role_resource` VALUES ('2106091BWSKNG3F8', '210526G6A5T5WNXP', '210608GM2YYH2WZC', '2021-06-09 01:59:45');
-INSERT INTO `role_resource` VALUES ('2106091BWSKYA5AW', '210526G6A5T5WNXP', '210608DW867M1K1P', '2021-06-09 01:59:45');
+INSERT INTO `role_resource` VALUES ('210609DMMBZKFN2W', '210609DHYKD6MKS8', '210609CP8BSRBS3C', '2021-06-09 19:08:56');
+INSERT INTO `role_resource` VALUES ('210609DMMBZZR7XP', '210609DHYKD6MKS8', '210609CPK90TYS14', '2021-06-09 19:08:56');
+INSERT INTO `role_resource` VALUES ('210609DMMC0DBBMW', '210609DHYKD6MKS8', '210609CP04XC5WH0', '2021-06-09 19:08:56');
+INSERT INTO `role_resource` VALUES ('210612GC7AN7KHPH', '210531APA38M4T54', '210609CZZMN1SWZC', '2021-06-12 21:37:52');
+INSERT INTO `role_resource` VALUES ('210612GC7ANB13MW', '210531APA38M4T54', '210609D0AW3YZT2W', '2021-06-12 21:37:52');
+INSERT INTO `role_resource` VALUES ('210612GC7ANKW5GC', '210531APA38M4T54', '210609DBKMCP3N54', '2021-06-12 21:37:52');
+INSERT INTO `role_resource` VALUES ('210612GC7ANWN7C0', '210531APA38M4T54', '210609DBTXM21AFW', '2021-06-12 21:37:52');
+INSERT INTO `role_resource` VALUES ('210612GC7AP3F98H', '210531APA38M4T54', '210609DC8D9617XP', '2021-06-12 21:37:52');
+INSERT INTO `role_resource` VALUES ('210612GC8SKM48SW', '210612GC5NC1N0H0', '210609CZZMN1SWZC', '2021-06-12 21:38:01');
+INSERT INTO `role_resource` VALUES ('210612GC8SKWZANC', '210612GC5NC1N0H0', '210609D0AW3YZT2W', '2021-06-12 21:38:01');
+INSERT INTO `role_resource` VALUES ('210612GC8SM0AXKP', '210612GC5NC1N0H0', '210609DBKMCP3N54', '2021-06-12 21:38:01');
+INSERT INTO `role_resource` VALUES ('210612GC8SM75ZF8', '210612GC5NC1N0H0', '210609DBTXM21AFW', '2021-06-12 21:38:01');
+INSERT INTO `role_resource` VALUES ('210612GC8SMF11AW', '210612GC5NC1N0H0', '210609DC8D9617XP', '2021-06-12 21:38:01');
+INSERT INTO `role_resource` VALUES ('210612GDK54P5PM8', '210526G6A5T5WNXP', '2106090BBSZY05WH', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK54TK7HH', '210526G6A5T5WNXP', '210608GM2YYH2WZC', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK54Z0SFW', '210526G6A5T5WNXP', '210608DW867M1K1P', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK552C9D4', '210526G6A5T5WNXP', '2106090BTK5P64BC', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK555TWBC', '210526G6A5T5WNXP', '210609B31NSTKPM8', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK555TWBD', '210526G6A5T5WNXP', '210609B1X10M4280', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK5597B9P', '210526G6A5T5WNXP', '210609C3209Y6CX4', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK55H2D68', '210526G6A5T5WNXP', '210609C2MTC43N54', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK55SXG2W', '210526G6A5T5WNXP', '210609CP04XC5WH0', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK55Y9214', '210526G6A5T5WNXP', '210609CPK90TYS14', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK56543XP', '210526G6A5T5WNXP', '210609CR4T8XCH94', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK56543XR', '210526G6A5T5WNXP', '210609DBTXM21AFW', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK568GMW0', '210526G6A5T5WNXP', '210609DC8D9617XP', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK56BZ5S8', '210526G6A5T5WNXP', '210609D0AW3YZT2W', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK56GAPPH', '210526G6A5T5WNXP', '210609DBKMCP3N54', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK56MS7MW', '210526G6A5T5WNXP', '210609CZZMN1SWZC', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK56MS7MX', '210526G6A5T5WNXP', '210609DNKAM93P4H', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK56S5SK4', '210526G6A5T5WNXP', '210609DNC1F0N3F8', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK56XK9GC', '210526G6A5T5WNXP', '210609DP3CY1F79P', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK5710WDP', '210526G6A5T5WNXP', '210609DNYZ4D78PH', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK574CBC0', '210526G6A5T5WNXP', '210610F93ZKDP6FW', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK577TYA8', '210526G6A5T5WNXP', '210610F9KY7TAWM8', '2021-06-12 21:41:56');
+INSERT INTO `role_resource` VALUES ('210612GDK57B7D8H', '210526G6A5T5WNXP', '210610F8Y9KH7F80', '2021-06-12 21:41:56');
 
 -- ----------------------------
 -- Table structure for s_administrative_divisions
@@ -3464,15 +3544,17 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('2105260FBK56RZTC', 'xhj', '4QrcOUm6Wau+VuBX8g+IPg==', '1阿达', '2', '21312', '的eawda', 'adadasd', 'dasda', null, null, null, '12d12dqwd', '1', '0', '2021-05-26 00:43:17', '2021-06-08 19:27:56', '2021-06-05 01:13:36', null, null, null, '210602DK3F951DD4', '1', '休假回家啊', 'ceo', '2');
-INSERT INTO `user` VALUES ('210603ASC488YB7C', 'ceshi', 'xMpCOKC5I4INzFCab3WEmw==', 'hhhhhh', '1', '21312', '', '', '', null, null, null, '', '0', '0', '2021-06-03 15:08:04', '2021-06-09 02:24:57', '2021-06-05 01:13:36', null, null, null, '', '', '', '', '1');
-INSERT INTO `user` VALUES ('210603ATX2HX8MK4', 'zz', 's928UC4wdmXzRsvW5SzBDQ==', '嘻嘻嘻嘻嘻', '3', '21312', '312', '321', '12313', '130000', '130200', '130202', '312', '0', '0', '2021-06-03 15:12:27', '2021-06-07 18:15:40', '2021-06-05 00:50:02', null, null, null, '2105261HWC2S51P0', '210602FCP1S8ACH0', '3123', '13123', null);
-INSERT INTO `user` VALUES ('210607CFNX09K6Y8', '1123', 'ICy5YqxZB1uWSwcVLSNLcA==', '124124', '1', '', '', '', '', '120000', '120100', '120101', '', '1', '0', '2021-06-07 17:33:01', '2021-06-07 18:15:23', null, null, null, null, '', '', '', '', '1');
-INSERT INTO `user` VALUES ('210607CKY08WAG54', 'test1', 'ICy5YqxZB1uWSwcVLSNLcA==', 'test1', '1', '213123', '13123', '12312', '1312', '110000', '110100', '110105', 'aaaaaaaa', '1', '0', '2021-06-07 17:42:40', null, null, null, null, null, '210602DK3F951DD4', '1', '1111', '111', '2');
-INSERT INTO `user` VALUES ('210608CAKKZXGNTC', '1', 'xMpCOKC5I4INzFCab3WEmw==', '1', '1', '', '', '', '', null, null, null, '', '1', '0', '2021-06-08 17:20:45', null, null, '10.65.1.168', null, null, '2105261HWC2S51P0', '210602FCP1S8ACH0', '1', '1', '1');
-INSERT INTO `user` VALUES ('210608CCXG5PSYK4', 'wwww', '40qIme9kaLdPihBIQZzMiw==', 'w', '1', '', '', '', '', null, null, null, '', '1', '0', '2021-06-08 17:27:37', null, null, '10.65.1.168', null, null, '210602DK3F951DD4', '1', 'www', 'www', '1');
-INSERT INTO `user` VALUES ('2106091870S6651P', '2', 'yB5yjZ1ML2NvBn+JzBSGLA==', '21', '1', '12313', '1rr1e12', 'e12e1e', '14211', '110000', '110100', '110101', 'adasdasd', '1', '0', '2021-06-09 01:48:51', '2021-06-09 02:25:06', null, '192.168.1.6', null, null, '2105261HWC2S51P0', '210602FCP1S8ACH0', 'asdad', 'adasdad', '210601G2GMANCY3C');
+INSERT INTO `user` VALUES ('2105260FBK56RZTC', 'xhj', '4QrcOUm6Wau+VuBX8g+IPg==', '夏华军', '2', '112313', '1231241', '1412413', '2141412', '330000', '330100', '330111', '富阳', '1', '0', '2021-05-26 00:43:17', '2021-06-12 21:17:33', '2021-06-05 01:13:36', null, '10.65.1.168', '2021-06-12 21:07:48', '2105261HWC2S51P0', '210602FCP1S8ACH0', '休假回家啊', 'ceo', '2');
+INSERT INTO `user` VALUES ('210603ASC488YB7C', 'ceshi', 'xMpCOKC5I4INzFCab3WEmw==', 'hhhhhh', '1', '21312', '', '', '', null, null, null, '', '0', '1', '2021-06-03 15:08:04', '2021-06-12 21:10:34', '2021-06-12 21:10:34', null, null, null, '', '', '', '', '1');
+INSERT INTO `user` VALUES ('210603ATX2HX8MK4', 'zz', 's928UC4wdmXzRsvW5SzBDQ==', '嘻嘻嘻嘻嘻', '3', '21312', '312', '321', '12313', '130000', '130200', '130202', '312', '0', '1', '2021-06-03 15:12:27', '2021-06-12 21:10:34', '2021-06-12 21:10:34', null, null, null, '2105261HWC2S51P0', '210602FCP1S8ACH0', '3123', '13123', null);
+INSERT INTO `user` VALUES ('210607CFNX09K6Y8', '1123', 'ICy5YqxZB1uWSwcVLSNLcA==', '124124', '1', '', '', '', '', '120000', '120100', '120101', '', '1', '1', '2021-06-07 17:33:01', '2021-06-12 21:10:34', '2021-06-12 21:10:34', null, null, null, '', '', '', '', '1');
+INSERT INTO `user` VALUES ('210607CKY08WAG54', 'test1', 'ICy5YqxZB1uWSwcVLSNLcA==', 'test1', '1', '213123', '13123', '12312', '1312', '110000', '110100', '110105', 'aaaaaaaa', '1', '1', '2021-06-07 17:42:40', '2021-06-12 21:10:34', '2021-06-12 21:10:34', null, null, null, '210602DK3F951DD4', '1', '1111', '111', '2');
+INSERT INTO `user` VALUES ('210608CAKKZXGNTC', '1', 'xMpCOKC5I4INzFCab3WEmw==', '1', '1', '', '', '', '', null, null, null, '', '1', '1', '2021-06-08 17:20:45', '2021-06-12 21:10:34', '2021-06-12 21:10:34', '10.65.1.168', null, null, '2105261HWC2S51P0', '210602FCP1S8ACH0', '1', '1', '1');
+INSERT INTO `user` VALUES ('210608CCXG5PSYK4', 'wwww', '40qIme9kaLdPihBIQZzMiw==', 'w', '1', '', '', '', '', null, null, null, '', '1', '1', '2021-06-08 17:27:37', '2021-06-12 21:10:34', '2021-06-12 21:10:34', '10.65.1.168', null, null, '210602DK3F951DD4', '1', 'www', 'www', '1');
+INSERT INTO `user` VALUES ('2106091870S6651P', '2', 'yB5yjZ1ML2NvBn+JzBSGLA==', '21', '1', '12313', '1rr1e12', 'e12e1e', '14211', '110000', '110100', '110101', 'adasdasd', '1', '1', '2021-06-09 01:48:51', '2021-06-12 21:09:52', '2021-06-12 21:09:52', '192.168.1.6', null, null, '2105261HWC2S51P0', '210602FCP1S8ACH0', 'asdad', 'adasdad', '210601G2GMANCY3C');
 INSERT INTO `user` VALUES ('21060919X3SH1RKP', '123', 'ICy5YqxZB1uWSwcVLSNLcA==', '123', '2', '', '', '', '', null, null, null, '', '1', '1', '2021-06-09 01:53:47', '2021-06-09 01:54:19', '2021-06-09 01:54:19', '192.168.1.6', null, null, '', '', '11', '11', '210601G3XRDMCFNC');
+INSERT INTO `user` VALUES ('210609G9XK1T8G9P', '测试', 'ICy5YqxZB1uWSwcVLSNLcA==', 'ceshi', '2', '', '', '', '', null, null, null, '', '1', '1', '2021-06-09 21:30:49', '2021-06-12 21:10:34', '2021-06-12 21:10:34', '10.65.1.168', null, null, '', '', '', '', '1');
+INSERT INTO `user` VALUES ('210612G539PYCARP', 'yla', '4QrcOUm6Wau+VuBX8g+IPg==', '杨隆安', '2', '111', '111', '11', '11', '330000', '330100', '330113', '杭电', '1', '0', '2021-06-12 21:16:25', null, null, '10.65.1.168', null, null, '2105261HWC2S51P0', '210602FCP1S8ACH0', '11111', '1111', '1');
 
 -- ----------------------------
 -- Table structure for usergroup
@@ -3495,18 +3577,19 @@ CREATE TABLE `usergroup` (
 -- ----------------------------
 INSERT INTO `usergroup` VALUES ('1', '超管', '1', '1', '2021-06-01 20:58:30', null, null, '0');
 INSERT INTO `usergroup` VALUES ('2', '客户', '1', '1', '2021-06-01 20:58:48', '2021-06-01 23:56:52', null, '0');
-INSERT INTO `usergroup` VALUES ('210601G2GMANCY3C', 'test嘻嘻嘻嘻嘻嘻嘻', '2', '1', '2021-06-01 21:08:44', '2021-06-01 23:50:54', null, '0');
-INSERT INTO `usergroup` VALUES ('210601G3XRDMCFNC', 'test2shkdhaksdhakj', '2', '1', '2021-06-01 21:12:49', '2021-06-01 23:57:09', null, '0');
+INSERT INTO `usergroup` VALUES ('210601G2GMANCY3C', 'test嘻嘻嘻嘻嘻嘻嘻', '2', '1', '2021-06-01 21:08:44', '2021-06-12 21:34:08', null, '1');
+INSERT INTO `usergroup` VALUES ('210601G3XRDMCFNC', '哈哈', '2', '1', '2021-06-01 21:12:49', '2021-06-12 21:34:39', null, '0');
 INSERT INTO `usergroup` VALUES ('210601G48WK6TDKP', 'test4', '2', '3', '2021-06-01 21:14:01', '2021-06-01 21:35:22', null, '0');
-INSERT INTO `usergroup` VALUES ('210601G534GCK9WH', '111', '2', '1', '2021-06-01 21:16:24', '2021-06-01 21:35:20', null, '0');
+INSERT INTO `usergroup` VALUES ('210601G534GCK9WH', 'ces', '2', '1', '2021-06-01 21:16:24', '2021-06-09 18:04:42', null, '0');
 INSERT INTO `usergroup` VALUES ('210601G55837CPX4', '111111', '2', '2', '2021-06-01 21:16:38', '2021-06-01 21:35:18', null, '0');
-INSERT INTO `usergroup` VALUES ('210601G5778729KP', '23123', '2', '2', '2021-06-01 21:16:50', '2021-06-01 21:35:09', null, '0');
+INSERT INTO `usergroup` VALUES ('210601G5778729KP', '23123', '2', '2', '2021-06-01 21:16:50', '2021-06-09 18:02:38', null, '1');
 INSERT INTO `usergroup` VALUES ('210601GF9PG4CZ2W', '111', '2', '1', '2021-06-01 21:44:08', '2021-06-01 21:44:10', null, '0');
 INSERT INTO `usergroup` VALUES ('210601HPZB523R40', '测试', '2', '1', '2021-06-01 23:28:07', null, null, '0');
 INSERT INTO `usergroup` VALUES ('210601HRAKBG63C0', '啊啊啊', '2', '1', '2021-06-01 23:29:19', null, null, '0');
 INSERT INTO `usergroup` VALUES ('210601HRZDR9846W', '啊啊是', '2', '1', '2021-06-01 23:31:07', null, null, '0');
-INSERT INTO `usergroup` VALUES ('210601HTB3K7DHBC', '对格式', '2', '1', '2021-06-01 23:35:22', null, null, '0');
+INSERT INTO `usergroup` VALUES ('210601HTB3K7DHBC', '对格式', '2', '1', '2021-06-01 23:35:22', '2021-06-09 18:02:45', null, '1');
 INSERT INTO `usergroup` VALUES ('210601HZXR0XD968', 'test夏华军', '2', '1', '2021-06-01 23:48:57', null, null, '0');
+INSERT INTO `usergroup` VALUES ('210609CSMFX36PBC', 'test', '2', '3', '2021-06-09 17:56:53', null, null, '0');
 INSERT INTO `usergroup` VALUES ('3', '普通用户', '1', '2', '2021-06-01 20:59:03', null, null, '0');
 INSERT INTO `usergroup` VALUES ('4', '数据上传', '1', '2', '2021-06-01 20:59:23', null, null, '0');
 
@@ -3534,6 +3617,8 @@ INSERT INTO `usergroup_role` VALUES ('210602C9HYMB3NF8', '210601HRAKBG63C0', '21
 INSERT INTO `usergroup_role` VALUES ('210602C9KGBFZRS8', '210601HPZB523R40', '210526G6A5T5WNXP', '2021-06-02 17:17:45');
 INSERT INTO `usergroup_role` VALUES ('210602C9KWT6A98H', '210601GF9PG4CZ2W', '210526G6A5T5WNXP', '2021-06-02 17:17:47');
 INSERT INTO `usergroup_role` VALUES ('210602C9KWZAAD68', '210601GF9PG4CZ2W', '210531APA38M4T54', '2021-06-02 17:17:47');
+INSERT INTO `usergroup_role` VALUES ('210609CYX2DAX39P', '210601G2GMANCY3C', '210531APA38M4T54', '2021-06-09 18:09:36');
+INSERT INTO `usergroup_role` VALUES ('210612GB8CXXNFY8', '210601G3XRDMCFNC', '210531APA38M4T54', '2021-06-12 21:34:59');
 
 -- ----------------------------
 -- Table structure for user_equipment
@@ -3558,4 +3643,166 @@ INSERT INTO `user_equipment` VALUES ('7', '210603ASC488YB7C', '210607GM8D27RTHH'
 INSERT INTO `user_equipment` VALUES ('8', '210607CFNX09K6Y8', '210607GMSN2MZN54', '2021-06-08 00:31:38');
 INSERT INTO `user_equipment` VALUES ('9', '210607CKY08WAG54', '210607GM8D27RTHH', '2021-06-08 14:46:12');
 INSERT INTO `user_equipment` VALUES ('10', '2106091870S6651P', '210607GM8D27RTHH', '2021-06-09 01:59:38');
+
+-- ----------------------------
+-- Table structure for user_log
+-- ----------------------------
+DROP TABLE IF EXISTS `user_log`;
+CREATE TABLE `user_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` varchar(20) NOT NULL,
+  `module` varchar(20) NOT NULL,
+  `action` varchar(50) NOT NULL,
+  `ip` varchar(200) DEFAULT NULL,
+  `createtime` datetime DEFAULT NULL,
+  `url` varchar(255) NOT NULL,
+  `deletetime` datetime DEFAULT NULL,
+  `delete_mark` tinyint(4) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_log
+-- ----------------------------
+INSERT INTO `user_log` VALUES ('1', '2105260FBK56RZTC', 'user', '查看用户', '10.65.1.168', '2021-06-09 21:29:51', '/user/query', null, '0');
+INSERT INTO `user_log` VALUES ('2', '2105260FBK56RZTC', 'user', '添加用户', '10.65.1.168', '2021-06-09 21:30:49', '/user/add', null, '0');
+INSERT INTO `user_log` VALUES ('3', '2105260FBK56RZTC', 'user', '查看用户', '10.65.1.168', '2021-06-09 21:30:49', '/user/query', null, '0');
+INSERT INTO `user_log` VALUES ('4', '2105260FBK56RZTC', 'role', '查看角色', '192.168.1.5', '2021-06-10 19:52:32', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('5', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 19:52:37', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('6', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 19:52:39', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('7', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 19:52:46', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('8', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 19:53:03', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('9', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 19:53:15', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('10', '2105260FBK56RZTC', 'resource', '添加资源', '192.168.1.5', '2021-06-10 20:00:59', '/resource/addResource', null, '0');
+INSERT INTO `user_log` VALUES ('11', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 20:00:59', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('12', '2105260FBK56RZTC', 'resource', '编辑资源', '192.168.1.5', '2021-06-10 20:02:19', '/resource/updateResources', null, '0');
+INSERT INTO `user_log` VALUES ('13', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 20:02:19', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('14', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 20:02:41', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('15', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 20:02:45', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('16', '2105260FBK56RZTC', 'resource', '添加资源', '192.168.1.5', '2021-06-10 20:03:13', '/resource/addResource', null, '0');
+INSERT INTO `user_log` VALUES ('17', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 20:03:14', '/resource/query', '2021-06-10 20:12:47', '1');
+INSERT INTO `user_log` VALUES ('18', '2105260FBK56RZTC', 'resource', '添加资源', '192.168.1.5', '2021-06-10 20:03:50', '/resource/addResource', null, '0');
+INSERT INTO `user_log` VALUES ('19', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 20:03:50', '/resource/query', '2021-06-10 20:12:47', '1');
+INSERT INTO `user_log` VALUES ('20', '2105260FBK56RZTC', 'resource', '添加资源', '192.168.1.5', '2021-06-10 20:04:26', '/resource/addResource', null, '0');
+INSERT INTO `user_log` VALUES ('21', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 20:04:26', '/resource/query', '2021-06-10 20:12:23', '1');
+INSERT INTO `user_log` VALUES ('22', '2105260FBK56RZTC', 'resource', '添加资源', '192.168.1.5', '2021-06-10 20:05:56', '/resource/addResource', null, '0');
+INSERT INTO `user_log` VALUES ('23', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 20:05:56', '/resource/query', '2021-06-10 20:12:17', '1');
+INSERT INTO `user_log` VALUES ('24', '2105260FBK56RZTC', 'role', '查看角色', '192.168.1.5', '2021-06-10 20:06:27', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('25', '2105260FBK56RZTC', 'role', '分配权限', '192.168.1.5', '2021-06-10 20:06:31', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('26', '2105260FBK56RZTC', 'role', '分配权限', '192.168.1.5', '2021-06-10 20:12:12', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('27', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 21:36:03', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('28', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 21:36:04', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('29', '2105260FBK56RZTC', 'role', '查看角色', '192.168.1.5', '2021-06-10 21:36:42', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('30', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-10 21:42:10', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('31', '2105260FBK56RZTC', 'role', '查看角色', '192.168.1.5', '2021-06-10 21:42:11', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('32', '2105260FBK56RZTC', 'role', '分配权限', '192.168.1.5', '2021-06-10 21:42:23', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('33', '2105260FBK56RZTC', 'role', '查看角色', '192.168.1.5', '2021-06-11 22:04:17', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('34', '2105260FBK56RZTC', 'role', '删除角色', '192.168.1.5', '2021-06-11 22:04:23', '/role/deleteRoles', null, '0');
+INSERT INTO `user_log` VALUES ('35', '2105260FBK56RZTC', 'role', '查看角色', '192.168.1.5', '2021-06-11 22:04:23', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('36', '2105260FBK56RZTC', 'role', '删除角色', '192.168.1.5', '2021-06-11 22:04:25', '/role/deleteRoles', null, '0');
+INSERT INTO `user_log` VALUES ('37', '2105260FBK56RZTC', 'role', '查看角色', '192.168.1.5', '2021-06-11 22:04:25', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('38', '2105260FBK56RZTC', 'role', '分配权限', '192.168.1.5', '2021-06-11 22:21:54', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('39', '2105260FBK56RZTC', 'role', '查看角色', '192.168.1.5', '2021-06-11 22:22:58', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('40', '2105260FBK56RZTC', 'role', '查看角色', '192.168.1.5', '2021-06-11 22:33:44', '/role/query', '2021-06-11 23:07:59', '1');
+INSERT INTO `user_log` VALUES ('41', '2105260FBK56RZTC', 'role', '分配权限', '192.168.1.5', '2021-06-11 22:33:48', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('42', '2105260FBK56RZTC', 'userLog', '下载日志', '192.168.1.5', '2021-06-11 22:33:50', '/userLog/downloadUserLog', null, '0');
+INSERT INTO `user_log` VALUES ('43', '2105260FBK56RZTC', 'userLog', '删除日志', '192.168.1.5', '2021-06-11 23:07:59', '/userLog/deleteUserLog', null, '0');
+INSERT INTO `user_log` VALUES ('44', '2105260FBK56RZTC', 'resource', '查看资源', '192.168.1.5', '2021-06-11 23:08:13', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('45', '2105260FBK56RZTC', 'role', '查看角色', '192.168.1.5', '2021-06-11 23:08:15', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('46', '2105260FBK56RZTC', 'user', '查看用户', '192.168.1.5', '2021-06-12 00:07:00', '/user/query', null, '0');
+INSERT INTO `user_log` VALUES ('47', '2105260FBK56RZTC', 'factory', '查看厂家', '192.168.1.5', '2021-06-12 00:07:05', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('48', '2105260FBK56RZTC', 'user', '用户登录', '10.65.1.168', '2021-06-12 19:26:32', '/user/login', null, '0');
+INSERT INTO `user_log` VALUES ('49', '2105260FBK56RZTC', 'user', '用户登录', '10.65.1.168', '2021-06-12 19:43:38', '/user/login', null, '0');
+INSERT INTO `user_log` VALUES ('50', '2105260FBK56RZTC', 'user', '用户登录', '10.65.1.168', '2021-06-12 20:32:44', '/user/login', null, '0');
+INSERT INTO `user_log` VALUES ('51', '2105260FBK56RZTC', 'user', '用户登录', '10.65.1.168', '2021-06-12 20:32:47', '/user/login', null, '0');
+INSERT INTO `user_log` VALUES ('52', '2105260FBK56RZTC', 'user', '用户登录', '10.65.1.168', '2021-06-12 20:59:02', '/user/login', null, '0');
+INSERT INTO `user_log` VALUES ('53', '2105260FBK56RZTC', 'user', '用户登录', '10.65.1.168', '2021-06-12 20:59:05', '/user/login', null, '0');
+INSERT INTO `user_log` VALUES ('54', '2105260FBK56RZTC', 'resource', '查看资源', '10.65.1.168', '2021-06-12 21:06:51', '/resource/query', null, '0');
+INSERT INTO `user_log` VALUES ('55', '2105260FBK56RZTC', 'role', '查看角色', '10.65.1.168', '2021-06-12 21:06:53', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('56', '2105260FBK56RZTC', 'user', '用户登录', '10.65.1.168', '2021-06-12 21:07:49', '/user/login', null, '0');
+INSERT INTO `user_log` VALUES ('57', '2105260FBK56RZTC', 'role', '查看角色', '10.65.1.168', '2021-06-12 21:08:07', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('58', '2105260FBK56RZTC', 'user', '查看用户', '10.65.1.168', '2021-06-12 21:09:29', '/user/query', null, '0');
+INSERT INTO `user_log` VALUES ('59', '2105260FBK56RZTC', 'user', '查看用户', '10.65.1.168', '2021-06-12 21:09:32', '/user/query', null, '0');
+INSERT INTO `user_log` VALUES ('60', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:09:48', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('61', '2105260FBK56RZTC', 'user', '删除用户', '10.65.1.168', '2021-06-12 21:09:52', '/user/deleteUser', null, '0');
+INSERT INTO `user_log` VALUES ('62', '2105260FBK56RZTC', 'user', '查看用户', '10.65.1.168', '2021-06-12 21:09:52', '/user/query', null, '0');
+INSERT INTO `user_log` VALUES ('63', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:10:03', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('64', '2105260FBK56RZTC', 'user', '删除用户', '10.65.1.168', '2021-06-12 21:10:34', '/user/deleteUser', null, '0');
+INSERT INTO `user_log` VALUES ('65', '2105260FBK56RZTC', 'user', '查看用户', '10.65.1.168', '2021-06-12 21:10:34', '/user/query', null, '0');
+INSERT INTO `user_log` VALUES ('66', '2105260FBK56RZTC', 'userGroup', '查看用户组', '10.65.1.168', '2021-06-12 21:11:45', '/userGroup/query', null, '0');
+INSERT INTO `user_log` VALUES ('67', '2105260FBK56RZTC', 'userGroup', '查看用户组', '10.65.1.168', '2021-06-12 21:11:53', '/userGroup/query', null, '0');
+INSERT INTO `user_log` VALUES ('68', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:12:59', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('69', '2105260FBK56RZTC', 'user', '添加用户', '10.65.1.168', '2021-06-12 21:13:34', '/user/add', null, '0');
+INSERT INTO `user_log` VALUES ('70', '2105260FBK56RZTC', 'user', '添加用户', '10.65.1.168', '2021-06-12 21:14:07', '/user/add', null, '0');
+INSERT INTO `user_log` VALUES ('71', '2105260FBK56RZTC', 'user', '添加用户', '10.65.1.168', '2021-06-12 21:15:09', '/user/add', null, '0');
+INSERT INTO `user_log` VALUES ('72', '2105260FBK56RZTC', 'user', '添加用户', '10.65.1.168', '2021-06-12 21:15:49', '/user/add', null, '0');
+INSERT INTO `user_log` VALUES ('73', '2105260FBK56RZTC', 'user', '添加用户', '10.65.1.168', '2021-06-12 21:16:25', '/user/add', null, '0');
+INSERT INTO `user_log` VALUES ('74', '2105260FBK56RZTC', 'user', '查看用户', '10.65.1.168', '2021-06-12 21:16:26', '/user/query', null, '0');
+INSERT INTO `user_log` VALUES ('75', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:16:57', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('76', '2105260FBK56RZTC', 'user', '编辑用户', '10.65.1.168', '2021-06-12 21:17:33', '/user/updateUserInfo', null, '0');
+INSERT INTO `user_log` VALUES ('77', '2105260FBK56RZTC', 'user', '查看用户', '10.65.1.168', '2021-06-12 21:17:34', '/user/query', null, '0');
+INSERT INTO `user_log` VALUES ('78', '2105260FBK56RZTC', 'user', '查看用户', '10.65.1.168', '2021-06-12 21:17:41', '/user/query', null, '0');
+INSERT INTO `user_log` VALUES ('79', '2105260FBK56RZTC', 'user', '查看用户', '10.65.1.168', '2021-06-12 21:17:42', '/user/query', null, '0');
+INSERT INTO `user_log` VALUES ('80', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:20:49', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('81', '2105260FBK56RZTC', 'factory', '删除厂家', '10.65.1.168', '2021-06-12 21:20:57', '/factory/deleteFactory', null, '0');
+INSERT INTO `user_log` VALUES ('82', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:20:57', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('83', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:21:18', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('84', '2105260FBK56RZTC', 'factory', '编辑厂家', '10.65.1.168', '2021-06-12 21:21:29', '/factory/updateFactoryInfo', null, '0');
+INSERT INTO `user_log` VALUES ('85', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:21:29', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('86', '2105260FBK56RZTC', 'factory', '编辑厂家', '10.65.1.168', '2021-06-12 21:29:11', '/factory/updateFactoryInfo', null, '0');
+INSERT INTO `user_log` VALUES ('87', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:29:11', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('88', '2105260FBK56RZTC', 'factory', '编辑厂家', '10.65.1.168', '2021-06-12 21:29:14', '/factory/updateFactoryInfo', null, '0');
+INSERT INTO `user_log` VALUES ('89', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:29:14', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('90', '2105260FBK56RZTC', 'factory', '删除厂家', '10.65.1.168', '2021-06-12 21:31:09', '/factory/deleteFactory', null, '0');
+INSERT INTO `user_log` VALUES ('91', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:31:09', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('92', '2105260FBK56RZTC', 'factory', '删除厂家', '10.65.1.168', '2021-06-12 21:31:13', '/factory/deleteFactory', null, '0');
+INSERT INTO `user_log` VALUES ('93', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:31:13', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('94', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:31:34', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('95', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:31:40', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('96', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:31:50', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('97', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:31:54', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('98', '2105260FBK56RZTC', 'factory', '查看厂家', '10.65.1.168', '2021-06-12 21:32:51', '/factory/query', null, '0');
+INSERT INTO `user_log` VALUES ('99', '2105260FBK56RZTC', 'userGroup', '查看用户组', '10.65.1.168', '2021-06-12 21:33:51', '/userGroup/query', null, '0');
+INSERT INTO `user_log` VALUES ('100', '2105260FBK56RZTC', 'userGroup', '查看用户组', '10.65.1.168', '2021-06-12 21:33:57', '/userGroup/query', null, '0');
+INSERT INTO `user_log` VALUES ('101', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:34:04', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('102', '2105260FBK56RZTC', 'userGroup', '删除用户组', '10.65.1.168', '2021-06-12 21:34:08', '/userGroup/deleteUserGroup', null, '0');
+INSERT INTO `user_log` VALUES ('103', '2105260FBK56RZTC', 'userGroup', '查看用户组', '10.65.1.168', '2021-06-12 21:34:08', '/userGroup/query', null, '0');
+INSERT INTO `user_log` VALUES ('104', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:34:15', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('105', '2105260FBK56RZTC', 'userGroup', '查看用户组', '10.65.1.168', '2021-06-12 21:34:18', '/userGroup/query', null, '0');
+INSERT INTO `user_log` VALUES ('106', '2105260FBK56RZTC', 'userGroup', '查看用户组', '10.65.1.168', '2021-06-12 21:34:27', '/userGroup/query', null, '0');
+INSERT INTO `user_log` VALUES ('107', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:34:34', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('108', '2105260FBK56RZTC', 'userGroup', '编辑用户组', '10.65.1.168', '2021-06-12 21:34:39', '/userGroup/updateUserGroup', null, '0');
+INSERT INTO `user_log` VALUES ('109', '2105260FBK56RZTC', 'userGroup', '查看用户组', '10.65.1.168', '2021-06-12 21:34:39', '/userGroup/query', null, '0');
+INSERT INTO `user_log` VALUES ('110', '2105260FBK56RZTC', 'userGroup', '查看用户组', '10.65.1.168', '2021-06-12 21:34:47', '/userGroup/query', null, '0');
+INSERT INTO `user_log` VALUES ('111', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:34:54', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('112', '2105260FBK56RZTC', 'userGroup', '分配角色', '10.65.1.168', '2021-06-12 21:34:59', '/userGroup/assignRoles', null, '0');
+INSERT INTO `user_log` VALUES ('113', '2105260FBK56RZTC', 'userGroup', '查看用户组', '10.65.1.168', '2021-06-12 21:34:59', '/userGroup/query', null, '0');
+INSERT INTO `user_log` VALUES ('114', '2105260FBK56RZTC', 'userGroup', '查看用户组', '10.65.1.168', '2021-06-12 21:35:12', '/userGroup/query', null, '0');
+INSERT INTO `user_log` VALUES ('115', '2105260FBK56RZTC', 'role', '查看角色', '10.65.1.168', '2021-06-12 21:37:04', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('116', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:37:16', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('117', '2105260FBK56RZTC', 'role', '查看角色', '10.65.1.168', '2021-06-12 21:37:25', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('118', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:37:33', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('119', '2105260FBK56RZTC', 'role', '添加角色', '10.65.1.168', '2021-06-12 21:37:42', '/role/addRole', null, '0');
+INSERT INTO `user_log` VALUES ('120', '2105260FBK56RZTC', 'role', '查看角色', '10.65.1.168', '2021-06-12 21:37:42', '/role/query', null, '0');
+INSERT INTO `user_log` VALUES ('121', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:37:52', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('122', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:38:02', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('123', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:41:48', '/role/assignAuth', null, '0');
+INSERT INTO `user_log` VALUES ('124', '2105260FBK56RZTC', 'role', '分配权限', '10.65.1.168', '2021-06-12 21:41:56', '/role/assignAuth', null, '0');
+
+-- ----------------------------
+-- Table structure for user_session
+-- ----------------------------
+DROP TABLE IF EXISTS `user_session`;
+CREATE TABLE `user_session` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(20) NOT NULL,
+  `session` varchar(100) DEFAULT NULL,
+  `createtime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_session
+-- ----------------------------
+INSERT INTO `user_session` VALUES ('1', '2105260FBK56RZTC', '2105260FBK56RZTC_0a88974f-0139-479a-920e-1de5f5940b94', '2021-06-12 21:07:49');
 SET FOREIGN_KEY_CHECKS=1;
