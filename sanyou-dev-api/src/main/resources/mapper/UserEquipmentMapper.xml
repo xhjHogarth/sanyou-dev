@@ -10,4 +10,10 @@
     <result column="equip_id" property="equipId" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <select id="checkAuth" parameterType="String" resultMap="BaseResultMap">
+    select ue.id,ue.user_id,ue.equip_id,ue.createtime
+    from user_equipment ue left join equipment e on ue.equip_id=e.id
+    where ue.user_id=#{userId} and e.equip_no=#{lineno}
+  </select>
 </mapper>

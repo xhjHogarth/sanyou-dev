@@ -18,7 +18,7 @@ public class EquipmentVo {
     private String subFactoryId;
     private Byte equipStatus;
     private Date equipOnlineTime;
-    private Double equipCycle;
+    private Integer equipCycle;
     private Double equipHealthLimit;
     private Double equipSubhealthLimit;
     private String equipAddress;
@@ -110,11 +110,11 @@ public class EquipmentVo {
         this.equipOnlineTime = equipOnlineTime;
     }
 
-    public Double getEquipCycle() {
+    public Integer getEquipCycle() {
         return equipCycle;
     }
 
-    public void setEquipCycle(Double equipCycle) {
+    public void setEquipCycle(Integer equipCycle) {
         this.equipCycle = equipCycle;
     }
 

@@ -48,7 +48,9 @@ public class LogInterceptor implements HandlerInterceptor {
                 "/role/getAll","/role/queryAuth",
                 "/resource/getAll",
                 "/equipment/getEquipmentTree","/equipment/getUserEquip",
-                "/userLog/query"
+                "/userLog/query",
+                "/industryData/getPieChart","/industryData/getBarChart","/industryData/getLineChart","/industryData/queryData","/industryData/deleteData",
+                "/industryData/query","/industryData/getCycleLineChart","/industryData/getNormalLineChart","/industryData/getNormalBarChart"
         );
         if(excludesPath.indexOf(url) > -1){
             return;

@@ -11,7 +11,7 @@
     <result column="sub_factory_id" property="subFactoryId" jdbcType="VARCHAR" />
     <result column="equip_status" property="equipStatus" jdbcType="TINYINT" />
     <result column="equip_online_time" property="equipOnlineTime" jdbcType="TIMESTAMP" />
-    <result column="equip_cycle" property="equipCycle" jdbcType="DOUBLE" />
+    <result column="equip_cycle" property="equipCycle" jdbcType="INTEGER" />
     <result column="equip_health_limit" property="equipHealthLimit" jdbcType="DOUBLE" />
     <result column="equip_subhealth_limit" property="equipSubhealthLimit" jdbcType="DOUBLE" />
     <result column="equip_address" property="equipAddress" jdbcType="VARCHAR" />

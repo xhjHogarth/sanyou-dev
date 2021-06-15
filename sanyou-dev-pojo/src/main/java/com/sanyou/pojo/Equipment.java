@@ -42,7 +42,7 @@ public class Equipment {
      * 设备周期
      */
     @Column(name = "equip_cycle")
-    private Double equipCycle;
+    private Integer equipCycle;
 
     /**
      * 设备健康上限
@@ -195,7 +195,7 @@ public class Equipment {
      *
      * @return equip_cycle - 设备周期
      */
-    public Double getEquipCycle() {
+    public Integer getEquipCycle() {
         return equipCycle;
     }
 
@@ -204,7 +204,7 @@ public class Equipment {
      *
      * @param equipCycle 设备周期
      */
-    public void setEquipCycle(Double equipCycle) {
+    public void setEquipCycle(Integer equipCycle) {
         this.equipCycle = equipCycle;
     }
 

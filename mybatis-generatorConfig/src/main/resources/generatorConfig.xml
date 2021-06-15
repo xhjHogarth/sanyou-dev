@@ -42,6 +42,7 @@
 <!--        <table tableName="user_equipment"></table>-->
 
 <!--        <table tableName="user_log"></table>-->
-        <table tableName="user_session"></table>
+<!--        <table tableName="user_session"></table>-->
+        <table tableName="industry_data"></table>
     </context>
 </generatorConfiguration>
