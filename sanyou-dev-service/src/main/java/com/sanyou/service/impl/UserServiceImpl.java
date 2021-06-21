@@ -77,6 +77,7 @@ public class UserServiceImpl implements UserService {
         Example.Criteria criteria = userExample.createCriteria();
         criteria.andEqualTo("username",username);
         criteria.andEqualTo("password",password);
+        criteria.andEqualTo("deleteMark",0);
         User user = userMapper.selectOneByExample(userExample);
         return user;
     }
@@ -201,5 +202,12 @@ public class UserServiceImpl implements UserService {
             return true;
 
         return false;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public User getUserById(String id) {
+        User user = userMapper.selectByPrimaryKey(id);
+        return user;
     }
 }

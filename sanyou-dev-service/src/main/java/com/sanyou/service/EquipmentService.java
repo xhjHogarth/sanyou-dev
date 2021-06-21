@@ -55,4 +55,30 @@ public interface EquipmentService {
      * @return
      */
     List<Equipment> getUserEquip(String userId);
+
+    /**
+     * 删除设备
+     * @param equipment
+     */
+    void deleteEquip(Equipment equipment);
+
+    /**
+     * 更新设备地址
+     * @param equipment
+     */
+    void updateAddress(Equipment equipment);
+
+    /**
+     * 查询厂家拥有的设备
+     * @param factoryId
+     * @return
+     */
+    List<Equipment> getEquip(String factoryId);
+
+    /**
+     * getEquipById
+     * @param id
+     * @return
+     */
+    Equipment getEquipById(String id);
 }

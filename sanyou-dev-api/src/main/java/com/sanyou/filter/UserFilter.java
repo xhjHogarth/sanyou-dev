@@ -38,8 +38,8 @@ public class UserFilter implements Filter {
                 "/userGroup/queryRoles","/userGroup/getAll",
                 "/role/getAll","/role/queryAuth",
                 "/resource/getAll",
-                "/equipment/getEquipmentTree","/equipment/getUserEquip",
-                "/userLog/download","/user/login"
+                "/equipment/getEquipmentTree","/equipment/getUserEquip","/equipment/getEquip","/equipment/getEquipById",
+                "/userLog/download","/user/login","/user/updatePwd"
         );
 
     }

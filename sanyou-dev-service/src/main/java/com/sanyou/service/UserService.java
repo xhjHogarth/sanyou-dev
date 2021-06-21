@@ -79,4 +79,11 @@ public interface UserService {
      * @return
      */
     boolean checkAuth(String userId, String url);
+
+    /**
+     * 根据用户id查找用户
+     * @param id
+     * @return
+     */
+    User getUserById(String id);
 }

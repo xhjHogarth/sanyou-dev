@@ -21,7 +21,8 @@ public class FilterConfig{
         FilterRegistrationBean bean = new FilterRegistrationBean();
         bean.setFilter(new UserFilter());
         bean.setOrder(1);
-        bean.setUrlPatterns(Arrays.asList("/user/*","/factory/*","/userGroup/*","/role/*","/resource/*","/userLog/*"));
+        bean.setUrlPatterns(Arrays.asList("/user/*","/factory/*","/userGroup/*","/role/*","/resource/*","/userLog/*",
+                "/equipment/*"));
         return bean;
     }
 

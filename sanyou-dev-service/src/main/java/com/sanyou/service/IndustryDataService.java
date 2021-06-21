@@ -1,5 +1,6 @@
 package com.sanyou.service;
 
+import com.sanyou.pojo.IndustryData;
 import com.sanyou.pojo.vo.IndustryDataVo;
 import com.sanyou.utils.PagedResult;
 
@@ -77,4 +78,11 @@ public interface IndustryDataService {
      * @param industryDataVo
      */
     void deleteData(IndustryDataVo industryDataVo);
+
+    /**
+     * 下载数据
+     * @param industryDataVo
+     * @return
+     */
+    List<IndustryData> queryDownloadData(IndustryDataVo industryDataVo);
 }

@@ -47,8 +47,8 @@ public class LogInterceptor implements HandlerInterceptor {
                 "/userGroup/queryRoles","/userGroup/getAll",
                 "/role/getAll","/role/queryAuth",
                 "/resource/getAll",
-                "/equipment/getEquipmentTree","/equipment/getUserEquip",
-                "/userLog/query",
+                "/equipment/getEquipmentTree","/equipment/getUserEquip","/equipment/getEquip","/equipment/getEquipById",
+                "/userLog/query","/user/updatePwd",
                 "/industryData/getPieChart","/industryData/getBarChart","/industryData/getLineChart","/industryData/queryData","/industryData/deleteData",
                 "/industryData/query","/industryData/getCycleLineChart","/industryData/getNormalLineChart","/industryData/getNormalBarChart"
         );

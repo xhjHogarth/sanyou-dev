@@ -1,6 +1,5 @@
 package com.sanyou.utils;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TimeAgoUtils {
@@ -71,10 +70,10 @@ public class TimeAgoUtils {
 		return toMonths(date) / 365L;
 	}
 
-	public static void main(String[] args) throws Exception {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:m:s");
-		Date date = format.parse("2018-05-01 18:35:35");
-		System.out.println(format(date));
-	}
+	// public static void main(String[] args) throws Exception {
+	// 	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:m:s");
+	// 	Date date = format.parse("2018-05-01 18:35:35");
+	// 	System.out.println(format(date));
+	// }
 
 }

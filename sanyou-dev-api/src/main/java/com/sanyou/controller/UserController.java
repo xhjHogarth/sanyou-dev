@@ -211,4 +211,36 @@ public class UserController {
 
         return JSONResult.ok();
     }
+
+    @ApiOperation(value = "修改密码", notes = "修改密码")
+    @PostMapping("/updatePwd")
+    public JSONResult updatePwd(@RequestBody UserVo userVo) throws Exception {
+
+        if (userVo == null || StringUtils.isBlank(userVo.getId()))
+            return JSONResult.errorMsg("用户id为空!");
+
+        if(StringUtils.isBlank(userVo.getOldPwd()))
+            return JSONResult.errorMsg("旧密码为空!");
+
+        if(StringUtils.isBlank(userVo.getNewPwd()))
+            return JSONResult.errorMsg("新密码为空!");
+
+        User user = userService.getUserById(userVo.getId());
+        if(user == null)
+            return JSONResult.errorMsg("用户id错误!");
+        else{
+            if(user.getPassword().equals(MD5Utils.getMD5Str(userVo.getOldPwd()))){
+                User updateUser = new User();
+                updateUser.setId(userVo.getId());
+                updateUser.setPassword(MD5Utils.getMD5Str(userVo.getNewPwd()));
+                List<User> list = new ArrayList<>();
+                list.add(updateUser);
+                userService.updateUserInfo(list);
+            }else{
+                return JSONResult.errorMsg("旧密码不正确!");
+            }
+        }
+
+        return JSONResult.ok();
+    }
 }

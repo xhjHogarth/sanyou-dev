@@ -64,6 +64,7 @@ public class UserLogServiceImpl implements UserLogService {
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
             calendar.set(Calendar.MILLISECOND, 0);
+            userLogVo.setCreatetime(calendar.getTime());
             calendar.add(Calendar.DATE,1);
             Date endTime = calendar.getTime();
             userLogVo.setEndTime(endTime);

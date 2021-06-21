@@ -85,9 +85,9 @@ public class IndustryDataServiceImpl implements IndustryDataService {
 
                 IndustryDataVo vo = new IndustryDataVo();
 
+                String dateStr = format.format(industryDataVo.getStartTime());
+                vo.setDate(dateStr);
                 for (IndustryDataVo dataVo : getList) {
-                    String dateStr = format.format(industryDataVo.getStartTime());
-                    vo.setDate(dateStr);
                     if("健康".equals(dataVo.getName())){
                         vo.setHealthValue(dataVo.getValue());
                     }else if("亚健康".equals(dataVo.getName())){
@@ -130,9 +130,9 @@ public class IndustryDataServiceImpl implements IndustryDataService {
 
                 IndustryDataVo vo = new IndustryDataVo();
 
+                String dateStr = format.format(industryDataVo.getStartTime());
+                vo.setDate(dateStr);
                 for (IndustryDataVo dataVo : getList) {
-                    String dateStr = format.format(industryDataVo.getStartTime());
-                    vo.setDate(dateStr);
                     if("健康".equals(dataVo.getName())){
                         vo.setHealthValue(dataVo.getValue());
                     }else if("亚健康".equals(dataVo.getName())){
@@ -426,5 +426,17 @@ public class IndustryDataServiceImpl implements IndustryDataService {
         criteria.andEqualTo("lineno",industryDataVo.getLineno());
 
         industryDataMapper.deleteByExample(example);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<IndustryData> queryDownloadData(IndustryDataVo industryDataVo) {
+        Example example = new Example(IndustryData.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("lineno",industryDataVo.getLineno());
+        criteria.andBetween("datatime",industryDataVo.getStartTime(),industryDataVo.getEndTime());
+
+        List<IndustryData> industryData = industryDataMapper.selectByExample(example);
+        return industryData;
     }
 }

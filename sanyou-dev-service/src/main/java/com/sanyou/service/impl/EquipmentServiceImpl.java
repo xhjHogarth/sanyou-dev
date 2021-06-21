@@ -125,9 +125,9 @@ public class EquipmentServiceImpl implements EquipmentService {
         Equipment equipment1 = equipmentMapper.selectByPrimaryKey(equipment.getId());
         if(equipment1 != null){
             String content = "";
-            if(equipment.getEquipCycle().doubleValue() != equipment1.getEquipCycle().doubleValue()){
-                content =  "周期由" + equipment1.getEquipCycle().doubleValue() + "修改为" +
-                        equipment.getEquipCycle().doubleValue();
+            if(equipment.getEquipCycle().intValue() != equipment1.getEquipCycle().intValue()){
+                content =  "周期由" + equipment1.getEquipCycle().intValue() + "修改为" +
+                        equipment.getEquipCycle().intValue();
             }
             if(equipment.getEquipHealthLimit().doubleValue() != equipment1.getEquipHealthLimit().doubleValue()){
                 if(content.length() > 0)
@@ -141,14 +141,18 @@ public class EquipmentServiceImpl implements EquipmentService {
                 content =  content + "亚健康值由" + equipment1.getEquipSubhealthLimit().doubleValue() + "修改为" +
                         equipment.getEquipSubhealthLimit().doubleValue();
             }
-            EquipmentRecords equipmentRecords = new EquipmentRecords();
-            String id = sid.nextShort();
-            equipmentRecords.setId(id);
-            equipmentRecords.setEquipNo(equipment.getEquipNo());
-            equipmentRecords.setUserId(userId);
-            equipmentRecords.setContent(content);
-            equipmentRecords.setCreatetime(new Date());
-            equipmentRecordsMapper.insert(equipmentRecords);
+            if(equipment.getEquipCycle().intValue() != equipment1.getEquipCycle().intValue() ||
+                    equipment.getEquipHealthLimit().doubleValue() != equipment1.getEquipHealthLimit().doubleValue() ||
+                    equipment.getEquipSubhealthLimit().doubleValue() != equipment1.getEquipSubhealthLimit().doubleValue()){
+                EquipmentRecords equipmentRecords = new EquipmentRecords();
+                String id = sid.nextShort();
+                equipmentRecords.setId(id);
+                equipmentRecords.setEquipNo(equipment.getEquipNo());
+                equipmentRecords.setUserId(userId);
+                equipmentRecords.setContent(content);
+                equipmentRecords.setCreatetime(new Date());
+                equipmentRecordsMapper.insert(equipmentRecords);
+            }
         }
 
 
@@ -230,5 +234,40 @@ public class EquipmentServiceImpl implements EquipmentService {
             return new ArrayList<>();
         }
 
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void deleteEquip(Equipment equipment) {
+        equipment.setDeleteMark((byte)1);
+        equipmentMapper.updateByPrimaryKeySelective(equipment);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void updateAddress(Equipment equipment) {
+        equipmentMapper.updateByPrimaryKeySelective(equipment);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<Equipment> getEquip(String factoryId) {
+
+        Example example = new Example(Equipment.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("factoryId",factoryId);
+        criteria.andEqualTo("deleteMark",0);
+
+        List<Equipment> equipmentList = equipmentMapper.selectByExample(example);
+
+        return equipmentList;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public Equipment getEquipById(String id) {
+
+        Equipment equipment = equipmentMapper.selectByPrimaryKey(id);
+        return equipment;
     }
 }

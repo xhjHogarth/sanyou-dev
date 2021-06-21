@@ -18,7 +18,7 @@
   <select id="queryUserGroups" parameterType="String" resultType="com.sanyou.pojo.vo.UserGroupVo">
     select id,group_name as groupName,group_type as groupType,group_level as groupLevel,
            createtime,updatetime,deletetime,delete_mark as deleteMark
-    from userGroup where 1=1 and delete_mark=0
+    from usergroup where 1=1 and delete_mark=0
     <if test="query != null and query != ''">
       and group_name like '%${query}%'
     </if>

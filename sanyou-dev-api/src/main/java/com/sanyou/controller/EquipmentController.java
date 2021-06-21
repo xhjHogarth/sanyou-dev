@@ -127,6 +127,29 @@ public class EquipmentController {
         return JSONResult.ok();
     }
 
+    @ApiOperation(value = "删除设备",notes = "删除设备")
+    @PostMapping("/deleteEquip")
+    public JSONResult deleteEquip(@RequestBody Equipment equipment){
+
+        if(equipment == null || StringUtils.isBlank(equipment.getId()))
+            return JSONResult.errorMsg("设备ID不允许为空!");
+
+        equipmentService.deleteEquip(equipment);
+
+        return JSONResult.ok();
+    }
+
+    @ApiOperation(value = "更新设备地址",notes = "更新设备地址")
+    @PostMapping("/updateAddress")
+    public JSONResult updateAddress(@RequestBody Equipment equipment){
+        if(equipment == null || StringUtils.isBlank(equipment.getId()))
+            return JSONResult.errorMsg("设备ID不允许为空!");
+
+        equipmentService.updateAddress(equipment);
+
+        return JSONResult.ok();
+    }
+
     @ApiOperation(value = "查询所有设备,生成树结构返回", notes = "查询所有设备,生成树结构返回")
     @GetMapping("/getEquipmentTree")
     public JSONResult getEquipmentTree(){
@@ -146,6 +169,34 @@ public class EquipmentController {
             return JSONResult.errorMsg("用户id为空!");
 
         List<Equipment> equipmentList = equipmentService.getUserEquip(userId);
+
+        return JSONResult.ok(equipmentList);
+    }
+
+    @ApiImplicitParam(name = "factoryId", value = "厂家id", required = true,
+            dataType = "string", paramType = "query")
+    @ApiOperation(value = "查询厂家拥有的设备", notes = "查询厂家拥有的设备")
+    @GetMapping("/getEquip")
+    public JSONResult getEquip(String factoryId){
+
+        if(StringUtils.isBlank(factoryId))
+            return JSONResult.errorMsg("厂家id为空");
+
+        List<Equipment> equipmentList = equipmentService.getEquip(factoryId);
+
+        return JSONResult.ok(equipmentList);
+    }
+
+    @ApiImplicitParam(name = "id", value = "设备id", required = true,
+            dataType = "string", paramType = "query")
+    @ApiOperation(value = "查询设备", notes = "查询设备")
+    @GetMapping("/getEquipById")
+    public JSONResult getEquipById(String id){
+
+        if(StringUtils.isBlank(id))
+            return JSONResult.errorMsg("设备id为空");
+
+        Equipment equipmentList = equipmentService.getEquipById(id);
 
         return JSONResult.ok(equipmentList);
     }

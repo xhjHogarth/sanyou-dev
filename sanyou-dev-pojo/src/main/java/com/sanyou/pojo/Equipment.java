@@ -65,14 +65,14 @@ public class Equipment {
     /**
      * 经度
      */
-    @Column(name = "equip_lat")
-    private Double equipLat;
+    @Column(name = "equip_lng")
+    private Double equipLng;
 
     /**
      * 纬度
      */
-    @Column(name = "equip_lng")
-    private Double equipLng;
+    @Column(name = "equip_lat")
+    private Double equipLat;
 
     private Date createtime;
 
