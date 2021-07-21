@@ -10,12 +10,14 @@ import com.sanyou.service.UserService;
 import com.sanyou.utils.PagedResult;
 import org.apache.commons.lang3.StringUtils;
 import org.n3r.idworker.Sid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -209,5 +211,64 @@ public class UserServiceImpl implements UserService {
     public User getUserById(String id) {
         User user = userMapper.selectByPrimaryKey(id);
         return user;
+    }
+
+    @Override
+    public List<UserVo> getUserByIds(String[] idList) {
+
+        ArrayList<String> ids = new ArrayList<>();
+        for (String s : idList) {
+            ids.add(s);
+        }
+
+        Example example = new Example(User.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andIn("id",ids);
+        List<User> userList = userMapper.selectByExample(example);
+
+        List<UserVo> userVoList = new ArrayList<>();
+        for (User user : userList) {
+            UserVo vo = new UserVo();
+            BeanUtils.copyProperties(user,vo);
+
+            String groupId = vo.getGroupId();
+            if(StringUtils.isNotBlank(groupId)) {
+                Usergroup usergroup = usergroupMapper.selectByPrimaryKey(groupId);
+                if (usergroup != null)
+                    vo.setGroupName(usergroup.getGroupName());
+            }
+            String factoryId = vo.getFactoryId();
+            if(StringUtils.isNotBlank(factoryId)){
+                Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
+                if(factory != null)
+                    vo.setFactoryName(factory.getFactoryName());
+            }
+            String subFactoryId = vo.getSubFactoryId();
+            if(StringUtils.isNotBlank(subFactoryId)){
+                Factory factory = factoryMapper.selectByPrimaryKey(subFactoryId);
+                if(factory != null)
+                    vo.setSubFactoryName(factory.getFactoryName());
+            }
+
+            if(vo.getSex() != null){
+                if(vo.getSex() == 1){
+                    vo.setSexName("保密");
+                }else if(vo.getSex() == 2){
+                    vo.setSexName("男");
+                }else if(vo.getSex() == 3){
+                    vo.setSexName("女");
+                }
+            }
+
+            if(vo.getArea() != null){
+                SAdministrativeDivisions administrativeDivisions = divisionsMapper.selectByPrimaryKey(vo.getArea());
+                String fullname = administrativeDivisions.getFullname();
+                vo.setAdministration(fullname.replace('/',','));
+            }
+
+            userVoList.add(vo);
+        }
+
+        return userVoList;
     }
 }

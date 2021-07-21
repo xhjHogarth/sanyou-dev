@@ -39,7 +39,7 @@ public class UserFilter implements Filter {
                 "/role/getAll","/role/queryAuth",
                 "/resource/getAll",
                 "/equipment/getEquipmentTree","/equipment/getUserEquip","/equipment/getEquip","/equipment/getEquipById",
-                "/userLog/download","/user/login","/user/updatePwd"
+                "/userLog/download","/user/login","/user/updatePwd","/user/download","/user/register"
         );
 
     }

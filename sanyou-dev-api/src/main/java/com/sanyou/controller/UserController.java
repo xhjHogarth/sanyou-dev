@@ -14,11 +14,14 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -58,7 +61,7 @@ public class UserController {
 
         if(loginUser != null){
             if(loginUser.getEnableMark() == 0)
-                return JSONResult.errorMsg("当前用户已被禁用!");
+                return JSONResult.errorMsg("当前用户未启用,请联系管理员!");
 
             String remoteAddr = request.getRemoteAddr();
             loginUser.setLastLoginIp(remoteAddr);
@@ -108,7 +111,7 @@ public class UserController {
             user.setCreatetime(new Date());
             userService.addUser(user);
         }else{
-            return JSONResult.errorMsg("用户名已经存在,请换一个!");
+            return JSONResult.errorMsg("用户名已经存在!");
         }
 
         return JSONResult.ok();
@@ -198,18 +201,62 @@ public class UserController {
     }
 
 
-    @ApiImplicitParam(name = "userId", value = "用户id", required = true,
-            dataType = "string", paramType = "query")
-    @ApiOperation(value = "下载用户信息", notes = "下载用户信息")
-    @PostMapping("/downloadUserInfo")
-    public JSONResult downloadUserInfo(String userId){
-
-        if(StringUtils.isBlank(userId))
-            return JSONResult.errorMsg("用户id为空!");
-
-        // TODO 用户资料下载的具体实现
-
+    @ApiOperation(value = "检查用户资料下载权限", notes = "检查用户资料下载权限")
+    @GetMapping("/downloadUserInfo")
+    public JSONResult downloadUserInfo(){
         return JSONResult.ok();
+    }
+
+    @ApiOperation(value = "下载用户资料", notes = "下载用户资料")
+    @GetMapping("/download")
+    public void download(String ids, HttpServletResponse response) throws IOException {
+        if(StringUtils.isNotBlank(ids)){
+
+            String[] idList = ids.split(",");
+
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            String[] headers = {"用户名","用户组","姓名","性别","手机号码","所在厂家","所在子厂家","所属部门","职务",
+                    "QQ号码","微信","Email","所属地区","详细地址"};
+            HSSFSheet sheet = workbook.createSheet("用户资料");
+
+            long timeMillis = System.currentTimeMillis();
+            String fileName = timeMillis + ".xls";
+
+            HSSFRow row = sheet.createRow(0);
+            for(int i=0;i<headers.length;i++){
+                HSSFCell cell = row.createCell(i);
+                HSSFRichTextString text = new HSSFRichTextString(headers[i]);
+                cell.setCellValue(text);
+            }
+
+            List<UserVo> list = userService.getUserByIds(idList);
+
+            int rowNum = 1;
+            for (UserVo user : list) {
+                HSSFRow row1 = sheet.createRow(rowNum);
+                row1.createCell(0).setCellValue(user.getUsername());
+                row1.createCell(1).setCellValue(user.getGroupName());
+                row1.createCell(2).setCellValue(user.getRealname());
+                row1.createCell(3).setCellValue(user.getSexName());
+                row1.createCell(4).setCellValue(user.getMobile());
+                row1.createCell(5).setCellValue(user.getFactoryName());
+                row1.createCell(6).setCellValue(user.getSubFactoryName());
+                row1.createCell(7).setCellValue(user.getDepart());
+                row1.createCell(8).setCellValue(user.getPosition());
+                row1.createCell(9).setCellValue(user.getQq());
+                row1.createCell(10).setCellValue(user.getWechat());
+                row1.createCell(11).setCellValue(user.getEmail());
+                row1.createCell(12).setCellValue(user.getAdministration());
+                row1.createCell(13).setCellValue(user.getAddress());
+                rowNum++;
+            }
+
+            response.setContentType("application/octet-stream");
+            response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+            response.flushBuffer();
+            workbook.write(response.getOutputStream());
+            workbook.close();
+        }
     }
 
     @ApiOperation(value = "修改密码", notes = "修改密码")
@@ -239,6 +286,33 @@ public class UserController {
             }else{
                 return JSONResult.errorMsg("旧密码不正确!");
             }
+        }
+
+        return JSONResult.ok();
+    }
+
+    @ApiOperation(value = "用户注册", notes = "用户注册")
+    @PostMapping("/register")
+    public JSONResult register(@RequestBody User user, HttpServletRequest request) throws Exception {
+        if(user == null)
+            return JSONResult.errorMsg("用户对象为空");
+
+        if(StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword()))
+            return JSONResult.errorMsg("用户名或密码不能为空");
+
+
+        User usernameIsExist = userService.queryUsernameIsExist(user.getUsername());
+        if(usernameIsExist == null){
+            String remoteAddr = request.getRemoteAddr();
+
+            user.setRegistIp(remoteAddr);
+            user.setPassword(MD5Utils.getMD5Str(user.getPassword()));
+            user.setEnableMark((byte) 0);
+            user.setDeleteMark((byte)0);
+            user.setCreatetime(new Date());
+            userService.addUser(user);
+        }else{
+            return JSONResult.errorMsg("用户名已经存在!");
         }
 
         return JSONResult.ok();

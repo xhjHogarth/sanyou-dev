@@ -76,6 +76,7 @@
            ABS(max) as max,maxno
     from industry_data
     WHERE lineno=#{vo.lineno} and DataTime BETWEEN #{vo.startTime} AND #{vo.endTime}
+    order by datatime desc
   </select>
 
     <select id="queryData" parameterType="com.sanyou.pojo.vo.IndustryDataVo" resultMap="BaseResultMap">
@@ -84,18 +85,19 @@
         from industry_data
         where 1=1
         <if test="vo.plateno != null and vo.plateno != ''">
-            and plateno like CONCAT('%',#{vo.plateno},'%')
+            and plateno=#{vo.plateno}
         </if>
         <if test="vo.lineno != null and vo.lineno != ''">
             and lineno like CONCAT('%',#{vo.lineno},'%')
         </if>
+        order by datatime desc
     </select>
     <select id="countData" parameterType="com.sanyou.pojo.vo.IndustryDataVo" resultType="int">
         select count(*)
         from industry_data
         where 1=1
         <if test="vo.plateno != null and vo.plateno != ''">
-            and plateno like CONCAT('%',#{vo.plateno},'%')
+            and plateno=#{vo.plateno}
         </if>
         <if test="vo.lineno != null and vo.lineno != ''">
             and lineno like CONCAT('%',#{vo.lineno},'%')

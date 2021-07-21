@@ -86,4 +86,11 @@ public interface UserService {
      * @return
      */
     User getUserById(String id);
+
+    /**
+     * 根据用户id查找用户
+     * @param idList
+     * @return
+     */
+    List<UserVo> getUserByIds(String[] idList);
 }
