@@ -257,7 +257,7 @@ public class IndustryDataController {
                 calendar.set(Calendar.MILLISECOND, 0);
                 calendar.add(Calendar.DATE,1);
                 industryDataVo.setEndTime(calendar.getTime());
-                List<IndustryDataVo> result = industryDataService.getNormalLineChart(industryDataVo);
+                List<IndustryDataVo> result = industryDataService.getNormalLineChart2(industryDataVo);
 
                 return JSONResult.ok(result);
             }else {

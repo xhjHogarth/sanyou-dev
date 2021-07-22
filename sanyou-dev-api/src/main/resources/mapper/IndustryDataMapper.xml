@@ -103,4 +103,21 @@
             and lineno like CONCAT('%',#{vo.lineno},'%')
         </if>
     </select>
+    <select id="getMax" parameterType="com.sanyou.pojo.vo.IndustryDataVo" resultType="double">
+        select IFNULL(MAX(ABS(MAX)),0) from industry_data
+        WHERE lineno=#{vo.lineno} and DataTime BETWEEN #{vo.startTime} AND #{vo.endTime}
+    </select>
+    <select id="getNormalLineChart" parameterType="com.sanyou.pojo.vo.IndustryDataVo" resultType="com.sanyou.pojo.vo.IndustryDataVo">
+        select elt(INTERVAL(ABS(MAX)
+            <foreach collection="vo.levelNums" item="levelNum" open="," close=")" separator=",">
+                #{levelNum}
+            </foreach>
+            <foreach collection="vo.levelNames" item="levelName" open="," close=")" separator=",">
+                #{levelName}
+            </foreach>
+            as name,
+            count(*) as value from industry_data
+        WHERE lineno=#{vo.lineno} and DataTime BETWEEN #{vo.startTime} AND #{vo.endTime}
+        GROUP BY name;
+    </select>
 </mapper>

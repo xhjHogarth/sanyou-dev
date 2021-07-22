@@ -73,6 +73,35 @@ public class IndustryDataVo {
     private int total;			// 总页数
     private long records;		// 总记录数
 
+    //正太分布数据
+    private List<Integer> levelNums;
+    private List<String> levelNames;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<Integer> getLevelNums() {
+        return levelNums;
+    }
+
+    public void setLevelNums(List<Integer> levelNums) {
+        this.levelNums = levelNums;
+    }
+
+    public List<String> getLevelNames() {
+        return levelNames;
+    }
+
+    public void setLevelNames(List<String> levelNames) {
+        this.levelNames = levelNames;
+    }
+
     public int getPage() {
         return page;
     }

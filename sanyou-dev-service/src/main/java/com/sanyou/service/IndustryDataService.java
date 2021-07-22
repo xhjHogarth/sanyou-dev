@@ -85,4 +85,11 @@ public interface IndustryDataService {
      * @return
      */
     List<IndustryData> queryDownloadData(IndustryDataVo industryDataVo);
+
+    /**
+     * 获取正太折线图数据
+     * @param industryDataVo
+     * @return
+     */
+    List<IndustryDataVo> getNormalLineChart2(IndustryDataVo industryDataVo);
 }

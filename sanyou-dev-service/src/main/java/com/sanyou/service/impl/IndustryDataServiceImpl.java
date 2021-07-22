@@ -302,6 +302,50 @@ public class IndustryDataServiceImpl implements IndustryDataService {
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
+    public List<IndustryDataVo> getNormalLineChart2(IndustryDataVo industryDataVo) {
+
+        double max = industryDataMapper.getMax(industryDataVo);
+
+        //分组
+        int step = 0;
+        List<Integer> levelNums = new ArrayList<>();
+        List<String> levelNames = new ArrayList<>();
+        levelNums.add(step);
+        step+=5;
+        while(step<max){
+            levelNames.add((step-5) + "-" + (step));
+            levelNums.add(step);
+            step+=5;
+        }
+        levelNames.add((step-5) + "-" + (step));
+
+        industryDataVo.setLevelNums(levelNums);
+        industryDataVo.setLevelNames(levelNames);
+
+        if(max == 0){
+            return new ArrayList<>();
+        }else{
+            List<IndustryDataVo> getList = industryDataMapper.getNormalLineChart(industryDataVo);
+            List<IndustryDataVo> result = new ArrayList<>();
+            int id = 1;
+            for (String levelName : levelNames) {
+                IndustryDataVo vo = new IndustryDataVo();
+                vo.setId(id++);
+                vo.setName(levelName);
+                IndustryDataVo vo1 = getList.stream().filter(t -> levelName.equals(t.getName())).findFirst().orElse(null);
+                if(vo1 != null)
+                    vo.setValue(vo1.getValue());
+                else
+                    vo.setValue(0);
+
+                result.add(vo);
+            }
+            return result;
+        }
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
     public List<IndustryDataVo> getNormalBarChart(IndustryDataVo industryDataVo) {
         Example example = new Example(Equipment.class);
         Example.Criteria criteria = example.createCriteria();

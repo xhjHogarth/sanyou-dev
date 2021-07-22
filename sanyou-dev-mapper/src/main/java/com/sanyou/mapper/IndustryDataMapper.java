@@ -18,4 +18,7 @@ public interface IndustryDataMapper extends MyMapper<IndustryData> {
 
     int countData(@Param("vo")IndustryDataVo industryDataVo);
 
+    double getMax(@Param("vo")IndustryDataVo industryDataVo);
+
+    List<IndustryDataVo> getNormalLineChart(@Param("vo")IndustryDataVo industryDataVo);
 }
