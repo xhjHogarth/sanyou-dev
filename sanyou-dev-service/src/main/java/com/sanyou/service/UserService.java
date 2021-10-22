@@ -93,4 +93,14 @@ public interface UserService {
      * @return
      */
     List<UserVo> getUserByIds(String[] idList);
+
+
+    //************************APP调用的接口*******************************
+
+    /**
+     * 根据用户Id获取用户信息
+     * @param userId
+     * @return
+     */
+    UserVo getUserInfo(String userId);
 }

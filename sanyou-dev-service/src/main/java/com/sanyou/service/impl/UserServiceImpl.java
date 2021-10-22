@@ -271,4 +271,51 @@ public class UserServiceImpl implements UserService {
 
         return userVoList;
     }
+
+    @Override
+    public UserVo getUserInfo(String userId) {
+        UserVo userVo = new UserVo();
+
+        User user = userMapper.selectByPrimaryKey(userId);
+
+        if(user != null){
+            BeanUtils.copyProperties(user,userVo);
+            String groupId = userVo.getGroupId();
+            if(StringUtils.isNotBlank(groupId)) {
+                Usergroup usergroup = usergroupMapper.selectByPrimaryKey(groupId);
+                if (usergroup != null)
+                    userVo.setGroupName(usergroup.getGroupName());
+            }
+            String factoryId = userVo.getFactoryId();
+            if(StringUtils.isNotBlank(factoryId)){
+                Factory factory = factoryMapper.selectByPrimaryKey(factoryId);
+                if(factory != null)
+                    userVo.setFactoryName(factory.getFactoryName());
+            }
+            String subFactoryId = userVo.getSubFactoryId();
+            if(StringUtils.isNotBlank(subFactoryId)){
+                Factory factory = factoryMapper.selectByPrimaryKey(subFactoryId);
+                if(factory != null)
+                    userVo.setSubFactoryName(factory.getFactoryName());
+            }
+
+            if(userVo.getSex() != null){
+                if(userVo.getSex() == 1){
+                    userVo.setSexName("保密");
+                }else if(userVo.getSex() == 2){
+                    userVo.setSexName("男");
+                }else if(userVo.getSex() == 3){
+                    userVo.setSexName("女");
+                }
+            }
+
+            if(userVo.getArea() != null){
+                SAdministrativeDivisions administrativeDivisions = divisionsMapper.selectByPrimaryKey(userVo.getArea());
+                String fullname = administrativeDivisions.getFullname();
+                userVo.setAdministration(fullname.replace('/',','));
+            }
+        }
+
+        return userVo;
+    }
 }

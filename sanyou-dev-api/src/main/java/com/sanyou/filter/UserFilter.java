@@ -34,6 +34,7 @@ public class UserFilter implements Filter {
         userService = ac.getBean(UserService.class);
 
         excludesPath = Arrays.asList(
+                "/app/*",
                 "/factory/getAll","/factory/querySubFactory",
                 "/userGroup/queryRoles","/userGroup/getAll",
                 "/role/getAll","/role/queryAuth",

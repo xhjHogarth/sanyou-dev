@@ -43,6 +43,7 @@ public class LogInterceptor implements HandlerInterceptor {
         String ip = request.getRemoteAddr();
 
         List<String> excludesPath = Arrays.asList(
+                "/app/*",
                 "/factory/getAll","/factory/querySubFactory",
                 "/userGroup/queryRoles","/userGroup/getAll",
                 "/role/getAll","/role/queryAuth",
