@@ -87,8 +87,8 @@ public class ProjectServiceImpl implements ProjectService {
 
         if(verticalityDataList != null && verticalityDataList.size() > 0){
             List<VerticalityData> sortedList = verticalityDataList.stream().sorted(Comparator.comparing(VerticalityData::getVerticalityId)).collect(Collectors.toList());
-            contractVo.setCodeStart(sortedList.get(0).getContractId());
-            contractVo.setCodeEnd(sortedList.get(sortedList.size()-1).getContractId());
+            contractVo.setCodeStart(sortedList.get(0).getVerticalityId());
+            contractVo.setCodeEnd(sortedList.get(sortedList.size()-1).getVerticalityId());
 
             contractVo.setTotalNum(sortedList.size());
 
