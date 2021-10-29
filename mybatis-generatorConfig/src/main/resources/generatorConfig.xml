@@ -13,9 +13,7 @@
         </plugin>
 
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://60.191.72.228:3306/sanyou"
-                        userId="root"
-                        password="lee#3403">
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/sanyou">
         </jdbcConnection>
 
         <!-- 对应生成的pojo所在包 -->
@@ -47,6 +45,6 @@
 
 <!--        <table tableName="project_data"></table>-->
 <!--        <table tableName="contract_data"></table>-->
-        <table tableName="verticality_data"></table>
+        <table tableName="question"></table>
     </context>
 </generatorConfiguration>
