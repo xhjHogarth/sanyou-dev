@@ -13,7 +13,8 @@ public interface ScanCodeService {
     /**
      * 根据阴极板编码获取阴极板信息
      * @param scanCode 阴极板编码
+     * @param userId 用户id
      * @return
      */
-    VerticalityDataVo getInfo(String scanCode);
+    VerticalityDataVo getInfo(String scanCode,String userId);
 }

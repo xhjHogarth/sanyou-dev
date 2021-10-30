@@ -1,8 +1,10 @@
 package com.sanyou.service.impl;
 
 import com.sanyou.mapper.IndustryDataMapper;
+import com.sanyou.mapper.SearchHistoryMapper;
 import com.sanyou.mapper.VerticalityDataMapper;
 import com.sanyou.pojo.IndustryData;
+import com.sanyou.pojo.SearchHistory;
 import com.sanyou.pojo.VerticalityData;
 import com.sanyou.pojo.vo.VerticalityDataVo;
 import com.sanyou.service.ScanCodeService;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,9 +32,12 @@ public class ScanCodeServiceImpl implements ScanCodeService {
     @Autowired
     private VerticalityDataMapper verticalityDataMapper;
 
+    @Autowired
+    private SearchHistoryMapper searchHistoryMapper;
+
 
     @Override
-    public VerticalityDataVo getInfo(String scanCode) {
+    public VerticalityDataVo getInfo(String scanCode,String userId) {
 
         VerticalityDataVo verticalityDataVo = new VerticalityDataVo();
 
@@ -39,6 +45,8 @@ public class ScanCodeServiceImpl implements ScanCodeService {
         Example.Criteria criteria = example.createCriteria();
         criteria.andEqualTo("verticalityId",scanCode);
         List<VerticalityData> verticalityDataList = verticalityDataMapper.selectByExample(example);
+
+        SearchHistory searchHistory = new SearchHistory();
 
         if(verticalityDataList != null && verticalityDataList.size() > 0){
             VerticalityData verticalityData = verticalityDataList.get(0);
@@ -50,7 +58,15 @@ public class ScanCodeServiceImpl implements ScanCodeService {
             List<IndustryData> industryDataList = industryDataMapper.selectByExample(example2);
 
             verticalityDataVo.setIndustryDataList(industryDataList);
+
+            searchHistory.setVerticality(verticalityData.getVerticality());
         }
+
+        //添加搜索记录
+        searchHistory.setSearchCode(scanCode);
+        searchHistory.setUserId(userId);
+        searchHistory.setSearchDate(new Date());
+        searchHistoryMapper.insertSelective(searchHistory);
 
         return verticalityDataVo;
     }

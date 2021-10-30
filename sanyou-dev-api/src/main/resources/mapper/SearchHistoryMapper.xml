@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sanyou.mapper.SearchHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.sanyou.pojo.SearchHistory" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="search_code" property="searchCode" jdbcType="VARCHAR" />
+    <result column="search_date" property="searchDate" jdbcType="TIMESTAMP" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="verticality" property="verticality" jdbcType="INTEGER"/>
+  </resultMap>
+</mapper>

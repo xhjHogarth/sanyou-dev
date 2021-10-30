@@ -45,6 +45,6 @@
 
 <!--        <table tableName="project_data"></table>-->
 <!--        <table tableName="contract_data"></table>-->
-        <table tableName="question"></table>
+        <table tableName="search_history"></table>
     </context>
 </generatorConfiguration>
