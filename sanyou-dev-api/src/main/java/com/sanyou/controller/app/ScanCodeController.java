@@ -28,7 +28,7 @@ public class ScanCodeController {
 
 
     @GetMapping("/getInfo")
-    public JSONResult getInfo(String scanCode,String userId){
+    public JSONResult getInfo(String scanCode,String userId,String tag){
 
         if(StringUtils.isBlank(scanCode))
             return JSONResult.errorMsg("阴极板编码为空!");
@@ -36,7 +36,13 @@ public class ScanCodeController {
         if(StringUtils.isBlank(userId))
             return JSONResult.errorMsg("用户Id不能为空!");
 
-        VerticalityDataVo dataVo = scanCodeService.getInfo(scanCode,userId);
+        boolean flag = false;
+        if(StringUtils.isBlank(tag))
+            flag = false;
+        if("1".equals(tag))
+            flag = true;
+
+        VerticalityDataVo dataVo = scanCodeService.getInfo(scanCode,userId,flag);
 
         return JSONResult.ok(dataVo);
     }

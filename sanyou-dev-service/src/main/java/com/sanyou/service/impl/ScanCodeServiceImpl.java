@@ -1,8 +1,10 @@
 package com.sanyou.service.impl;
 
+import com.sanyou.mapper.CollectHistoryMapper;
 import com.sanyou.mapper.IndustryDataMapper;
 import com.sanyou.mapper.SearchHistoryMapper;
 import com.sanyou.mapper.VerticalityDataMapper;
+import com.sanyou.pojo.CollectHistory;
 import com.sanyou.pojo.IndustryData;
 import com.sanyou.pojo.SearchHistory;
 import com.sanyou.pojo.VerticalityData;
@@ -35,9 +37,12 @@ public class ScanCodeServiceImpl implements ScanCodeService {
     @Autowired
     private SearchHistoryMapper searchHistoryMapper;
 
+    @Autowired
+    private CollectHistoryMapper collectHistoryMapper;
+
 
     @Override
-    public VerticalityDataVo getInfo(String scanCode,String userId) {
+    public VerticalityDataVo getInfo(String scanCode,String userId,boolean flag) {
 
         VerticalityDataVo verticalityDataVo = new VerticalityDataVo();
 
@@ -60,13 +65,25 @@ public class ScanCodeServiceImpl implements ScanCodeService {
             verticalityDataVo.setIndustryDataList(industryDataList);
 
             searchHistory.setVerticality(verticalityData.getVerticality());
+
+            //查询阴极板是否被收藏
+            Example example3 = new Example(CollectHistory.class);
+            Example.Criteria criteria3 = example3.createCriteria();
+            criteria3.andEqualTo("userId",userId);
+            criteria3.andEqualTo("collectCode",scanCode);
+            List<CollectHistory> collectHistoryList = collectHistoryMapper.selectByExample(example3);
+            if(collectHistoryList != null && collectHistoryList.size() > 0)
+                verticalityDataVo.setCollectStatus(1);
+            else
+                verticalityDataVo.setCollectStatus(2);
         }
 
         //添加搜索记录
         searchHistory.setSearchCode(scanCode);
         searchHistory.setUserId(userId);
         searchHistory.setSearchDate(new Date());
-        searchHistoryMapper.insertSelective(searchHistory);
+        if(flag)
+            searchHistoryMapper.insertSelective(searchHistory);
 
         return verticalityDataVo;
     }
