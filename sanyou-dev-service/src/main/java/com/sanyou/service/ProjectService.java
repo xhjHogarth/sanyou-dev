@@ -1,6 +1,5 @@
 package com.sanyou.service;
 
-import com.sanyou.pojo.vo.ContractVo;
 import com.sanyou.pojo.vo.ProjectVo;
 
 import java.util.List;
@@ -23,8 +22,7 @@ public interface ProjectService {
     /**
      * 根据项目Id，合同Id获取合同详情信息
      * @param projectId 项目Id
-     * @param contractId 合同Id
      * @return
      */
-    ContractVo getContractDetail(String projectId, String contractId);
+    ProjectVo getContractDetail(String projectId);
 }

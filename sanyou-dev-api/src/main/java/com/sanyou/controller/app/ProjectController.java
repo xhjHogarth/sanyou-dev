@@ -1,6 +1,5 @@
 package com.sanyou.controller.app;
 
-import com.sanyou.pojo.vo.ContractVo;
 import com.sanyou.pojo.vo.ProjectVo;
 import com.sanyou.service.ProjectService;
 import com.sanyou.utils.JSONResult;
@@ -42,16 +41,12 @@ public class ProjectController {
     }
 
     @GetMapping("/getContractDetail")
-    public JSONResult getContractDetail(String projectId,String contractId){
+    public JSONResult getContractDetail(String projectId){
         if(StringUtils.isBlank(projectId))
             return JSONResult.errorMsg("项目Id为空!");
 
-        if(StringUtils.isBlank(contractId))
-            return JSONResult.errorMsg("合同Id为空!");
+        ProjectVo projectVo = projectService.getContractDetail(projectId);
 
-
-        ContractVo contractVo = projectService.getContractDetail(projectId,contractId);
-
-        return JSONResult.ok(contractVo);
+        return JSONResult.ok(projectVo);
     }
 }

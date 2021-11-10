@@ -24,6 +24,9 @@ public class VerticalityData {
 
     private Integer state;
 
+    @Column(name = "maintain_type")
+    private Integer maintainType;
+
     /**
      * @return verticality_id
      */
@@ -106,5 +109,13 @@ public class VerticalityData {
      */
     public void setState(Integer state) {
         this.state = state;
+    }
+
+    public Integer getMaintainType() {
+        return maintainType;
+    }
+
+    public void setMaintainType(Integer maintainType) {
+        this.maintainType = maintainType;
     }
 }

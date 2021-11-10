@@ -33,6 +33,11 @@ public class VerticalityDataVo {
     private Integer state;
 
     /**
+     * 阴极板维修类型
+     */
+    private Integer MaintainType;
+
+    /**
      * 阴极板是否收藏(1-收藏,2-未收藏)
      */
     private int collectStatus;
@@ -104,5 +109,13 @@ public class VerticalityDataVo {
 
     public void setCollectStatus(int collectStatus) {
         this.collectStatus = collectStatus;
+    }
+
+    public Integer getMaintainType() {
+        return MaintainType;
+    }
+
+    public void setMaintainType(Integer maintainType) {
+        MaintainType = maintainType;
     }
 }
