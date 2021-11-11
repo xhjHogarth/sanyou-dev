@@ -10,4 +10,6 @@ import com.sanyou.pojo.VerticalityData;
  */
 public interface VerticalityService {
     void updateState(VerticalityData verticalityData);
+
+    VerticalityData query(String code);
 }

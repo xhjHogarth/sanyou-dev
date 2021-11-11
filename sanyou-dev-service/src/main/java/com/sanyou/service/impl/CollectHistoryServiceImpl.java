@@ -5,6 +5,8 @@ import com.sanyou.pojo.CollectHistory;
 import com.sanyou.service.CollectHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
@@ -30,11 +32,13 @@ public class CollectHistoryServiceImpl implements CollectHistoryService {
         return historyList;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void collect(CollectHistory collectHistory) {
         collectHistoryMapper.insertSelective(collectHistory);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void unCollect(CollectHistory collectHistory) {
         Example example = new Example(CollectHistory.class);

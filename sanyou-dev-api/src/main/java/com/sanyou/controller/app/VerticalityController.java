@@ -32,4 +32,16 @@ public class VerticalityController {
         verticalityService.updateState(verticalityData);
         return JSONResult.ok();
     }
+
+    @GetMapping("/checkExist")
+    public JSONResult checkExist(String code){
+        if(StringUtils.isBlank(code))
+            return JSONResult.errorMsg("阴极板不存在");
+
+        VerticalityData verticalityData = verticalityService.query(code);
+        if(verticalityData != null)
+            return JSONResult.ok();
+        else
+            return JSONResult.errorMsg("阴极板不存在");
+    }
 }

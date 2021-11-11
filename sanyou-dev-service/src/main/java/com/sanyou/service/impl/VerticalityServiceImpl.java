@@ -5,6 +5,8 @@ import com.sanyou.pojo.VerticalityData;
 import com.sanyou.service.VerticalityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 /**
@@ -20,6 +22,7 @@ public class VerticalityServiceImpl implements VerticalityService {
     private VerticalityDataMapper verticalityDataMapper;
 
 
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateState(VerticalityData verticalityData) {
         Example example = new Example(VerticalityData.class);
@@ -33,5 +36,18 @@ public class VerticalityServiceImpl implements VerticalityService {
             data.setMaintainType(verticalityData.getMaintainType());
 
         verticalityDataMapper.updateByExampleSelective(data,example);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public VerticalityData query(String code) {
+
+        Example example = new Example(VerticalityData.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("verticalityId",code);
+
+        VerticalityData verticalityData = verticalityDataMapper.selectOneByExample(example);
+
+        return verticalityData;
     }
 }
