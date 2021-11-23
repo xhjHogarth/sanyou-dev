@@ -9,6 +9,28 @@
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="is_handled" property="isHandled" jdbcType="INTEGER" />
+    <result column="handle_user_id" property="handleUserId" jdbcType="VARCHAR" />
+    <result column="handle_time" property="handleTime" jdbcType="TIMESTAMP" />
   </resultMap>
 
+  <insert id="insertOne" parameterType="com.sanyou.pojo.Question" useGeneratedKeys="true"
+          keyProperty="id" keyColumn="id">
+    INSERT INTO question(`title`, `description`, `createtime`, `userid`,`is_handled`)
+    VALUES (#{title}, #{description}, #{createtime}, #{userid},#{isHandled});
+  </insert>
+  <select id="query" resultType="com.sanyou.pojo.vo.QuestionVo">
+    select id,title,description,createtime,userid,is_handled as isHandled,handle_user_id as handleUserId,
+           handle_time as handleTime,(select username from user where id=userid) as username
+    from question
+    order by createtime desc
+  </select>
+
+  <select id="getQuestionList" parameterType="String" resultType="com.sanyou.pojo.vo.QuestionVo">
+    select id,title,description,createtime,userid,is_handled as isHandled,handle_user_id as handleUserId,
+           handle_time as handleTime,(select filename from question_image where question_id=q.id) as url
+    from question q where userid=#{userId}
+    order by createtime desc
+  </select>
 </mapper>

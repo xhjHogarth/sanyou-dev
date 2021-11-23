@@ -45,6 +45,6 @@
 
 <!--        <table tableName="project_data"></table>-->
 <!--        <table tableName="contract_data"></table>-->
-        <table tableName="collect_history"></table>
+        <table tableName="user_image"></table>
     </context>
 </generatorConfiguration>

@@ -1,6 +1,10 @@
 package com.sanyou.service;
 
 import com.sanyou.pojo.Question;
+import com.sanyou.pojo.vo.QuestionVo;
+import com.sanyou.utils.PagedResult;
+
+import java.util.List;
 
 /**
  * User: asus
@@ -10,5 +14,11 @@ import com.sanyou.pojo.Question;
  */
 public interface QuestionService {
 
-    void addQuestion(Question question);
+    int addQuestion(Question question);
+
+    PagedResult query(Integer page, Integer pageSize);
+
+    void handleMessage(Question question);
+
+    List<QuestionVo> getQuestionList(String userId);
 }

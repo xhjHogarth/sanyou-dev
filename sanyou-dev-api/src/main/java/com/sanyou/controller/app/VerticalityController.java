@@ -1,12 +1,16 @@
 package com.sanyou.controller.app;
 
 import com.sanyou.pojo.VerticalityData;
+import com.sanyou.pojo.vo.VerticalityDataVo;
 import com.sanyou.service.VerticalityService;
 import com.sanyou.utils.JSONResult;
+import com.sanyou.utils.PagedResult;
 import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import static com.sanyou.controller.BasicController.PAGE_SIZE;
 
 /**
  * User: asus
@@ -28,6 +32,8 @@ public class VerticalityController {
         if(verticalityData == null || StringUtils.isBlank(verticalityData.getVerticalityId())
         || verticalityData.getState()==null)
             return JSONResult.errorMsg("阴极板不存在!");
+        if(StringUtils.isBlank(verticalityData.getUserid()))
+            return JSONResult.errorMsg("用户Id为空!");
 
         verticalityService.updateState(verticalityData);
         return JSONResult.ok();
@@ -43,5 +49,23 @@ public class VerticalityController {
             return JSONResult.ok();
         else
             return JSONResult.errorMsg("阴极板不存在");
+    }
+
+    @GetMapping("/query")
+    public JSONResult query(String query,Integer page, Integer pageSize,Integer state,Integer maintainType){
+        if(page == null)
+            page = 1;
+
+        if(pageSize == null)
+            pageSize = PAGE_SIZE;
+
+        VerticalityDataVo queryVo = new VerticalityDataVo();
+        queryVo.setQuery(query);
+        queryVo.setState(state);
+        queryVo.setMaintainType(maintainType);
+
+        PagedResult pagedResult = verticalityService.query(queryVo,page,pageSize);
+
+        return JSONResult.ok(pagedResult);
     }
 }

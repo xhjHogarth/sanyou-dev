@@ -20,12 +20,21 @@ public class VerticalityData {
     @Column(name = "createTime")
     private Date createtime;
 
-    private Integer verticality;
+    private Float verticality;
 
     private Integer state;
 
+    @Column(name = "update_state_date")
+    private Date updateStateDate;
+
     @Column(name = "maintain_type")
     private Integer maintainType;
+
+    @Column(name = "update_maintain_date")
+    private Date updateMaintainDate;
+
+    @Column(name = "userId")
+    private String userid;
 
     /**
      * @return verticality_id
@@ -86,14 +95,14 @@ public class VerticalityData {
     /**
      * @return verticality
      */
-    public Integer getVerticality() {
+    public Float getVerticality() {
         return verticality;
     }
 
     /**
      * @param verticality
      */
-    public void setVerticality(Integer verticality) {
+    public void setVerticality(Float verticality) {
         this.verticality = verticality;
     }
 
@@ -117,5 +126,29 @@ public class VerticalityData {
 
     public void setMaintainType(Integer maintainType) {
         this.maintainType = maintainType;
+    }
+
+    public Date getUpdateStateDate() {
+        return updateStateDate;
+    }
+
+    public void setUpdateStateDate(Date updateStateDate) {
+        this.updateStateDate = updateStateDate;
+    }
+
+    public Date getUpdateMaintainDate() {
+        return updateMaintainDate;
+    }
+
+    public void setUpdateMaintainDate(Date updateMaintainDate) {
+        this.updateMaintainDate = updateMaintainDate;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 }

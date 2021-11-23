@@ -1,11 +1,8 @@
-package com.sanyou.pojo;
+package com.sanyou.pojo.vo;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 import java.util.Date;
 
-public class Question {
-    @Id
+public class QuestionVo {
     private Integer id;
 
     private String title;
@@ -15,15 +12,17 @@ public class Question {
     private Date createtime;
 
     private String userid;
+    private String username;
 
-    @Column(name = "is_handled")
     private Integer isHandled;
 
-    @Column(name = "handle_user_id")
     private String handleUserId;
+    private String handleUserName;
 
-    @Column(name = "handle_time")
     private Date handleTime;
+
+    private String url;
+    private int index;
 
     /**
      * @return id
@@ -111,5 +110,37 @@ public class Question {
 
     public void setHandleTime(Date handleTime) {
         this.handleTime = handleTime;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getHandleUserName() {
+        return handleUserName;
+    }
+
+    public void setHandleUserName(String handleUserName) {
+        this.handleUserName = handleUserName;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }
