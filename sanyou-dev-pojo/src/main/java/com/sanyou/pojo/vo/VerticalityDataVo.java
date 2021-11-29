@@ -61,6 +61,8 @@ public class VerticalityDataVo {
 
     private String query;
 
+    private String factoryId;
+
     /**
      * 阴极板动态检测数据
      */
@@ -176,5 +178,13 @@ public class VerticalityDataVo {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFactoryId() {
+        return factoryId;
+    }
+
+    public void setFactoryId(String factoryId) {
+        this.factoryId = factoryId;
     }
 }

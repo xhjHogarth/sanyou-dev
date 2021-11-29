@@ -55,7 +55,7 @@ public class UserImageController {
                 String path = "/upload/";
                 //绝对路径
                 //String url = request.getSession().getServletContext().getRealPath("") + path;
-                String url = "E:/projects" + path;
+                String url = "/home/data/www/web/sanyou" + path;
                 File dir = new File(url);
                 if(!dir.exists()){
                     dir.mkdirs();

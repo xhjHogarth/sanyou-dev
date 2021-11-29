@@ -52,7 +52,7 @@ public class VerticalityController {
     }
 
     @GetMapping("/query")
-    public JSONResult query(String query,Integer page, Integer pageSize,Integer state,Integer maintainType){
+    public JSONResult query(String query,Integer page, Integer pageSize,Integer state,Integer maintainType,String factoryId){
         if(page == null)
             page = 1;
 
@@ -63,6 +63,7 @@ public class VerticalityController {
         queryVo.setQuery(query);
         queryVo.setState(state);
         queryVo.setMaintainType(maintainType);
+        queryVo.setFactoryId(factoryId);
 
         PagedResult pagedResult = verticalityService.query(queryVo,page,pageSize);
 
