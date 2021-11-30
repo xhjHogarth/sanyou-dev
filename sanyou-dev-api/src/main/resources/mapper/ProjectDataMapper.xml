@@ -5,20 +5,25 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <id column="custom_project_name" property="customProjectName" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
     <result column="factory_id" property="factoryId" jdbcType="VARCHAR" />
     <result column="dir_path" property="dirPath" jdbcType="VARCHAR" />
     <result column="fileName" property="filename" jdbcType="VARCHAR" />
     <result column="extension" property="extension" jdbcType="VARCHAR" />
-    <result column="length" property="length" jdbcType="INTEGER" />
-    <result column="width" property="width" jdbcType="INTEGER" />
-    <result column="height" property="height" jdbcType="INTEGER" />
+    <result column="ddb_length" property="ddbLength" jdbcType="INTEGER" />
+    <result column="ddb_width" property="ddbWidth" jdbcType="INTEGER" />
+    <result column="ddb_height" property="ddbHeight" jdbcType="INTEGER" />
+    <result column="yjb_length" property="yjbLength" jdbcType="INTEGER" />
+    <result column="yjb_width" property="yjbWidth" jdbcType="INTEGER" />
+    <result column="yjb_height" property="yjbHeight" jdbcType="INTEGER" />
     <result column="MD5" property="md5" jdbcType="VARCHAR" />
     <result column="createTime" property="createtime" jdbcType="TIMESTAMP" />
   </resultMap>
 
   <select id="getProjectList" parameterType="String" resultMap="BaseResultMap">
-    select project_id,factory_id,dir_path,fileName,extension,length,width,height,MD5,createTime
+    select custom_project_name,project_id,factory_id,dir_path,fileName,extension,ddb_length,ddb_width,ddb_height,
+           yjb_length,yjb_width,yjb_height,MD5,createTime
     from project_data
     where factory_id=(select factory_id from user where id=#{userId})
   </select>

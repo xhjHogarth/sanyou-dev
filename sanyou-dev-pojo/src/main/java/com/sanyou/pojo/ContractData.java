@@ -7,28 +7,48 @@ import javax.persistence.Table;
 @Table(name = "contract_data")
 public class ContractData {
     @Id
-    @Column(name = "contract_id")
-    private String contractId;
+    @Column(name = "custom_project_name")
+    private String customProjectName;
 
     @Id
+    @Column(name = "custom_contract_name")
+    private String customContractName;
+
     @Column(name = "project_id")
     private String projectId;
+
+    @Column(name = "contract_id")
+    private String contractId;
 
     @Column(name = "contract_name")
     private String contractName;
 
     /**
-     * @return contract_id
+     * @return custom_project_name
      */
-    public String getContractId() {
-        return contractId;
+    public String getCustomProjectName() {
+        return customProjectName;
     }
 
     /**
-     * @param contractId
+     * @param customProjectName
      */
-    public void setContractId(String contractId) {
-        this.contractId = contractId;
+    public void setCustomProjectName(String customProjectName) {
+        this.customProjectName = customProjectName;
+    }
+
+    /**
+     * @return custom_contract_name
+     */
+    public String getCustomContractName() {
+        return customContractName;
+    }
+
+    /**
+     * @param customContractName
+     */
+    public void setCustomContractName(String customContractName) {
+        this.customContractName = customContractName;
     }
 
     /**
@@ -43,6 +63,20 @@ public class ContractData {
      */
     public void setProjectId(String projectId) {
         this.projectId = projectId;
+    }
+
+    /**
+     * @return contract_id
+     */
+    public String getContractId() {
+        return contractId;
+    }
+
+    /**
+     * @param contractId
+     */
+    public void setContractId(String contractId) {
+        this.contractId = contractId;
     }
 
     /**

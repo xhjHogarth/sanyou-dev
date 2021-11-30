@@ -5,8 +5,10 @@
     <!--
       WARNING - @mbg.generated
     -->
-    <id column="contract_id" property="contractId" jdbcType="VARCHAR" />
-    <id column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <id column="custom_project_name" property="customProjectName" jdbcType="VARCHAR" />
+    <id column="custom_contract_name" property="customContractName" jdbcType="VARCHAR" />
+    <result column="project_id" property="projectId" jdbcType="VARCHAR" />
+    <result column="contract_id" property="contractId" jdbcType="VARCHAR" />
     <result column="contract_name" property="contractName" jdbcType="VARCHAR" />
   </resultMap>
 </mapper>

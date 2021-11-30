@@ -1,13 +1,7 @@
 package com.sanyou.service.impl;
 
-import com.sanyou.mapper.CollectHistoryMapper;
-import com.sanyou.mapper.IndustryDataMapper;
-import com.sanyou.mapper.SearchHistoryMapper;
-import com.sanyou.mapper.VerticalityDataMapper;
-import com.sanyou.pojo.CollectHistory;
-import com.sanyou.pojo.IndustryData;
-import com.sanyou.pojo.SearchHistory;
-import com.sanyou.pojo.VerticalityData;
+import com.sanyou.mapper.*;
+import com.sanyou.pojo.*;
 import com.sanyou.pojo.vo.VerticalityDataVo;
 import com.sanyou.service.ScanCodeService;
 import org.springframework.beans.BeanUtils;
@@ -39,6 +33,9 @@ public class ScanCodeServiceImpl implements ScanCodeService {
 
     @Autowired
     private CollectHistoryMapper collectHistoryMapper;
+
+    @Autowired
+    private ProjectDataMapper projectDataMapper;
 
 
     @Override
@@ -76,6 +73,22 @@ public class ScanCodeServiceImpl implements ScanCodeService {
                 verticalityDataVo.setCollectStatus(1);
             else
                 verticalityDataVo.setCollectStatus(2);
+
+            //根据projectId获取阴极板尺寸和导电棒尺寸
+            String projectId = verticalityDataVo.getProjectId();
+            Example example4 = new Example(ProjectData.class);
+            Example.Criteria criteria4 = example4.createCriteria();
+            criteria4.andEqualTo("projectId",projectId);
+            ProjectData projectData = projectDataMapper.selectOneByExample(example4);
+            String ddbLength = projectData.getDdbLength()==null?"":projectData.getDdbLength()+"";
+            String ddbWidth = projectData.getDdbWidth()==null?"":projectData.getDdbWidth()+"";
+            String ddbHeight = projectData.getDdbHeight()==null?"":projectData.getDdbHeight()+"";
+            String yjbLength = projectData.getYjbLength()==null?"":projectData.getYjbLength()+"";
+            String yjbWidth = projectData.getYjbWidth()==null?"":projectData.getYjbWidth()+"";
+            String yjbHeight = projectData.getYjbHeight()==null?"":projectData.getYjbHeight()+"";
+
+            verticalityDataVo.setDdbSize(ddbLength + "*" + ddbWidth + "*" + ddbHeight);
+            verticalityDataVo.setYjbSize(yjbLength + "*" + yjbWidth + "*" + yjbHeight);
         }
 
         //添加搜索记录

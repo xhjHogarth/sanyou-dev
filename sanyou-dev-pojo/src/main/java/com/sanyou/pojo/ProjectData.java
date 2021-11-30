@@ -8,6 +8,9 @@ import java.util.Date;
 @Table(name = "project_data")
 public class ProjectData {
     @Id
+    @Column(name = "custom_project_name")
+    private String customProjectName;
+
     @Column(name = "project_id")
     private String projectId;
 
@@ -22,17 +25,43 @@ public class ProjectData {
 
     private String extension;
 
-    private Integer length;
+    @Column(name = "ddb_length")
+    private Integer ddbLength;
 
-    private Integer width;
+    @Column(name = "ddb_width")
+    private Integer ddbWidth;
 
-    private Integer height;
+    @Column(name = "ddb_height")
+    private Integer ddbHeight;
+
+    @Column(name = "yjb_length")
+    private Integer yjbLength;
+
+    @Column(name = "yjb_width")
+    private Integer yjbWidth;
+
+    @Column(name = "yjb_height")
+    private Integer yjbHeight;
 
     @Column(name = "MD5")
     private String md5;
 
     @Column(name = "createTime")
     private Date createtime;
+
+    /**
+     * @return custom_project_name
+     */
+    public String getCustomProjectName() {
+        return customProjectName;
+    }
+
+    /**
+     * @param customProjectName
+     */
+    public void setCustomProjectName(String customProjectName) {
+        this.customProjectName = customProjectName;
+    }
 
     /**
      * @return project_id
@@ -105,45 +134,87 @@ public class ProjectData {
     }
 
     /**
-     * @return length
+     * @return ddb_length
      */
-    public Integer getLength() {
-        return length;
+    public Integer getDdbLength() {
+        return ddbLength;
     }
 
     /**
-     * @param length
+     * @param ddbLength
      */
-    public void setLength(Integer length) {
-        this.length = length;
+    public void setDdbLength(Integer ddbLength) {
+        this.ddbLength = ddbLength;
     }
 
     /**
-     * @return width
+     * @return ddb_width
      */
-    public Integer getWidth() {
-        return width;
+    public Integer getDdbWidth() {
+        return ddbWidth;
     }
 
     /**
-     * @param width
+     * @param ddbWidth
      */
-    public void setWidth(Integer width) {
-        this.width = width;
+    public void setDdbWidth(Integer ddbWidth) {
+        this.ddbWidth = ddbWidth;
     }
 
     /**
-     * @return height
+     * @return ddb_height
      */
-    public Integer getHeight() {
-        return height;
+    public Integer getDdbHeight() {
+        return ddbHeight;
     }
 
     /**
-     * @param height
+     * @param ddbHeight
      */
-    public void setHeight(Integer height) {
-        this.height = height;
+    public void setDdbHeight(Integer ddbHeight) {
+        this.ddbHeight = ddbHeight;
+    }
+
+    /**
+     * @return yjb_length
+     */
+    public Integer getYjbLength() {
+        return yjbLength;
+    }
+
+    /**
+     * @param yjbLength
+     */
+    public void setYjbLength(Integer yjbLength) {
+        this.yjbLength = yjbLength;
+    }
+
+    /**
+     * @return yjb_width
+     */
+    public Integer getYjbWidth() {
+        return yjbWidth;
+    }
+
+    /**
+     * @param yjbWidth
+     */
+    public void setYjbWidth(Integer yjbWidth) {
+        this.yjbWidth = yjbWidth;
+    }
+
+    /**
+     * @return yjb_height
+     */
+    public Integer getYjbHeight() {
+        return yjbHeight;
+    }
+
+    /**
+     * @param yjbHeight
+     */
+    public void setYjbHeight(Integer yjbHeight) {
+        this.yjbHeight = yjbHeight;
     }
 
     /**
