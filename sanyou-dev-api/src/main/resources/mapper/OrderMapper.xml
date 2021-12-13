@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sanyou.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.sanyou.pojo.Order" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_name" property="orderName" jdbcType="VARCHAR" />
+    <result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+    <result column="ddb_length" property="ddbLength" jdbcType="DOUBLE" />
+    <result column="ddb_width" property="ddbWidth" jdbcType="DOUBLE" />
+    <result column="ddb_height" property="ddbHeight" jdbcType="DOUBLE" />
+    <result column="yjb_length" property="yjbLength" jdbcType="DOUBLE" />
+    <result column="yjb_width" property="yjbWidth" jdbcType="DOUBLE" />
+    <result column="yjb_height" property="yjbHeight" jdbcType="DOUBLE" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="delete_mark" property="deleteMark" jdbcType="TINYINT" />
+  </resultMap>
+
+  <select id="checkOrderExist" parameterType="com.sanyou.pojo.vo.OrderVo" resultType="Integer">
+    select count(*) from `order` o
+    LEFT JOIN project_order po on o.id=po.order_id
+    where po.project_id=#{projectId} and (order_name=#{orderName} or order_code=#{orderCode}) and o.delete_mark=0
+  </select>
+
+  <insert id="insertOne" parameterType="com.sanyou.pojo.Order" useGeneratedKeys="true"
+          keyProperty="id" keyColumn="id">
+    INSERT INTO `sanyou`.`order` (`id`, `order_name`, `order_code`, `ddb_length`, `ddb_width`, `ddb_height`,
+                                  `yjb_length`, `yjb_width`, `yjb_height`, `user_id`, `createtime`,
+                                  `updatetime`, `delete_mark`)
+    VALUES (#{id}, #{orderName}, #{orderCode}, #{ddbLength}, #{ddbWidth}, #{ddbHeight}, #{yjbLength}, #{yjbWidth}, #{yjbHeight},
+            #{userId}, #{createtime}, NULL, 0);
+  </insert>
+
+  <select id="queryOrders" parameterType="com.sanyou.pojo.vo.OrderVo" resultType="com.sanyou.pojo.vo.OrderVo">
+    select o.id as id,o.order_name as orderName,o.order_code as orderCode,o.ddb_length as ddbLength,
+           o.ddb_width as ddbWidth,o.ddb_height as ddbHeight,o.yjb_length as yjbLength,o.yjb_width as yjbWidth,
+           o.yjb_height as yjbHeight,o.user_id as userId,o.createtime as createtime,o.updatetime as updatetime,
+           o.delete_mark as deleteMark,
+           (select username from user where id=o.user_id) as username,
+           p.project_name as projectName,
+           p.project_code as projectCode,
+           p.id as projectId
+    from `order` o
+    LEFT JOIN project_order po on o.id=po.order_id
+    left join project p on po.project_id=p.id
+    where o.delete_mark=0
+    <if test="query != null and query != ''">
+        and (o.order_name like '%${query}%' or o.order_code like '%${query}%')
+    </if>
+    <if test="projectId != null">
+        and p.id=#{projectId}
+    </if>
+  </select>
+
+  <update id="updateOrder" parameterType="com.sanyou.pojo.Order">
+      UPDATE `order` SET `order_name`=#{orderName}, `order_code`=#{orderCode}, `ddb_length`=#{ddbLength},
+      `ddb_width`=#{ddbWidth}, `ddb_height`=#{ddbHeight}, `yjb_length`=#{yjbLength}, `yjb_width`=#{yjbWidth},
+                                  `yjb_height`=#{yjbHeight}, `updatetime`=#{updatetime}, `delete_mark`=#{deleteMark} WHERE (`id`=#{id});
+
+  </update>
+
+  <update id="deleteOrder" parameterType="Integer">
+      update `order` set `delete_mark`=1 WHERE (`id`=#{oid});
+  </update>
+
+  <select id="getProjectOrder" parameterType="Integer" resultType="com.sanyou.pojo.vo.OrderVo">
+      select o.id as id,o.order_name as orderName,o.order_code as orderCode,o.ddb_length as ddbLength,
+             o.ddb_width as ddbWidth,o.ddb_height as ddbHeight,o.yjb_length as yjbLength,o.yjb_width as yjbWidth,
+             o.yjb_height as yjbHeight,o.user_id as userId,o.createtime as createtime,o.updatetime as updatetime,
+             o.delete_mark as deleteMark,
+             (select username from user where id=o.user_id) as username,
+             p.project_name as projectName,
+             p.project_code as projectCode,
+             p.id as projectId
+      from `order` o
+               LEFT JOIN project_order po on o.id=po.order_id
+               left join project p on po.project_id=p.id
+      where o.delete_mark=0 and p.id=#{pid}
+  </select>
+</mapper>

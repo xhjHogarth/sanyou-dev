@@ -1,21 +1,23 @@
 package com.sanyou.service.impl;
 
-import com.sanyou.mapper.ContractDataMapper;
-import com.sanyou.mapper.FactoryMapper;
-import com.sanyou.mapper.ProjectDataMapper;
-import com.sanyou.mapper.VerticalityDataMapper;
-import com.sanyou.pojo.ContractData;
-import com.sanyou.pojo.Factory;
-import com.sanyou.pojo.ProjectData;
-import com.sanyou.pojo.VerticalityData;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.sanyou.mapper.*;
+import com.sanyou.pojo.*;
 import com.sanyou.pojo.vo.ProjectVo;
+import com.sanyou.pojo.vo.ProjectVo2;
 import com.sanyou.service.ProjectService;
+import com.sanyou.utils.PagedResult;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,9 +41,15 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private FactoryMapper factoryMapper;
 
+    @Autowired
+    private ProjectMapper projectMapper;
+
+    @Autowired
+    private ProjectOrderMapper projectOrderMapper;
+
     @Override
-    public List<ProjectVo> getProjectList(String userId) {
-        List<ProjectVo> projectList = new ArrayList<>();
+    public List<ProjectVo2> getProjectList(String userId) {
+        List<ProjectVo2> projectList = new ArrayList<>();
         List<ProjectData> projectDataList = projectDataMapper.getProjectList(userId);
 
         if(projectDataList != null && projectDataList.size()>0){
@@ -49,7 +57,7 @@ public class ProjectServiceImpl implements ProjectService {
 
             int count = 1;
             for (ProjectData projectData : projectDataList) {
-                ProjectVo projectVo = new ProjectVo();
+                ProjectVo2 projectVo = new ProjectVo2();
                 BeanUtils.copyProperties(projectData,projectVo);
 
                 projectVo.setProjectName(factory.getFactoryName() + "项目" + count);
@@ -63,9 +71,9 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectVo getContractDetail(String projectId) {
+    public ProjectVo2 getContractDetail(String projectId) {
 
-        ProjectVo projectVo = new ProjectVo();
+        ProjectVo2 projectVo = new ProjectVo2();
 
         Example example1 = new Example(ProjectData.class);
         Example.Criteria criteria1 = example1.createCriteria();
@@ -101,5 +109,77 @@ public class ProjectServiceImpl implements ProjectService {
         }
 
         return projectVo;
+    }
+
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public int addProject(Project project) {
+        project.setCreatetime(new Date());
+
+        projectMapper.insertOne(project);
+        return project.getId();
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public boolean checkNameAndCode(Project project) {
+
+        int count = projectMapper.checkNameAndCode(project);
+
+        return count>0;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void updateProject(Project project) {
+        project.setUpdatetime(new Date());
+        projectMapper.updateByPrimaryKeySelective(project);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void deleteProject(Integer pid) {
+        Project project = new Project();
+        project.setId(pid);
+        project.setDeleteMark((byte) 1);
+
+        projectMapper.updateByPrimaryKeySelective(project);
+
+        Example example = new Example(ProjectOrder.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("projectId",pid);
+        projectOrderMapper.deleteByExample(example);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public PagedResult query(String query,Integer page, Integer pageSize) {
+
+        PageHelper.startPage(page,pageSize);
+        List<ProjectVo> list = projectMapper.queryProjects(query);
+
+        for (ProjectVo projectVo : list) {
+            if(StringUtils.isNotBlank(projectVo.getFilename()))
+                projectVo.setHasFile(1);
+        }
+
+        PageInfo<ProjectVo> pageList = new PageInfo<>(list);
+
+        PagedResult pagedResult = new PagedResult();
+        pagedResult.setPage(page);
+        pagedResult.setTotal(pageList.getPages());
+        pagedResult.setRows(list);
+        pagedResult.setRecords(pageList.getTotal());
+        return pagedResult;
+    }
+
+    @Override
+    public List<Project> getAll() {
+        Example example = new Example(Project.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("deleteMark",0);
+        List<Project> projectList = projectMapper.selectByExample(example);
+        return projectList;
     }
 }

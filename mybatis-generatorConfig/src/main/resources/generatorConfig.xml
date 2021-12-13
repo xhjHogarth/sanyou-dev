@@ -46,7 +46,7 @@
 <!--        <table tableName="industry_data"></table>-->
 
 <!--        <table tableName="project_data"></table>-->
-        <table tableName="contract_data"></table>
+        <table tableName="order_product"></table>
 <!--        <table tableName="user_image"></table>-->
     </context>
 </generatorConfiguration>
