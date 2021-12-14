@@ -22,7 +22,7 @@ public class FilterConfig{
         bean.setFilter(new UserFilter());
         bean.setOrder(1);
         bean.setUrlPatterns(Arrays.asList("/user/*","/factory/*","/userGroup/*","/role/*","/resource/*","/userLog/*",
-                "/equipment/*"));
+                "/equipment/*","/project/*","/order/*","/product/*"));
         return bean;
     }
 

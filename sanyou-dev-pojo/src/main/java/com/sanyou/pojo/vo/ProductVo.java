@@ -42,6 +42,11 @@ public class ProductVo {
     private String ddbSize;
     private String yjbSize;
 
+    private String query;
+    private String factoryId;
+
+    private String username;
+
     public Integer getId() {
         return id;
     }
@@ -176,5 +181,29 @@ public class ProductVo {
 
     public void setYjbSize(String yjbSize) {
         this.yjbSize = yjbSize;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
+    }
+
+    public String getFactoryId() {
+        return factoryId;
+    }
+
+    public void setFactoryId(String factoryId) {
+        this.factoryId = factoryId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

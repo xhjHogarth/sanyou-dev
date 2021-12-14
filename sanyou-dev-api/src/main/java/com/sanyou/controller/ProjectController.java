@@ -104,9 +104,9 @@ public class ProjectController {
                 //扩展名
                 String extension = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
                 //存储的相对路径
-                String path = "/upload/";
+                String path = "/upload/pdf/";
                 //绝对路径
-                String url = "E:/projects" + path;
+                String url = "/home/data/www/web/sanyou" + path;
                 File dir = new File(url);
                 if(!dir.exists()){
                     dir.mkdirs();
@@ -170,9 +170,9 @@ public class ProjectController {
                 //扩展名
                 String extension = originalFilename.substring(originalFilename.lastIndexOf(".")).toLowerCase();
                 //存储的相对路径
-                String path = "/upload/";
+                String path = "/upload/pdf/";
                 //绝对路径
-                String url = "E:/projects" + path;
+                String url = "/home/data/www/web/sanyou" + path;
                 File dir = new File(url);
                 if(!dir.exists()){
                     dir.mkdirs();

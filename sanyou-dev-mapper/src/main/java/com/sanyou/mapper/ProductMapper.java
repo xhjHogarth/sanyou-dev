@@ -10,4 +10,8 @@ public interface ProductMapper extends MyMapper<Product> {
     List<ProductVo> getOrderProduct(Integer oid);
 
     int checkCodeRange(String startProductCode, String endProductCode);
+
+    List<ProductVo> query(ProductVo queryVo);
+
+    void updateProduct(Product product);
 }

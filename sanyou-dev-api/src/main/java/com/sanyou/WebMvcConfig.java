@@ -22,7 +22,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("file:" + "/home/data/www/web/sanyou/upload/");
         registry.addResourceHandler("/file/**")
-                .addResourceLocations("file:" + "E:/projects/upload/");
+                .addResourceLocations("file:" + "/home/data/www/web/sanyou/upload/pdf/");
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/META-INF/resources/");
     }
