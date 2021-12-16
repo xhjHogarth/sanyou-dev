@@ -2,8 +2,11 @@ package com.sanyou.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sanyou.mapper.ProductMapper;
+import com.sanyou.mapper.*;
+import com.sanyou.pojo.CollectHistory;
+import com.sanyou.pojo.IndustryData;
 import com.sanyou.pojo.Product;
+import com.sanyou.pojo.SearchHistory;
 import com.sanyou.pojo.vo.ProductVo;
 import com.sanyou.service.ProductService;
 import com.sanyou.utils.PagedResult;
@@ -11,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,6 +30,18 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private ProductMapper productMapper;
+
+    @Autowired
+    private IndustryDataMapper industryDataMapper;
+
+    @Autowired
+    private CollectHistoryMapper collectHistoryMapper;
+
+    @Autowired
+    private SearchHistoryMapper searchHistoryMapper;
+
+    @Autowired
+    private OrderProductMapper orderProductMapper;
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
@@ -56,5 +73,91 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void updateProduct(Product product) {
         productMapper.updateProduct(product);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public Product query(String code) {
+        Example example = new Example(Product.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("productCode",code);
+        Product product = productMapper.selectOneByExample(example);
+
+        return product;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public ProductVo getInfo(String scanCode, String userId, boolean flag) {
+        ProductVo product = productMapper.selectByCode(scanCode);
+
+        SearchHistory searchHistory = new SearchHistory();
+
+        if(product != null){
+            Example example2 = new Example(IndustryData.class);
+            Example.Criteria criteria2 = example2.createCriteria();
+            criteria2.andEqualTo("plateno",scanCode);
+            List<IndustryData> industryDataList = industryDataMapper.selectByExample(example2);
+            product.setIndustryDataList(industryDataList);
+
+            searchHistory.setVerticality(product.getProductValue());
+
+            //查询阴极板是否被收藏
+            Example example3 = new Example(CollectHistory.class);
+            Example.Criteria criteria3 = example3.createCriteria();
+            criteria3.andEqualTo("userId",userId);
+            criteria3.andEqualTo("collectCode",scanCode);
+            List<CollectHistory> collectHistoryList = collectHistoryMapper.selectByExample(example3);
+            if(collectHistoryList != null && collectHistoryList.size() > 0)
+                product.setCollectStatus(1);
+            else
+                product.setCollectStatus(2);
+
+            if(product.getDdbLength() != null && product.getDdbWidth() != null && product.getDdbHeight() != null)
+                product.setDdbSize(product.getDdbLength() + "*" + product.getDdbWidth() + "*" + product.getDdbHeight());
+            else
+                product.setDdbSize("");
+
+            if(product.getYjbLength() != null && product.getYjbWidth() != null && product.getYjbHeight() != null)
+                product.setYjbSize(product.getYjbLength() + "*" + product.getYjbWidth() + "*" + product.getYjbHeight());
+            else
+                product.setYjbSize("");
+        }
+
+        //添加搜索记录
+        searchHistory.setSearchCode(scanCode);
+        searchHistory.setUserId(userId);
+        searchHistory.setSearchDate(new Date());
+        if(flag)
+            searchHistoryMapper.insertSelective(searchHistory);
+
+        return product;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void updateState(ProductVo productVo) {
+        Example example = new Example(Product.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andEqualTo("productCode",productVo.getProductCode());
+        Product product = productMapper.selectOneByExample(example);
+
+        if(product != null){
+            if(productVo.getProductState() != null) {
+                product.setProductState(productVo.getProductState());
+                product.setUpdateStateDate(new Date());
+                if(productVo.getProductState() == 1){
+                    product.setMaintainType(productVo.getMaintainType());
+                    product.setUpdateMaintainDate(new Date());
+                    product.setUserid(productVo.getUserid());
+                }else{
+                    product.setMaintainType(null);
+                    product.setUpdateMaintainDate(null);
+                    product.setUserid(null);
+                }
+            }
+
+            productMapper.updateProduct(product);
+        }
     }
 }

@@ -65,4 +65,29 @@
     WHERE (`id`=#{id});
 
   </update>
+
+  <select id="getProjectProducts" parameterType="Integer" resultType="com.sanyou.pojo.Product">
+    select p.id as id,p.product_state as productState from product p where p.id in (
+      select op.product_id from order_product op where op.order_id in (
+        select po.order_id from project_order po where po.project_id=#{pid}
+      ))
+  </select>
+
+  <select id="selectByCode" parameterType="String" resultType="com.sanyou.pojo.vo.ProductVo">
+    select p.id as id,p.product_code as productCode,p.product_value as productValue,p.product_state as productState,
+    p.createtime as createtime,p.update_state_date as updateStateDate,p.maintain_type as maintainType,
+    p.update_maintain_date as updateMaintainDate,p.userId as userid,
+    o.ddb_length as ddbLength,o.ddb_width as ddbWidth,o.ddb_height as ddbHeight,
+    o.yjb_length as yjbLength,o.yjb_width as yjbWidth,o.yjb_height as yjbHeight,
+    (select username from user where id=p.userId) as username
+    from product p
+    left join order_product op on p.id=op.product_id
+    left join `order` o on o.id=op.order_id
+    left join project_order po on o.id=po.order_id
+    left join project pr on po.project_id=pr.id
+    where 1=1
+    <if test="scanCode != null and scanCode != ''">
+      and p.product_code=#{scanCode}
+    </if>
+  </select>
 </mapper>

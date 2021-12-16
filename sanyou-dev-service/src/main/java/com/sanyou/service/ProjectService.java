@@ -1,7 +1,7 @@
 package com.sanyou.service;
 
 import com.sanyou.pojo.Project;
-import com.sanyou.pojo.vo.ProjectVo2;
+import com.sanyou.pojo.vo.ProjectVo;
 import com.sanyou.utils.PagedResult;
 
 import java.util.List;
@@ -19,14 +19,7 @@ public interface ProjectService {
      * @param userId
      * @return
      */
-    List<ProjectVo2> getProjectList(String userId);
-
-    /**
-     * 根据项目Id，合同Id获取合同详情信息
-     * @param projectId 项目Id
-     * @return
-     */
-    ProjectVo2 getContractDetail(String projectId);
+    List<ProjectVo> getProjectList(String userId);
 
     /**
      * 新增项目
@@ -58,4 +51,5 @@ public interface ProjectService {
 
     List<Project> getAll();
 
+    ProjectVo getProject(Integer projectId);
 }

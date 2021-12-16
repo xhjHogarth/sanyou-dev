@@ -19,7 +19,7 @@ public class SearchHistory {
     @Column(name = "user_id")
     private String userId;
 
-    private Float verticality;
+    private Double verticality;
 
     /**
      * @return id
@@ -77,11 +77,11 @@ public class SearchHistory {
         this.userId = userId;
     }
 
-    public Float getVerticality() {
+    public Double getVerticality() {
         return verticality;
     }
 
-    public void setVerticality(Float verticality) {
+    public void setVerticality(Double verticality) {
         this.verticality = verticality;
     }
 }

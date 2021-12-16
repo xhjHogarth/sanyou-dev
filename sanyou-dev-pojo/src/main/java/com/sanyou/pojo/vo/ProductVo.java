@@ -1,6 +1,9 @@
 package com.sanyou.pojo.vo;
 
+import com.sanyou.pojo.IndustryData;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * User: asus
@@ -46,6 +49,16 @@ public class ProductVo {
     private String factoryId;
 
     private String username;
+
+    /**
+     * 阴极板动态检测数据
+     */
+    private List<IndustryData> industryDataList;
+
+    /**
+     * 阴极板是否收藏(1-收藏,2-未收藏)
+     */
+    private int collectStatus;
 
     public Integer getId() {
         return id;
@@ -205,5 +218,21 @@ public class ProductVo {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public List<IndustryData> getIndustryDataList() {
+        return industryDataList;
+    }
+
+    public void setIndustryDataList(List<IndustryData> industryDataList) {
+        this.industryDataList = industryDataList;
+    }
+
+    public int getCollectStatus() {
+        return collectStatus;
+    }
+
+    public void setCollectStatus(int collectStatus) {
+        this.collectStatus = collectStatus;
     }
 }

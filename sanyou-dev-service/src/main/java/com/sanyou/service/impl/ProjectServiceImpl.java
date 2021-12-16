@@ -3,9 +3,10 @@ package com.sanyou.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sanyou.mapper.*;
-import com.sanyou.pojo.*;
+import com.sanyou.pojo.Product;
+import com.sanyou.pojo.Project;
+import com.sanyou.pojo.ProjectOrder;
 import com.sanyou.pojo.vo.ProjectVo;
-import com.sanyou.pojo.vo.ProjectVo2;
 import com.sanyou.service.ProjectService;
 import com.sanyou.utils.PagedResult;
 import org.apache.commons.lang3.StringUtils;
@@ -16,7 +17,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,15 +30,6 @@ import java.util.List;
 public class ProjectServiceImpl implements ProjectService {
 
     @Autowired
-    private ProjectDataMapper projectDataMapper;
-
-    @Autowired
-    private ContractDataMapper contractDataMapper;
-
-    @Autowired
-    private VerticalityDataMapper verticalityDataMapper;
-
-    @Autowired
     private FactoryMapper factoryMapper;
 
     @Autowired
@@ -47,70 +38,37 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private ProjectOrderMapper projectOrderMapper;
 
+    @Autowired
+    private ProductMapper productMapper;
+
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public List<ProjectVo2> getProjectList(String userId) {
-        List<ProjectVo2> projectList = new ArrayList<>();
-        List<ProjectData> projectDataList = projectDataMapper.getProjectList(userId);
-
-        if(projectDataList != null && projectDataList.size()>0){
-            Factory factory = factoryMapper.selectByPrimaryKey(projectDataList.get(0).getFactoryId());
-
-            int count = 1;
-            for (ProjectData projectData : projectDataList) {
-                ProjectVo2 projectVo = new ProjectVo2();
-                BeanUtils.copyProperties(projectData,projectVo);
-
-                projectVo.setProjectName(factory.getFactoryName() + "项目" + count);
-                count++;
-
-                projectList.add(projectVo);
-            }
-        }
+    public List<ProjectVo> getProjectList(String userId) {
+        List<ProjectVo> projectList = projectMapper.queryProjects("",userId);
 
         return projectList;
     }
 
+
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public ProjectVo2 getContractDetail(String projectId) {
+    public ProjectVo getProject(Integer projectId) {
+        Project project = projectMapper.selectByPrimaryKey(projectId);
+        if(project == null)
+            return null;
+        ProjectVo projectVo = new ProjectVo();
+        BeanUtils.copyProperties(project,projectVo);
 
-        ProjectVo2 projectVo = new ProjectVo2();
-
-        Example example1 = new Example(ProjectData.class);
-        Example.Criteria criteria1 = example1.createCriteria();
-        criteria1.andEqualTo("projectId",projectId);
-        ProjectData projectData = projectDataMapper.selectOneByExample(example1);
-        BeanUtils.copyProperties(projectData,projectVo);
-
-
-        Example example2 = new Example(ContractData.class);
-        Example.Criteria criteria2 = example2.createCriteria();
-        criteria2.andEqualTo("projectId",projectId);
-        List<ContractData> contractDataList = contractDataMapper.selectByExample(example2);
-        if(contractDataList == null || contractDataList.size() == 0){
-            projectVo.setContractDataList(new ArrayList<>());
-            return projectVo;
+        List<Product> productList = productMapper.getProjectProducts(projectId);
+        if(productList != null && productList.size() > 0) {
+            projectVo.setTotalNum(productList.size());
+            projectVo.setUsingNum((int) productList.stream().filter(t -> t.getProductState() == 0).count());
+            projectVo.setMaintainNum((int) productList.stream().filter(t -> t.getProductState() == 1).count());
+            projectVo.setReserveNum((int) productList.stream().filter(t -> t.getProductState() == 2).count());
+            projectVo.setDeprecatedNum((int) productList.stream().filter(t -> t.getProductState() == 3).count());
         }
-        projectVo.setContractDataList(contractDataList);
-
-        Example example3 = new Example(VerticalityData.class);
-        Example.Criteria criteria3 = example3.createCriteria();
-        criteria3.andEqualTo("projectId",projectId);
-        List<VerticalityData> verticalityDataList = verticalityDataMapper.selectByExample(example3);
-
-        if(verticalityDataList != null && verticalityDataList.size() > 0){
-
-            projectVo.setTotalNum(verticalityDataList.size());
-
-            //TODO 不同的state代表什么?
-            projectVo.setUsingNum((int)verticalityDataList.stream().filter(t -> t.getState()==0).count());
-            projectVo.setMaintainNum((int)verticalityDataList.stream().filter(t -> t.getState()==1).count());
-            projectVo.setReserveNum((int)verticalityDataList.stream().filter(t -> t.getState()==2).count());
-            projectVo.setDeprecatedNum((int)verticalityDataList.stream().filter(t -> t.getState()==3).count());
-        }
-
         return projectVo;
     }
-
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
@@ -157,11 +115,17 @@ public class ProjectServiceImpl implements ProjectService {
     public PagedResult query(String query,Integer page, Integer pageSize) {
 
         PageHelper.startPage(page,pageSize);
-        List<ProjectVo> list = projectMapper.queryProjects(query);
+        List<ProjectVo> list = projectMapper.queryProjects(query,null);
 
         for (ProjectVo projectVo : list) {
             if(StringUtils.isNotBlank(projectVo.getFilename()))
                 projectVo.setHasFile(1);
+
+            if(projectVo.getDdbLength() != null && projectVo.getDdbWidth() != null && projectVo.getDdbHeight() != null)
+                projectVo.setDdbSize(projectVo.getDdbLength() + "*" + projectVo.getDdbWidth() + "*" + projectVo.getDdbHeight());
+
+            if(projectVo.getYjbLength() != null && projectVo.getYjbWidth() != null && projectVo.getYjbHeight() != null)
+                projectVo.setYjbSize(projectVo.getYjbLength() + "*" + projectVo.getYjbWidth() + "*" + projectVo.getYjbHeight());
         }
 
         PageInfo<ProjectVo> pageList = new PageInfo<>(list);

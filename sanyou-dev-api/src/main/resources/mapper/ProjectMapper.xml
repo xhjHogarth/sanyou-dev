@@ -17,8 +17,10 @@
 
   <insert id="insertOne" parameterType="com.sanyou.pojo.Project" useGeneratedKeys="true"
           keyProperty="id" keyColumn="id">
-    INSERT INTO project(`project_name`, `project_code`, `factory_id`, `user_id`, `createtime`, `updatetime`, `delete_mark`)
-    VALUES (#{projectName}, #{projectCode}, #{factoryId}, #{userId}, #{createtime}, NULL, 0);
+    INSERT INTO project(`project_name`, `project_code`, `factory_id`, `user_id`, `createtime`, `updatetime`, `delete_mark`,
+                        `ddb_length`,`ddb_width`,`ddb_height`,`yjb_length`,`yjb_width`,`yjb_height`)
+    VALUES (#{projectName}, #{projectCode}, #{factoryId}, #{userId}, #{createtime}, NULL, 0,
+            #{ddbLength},#{ddbWidth},#{ddbHeight},#{yjbLength},#{yjbWidth},#{yjbHeight});
   </insert>
   <select id="checkNameAndCode" parameterType="com.sanyou.pojo.Project" resultType="Integer">
     select count(*) from project where (project_name=#{projectName} or project_code=#{projectCode}) and delete_mark=0
@@ -27,8 +29,9 @@
     </if>
   </select>
   <select id="queryProjects" parameterType="String" resultType="com.sanyou.pojo.vo.ProjectVo">
-    select p.id,project_name as projectName,project_code as projectCode,factory_id as factoryId,
-           user_id as userId,createtime,updatetime,delete_mark as deleteMark,
+    select p.id,project_name as projectName,project_code as projectCode,p.ddb_length as ddbLength,
+            p.ddb_width as ddbWidth,p.ddb_height as ddbHeight,p.yjb_length as yjbLength,p.yjb_width as yjbWidth,
+            p.yjb_height as yjbHeight,factory_id as factoryId,user_id as userId,createtime,updatetime,delete_mark as deleteMark,
            (select username from user where id=user_id) as username,
            (select factory_name from factory where id=factory_id) as factoryName,pf.filename as filename
     from project p
@@ -36,6 +39,9 @@
     where delete_mark=0
     <if test="query != null and query != ''">
       and (project_name like '%${query}%' or project_code like '%${query}%')
+    </if>
+    <if test="userId != null and userId != ''">
+      and p.factory_id=(select factory_id from user where id=#{userId})
     </if>
   </select>
 </mapper>

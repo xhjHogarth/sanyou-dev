@@ -2,14 +2,8 @@ package com.sanyou.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sanyou.mapper.OrderMapper;
-import com.sanyou.mapper.OrderProductMapper;
-import com.sanyou.mapper.ProductMapper;
-import com.sanyou.mapper.ProjectOrderMapper;
-import com.sanyou.pojo.Order;
-import com.sanyou.pojo.OrderProduct;
-import com.sanyou.pojo.Product;
-import com.sanyou.pojo.ProjectOrder;
+import com.sanyou.mapper.*;
+import com.sanyou.pojo.*;
 import com.sanyou.pojo.vo.OrderVo;
 import com.sanyou.pojo.vo.ProductVo;
 import com.sanyou.service.OrderService;
@@ -45,6 +39,9 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private ProductMapper productMapper;
 
+    @Autowired
+    private ProjectMapper projectMapper;
+
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public boolean checkOrderExist(OrderVo orderVo) {
@@ -60,6 +57,22 @@ public class OrderServiceImpl implements OrderService {
 
         order.setCreatetime(new Date());
         order.setDeleteMark((byte)0);
+
+        if(orderVo.getProjectId() != null){
+            Project project = projectMapper.selectByPrimaryKey(orderVo.getProjectId());
+            if(order.getDdbLength() == null)
+                order.setDdbLength(project.getDdbLength());
+            if(order.getDdbWidth() == null)
+                order.setDdbWidth(project.getDdbWidth());
+            if(order.getDdbHeight() == null)
+                order.setDdbHeight(project.getDdbHeight());
+            if(order.getYjbLength() == null)
+                order.setYjbLength(project.getYjbLength());
+            if(order.getYjbWidth() == null)
+                order.setYjbWidth(project.getYjbWidth());
+            if(order.getYjbHeight() == null)
+                order.setYjbHeight(project.getYjbHeight());
+        }
 
         orderMapper.insertOne(order);
 

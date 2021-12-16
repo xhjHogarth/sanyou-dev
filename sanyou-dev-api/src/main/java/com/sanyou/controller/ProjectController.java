@@ -72,6 +72,13 @@ public class ProjectController {
         String projectCode = request.getParameter("projectCode");
         String factoryId = request.getParameter("factoryId");
         String userId = request.getParameter("userId");
+        String ddbLength = request.getParameter("ddbLength");
+        String ddbWidth = request.getParameter("ddbWidth");
+        String ddbHeight = request.getParameter("ddbHeight");
+        String yjbLength = request.getParameter("yjbLength");
+        String yjbWidth = request.getParameter("yjbWidth");
+        String yjbHeight = request.getParameter("yjbHeight");
+
 
         if(StringUtils.isBlank(projectName))
             return JSONResult.errorMsg("项目名不能为空!");
@@ -82,12 +89,24 @@ public class ProjectController {
         if(StringUtils.isBlank(userId))
             return JSONResult.errorMsg("用户Id不能为空!");
 
+        if(StringUtils.isBlank(ddbLength) || StringUtils.isBlank(ddbWidth) || StringUtils.isBlank(ddbHeight))
+            return JSONResult.errorMsg("导电棒尺寸不能为空!");
+
+        if(StringUtils.isBlank(yjbLength) || StringUtils.isBlank(yjbWidth) || StringUtils.isBlank(yjbHeight))
+            return JSONResult.errorMsg("阴极板尺寸不能为空!");
+
         Project project = new Project();
         project.setProjectName(projectName);
         project.setProjectCode(projectCode);
         project.setUserId(userId);
         if(StringUtils.isNotBlank(factoryId))
             project.setFactoryId(factoryId);
+        project.setDdbLength(Double.valueOf(ddbLength));
+        project.setDdbWidth(Double.valueOf(ddbWidth));
+        project.setDdbHeight(Double.valueOf(ddbHeight));
+        project.setYjbLength(Double.valueOf(yjbLength));
+        project.setYjbWidth(Double.valueOf(yjbWidth));
+        project.setYjbHeight(Double.valueOf(yjbHeight));
 
         if(projectService.checkNameAndCode(project)){
             return JSONResult.errorMsg("项目名或编码已存在!");
@@ -138,6 +157,12 @@ public class ProjectController {
         String projectName = request.getParameter("projectName");
         String projectCode = request.getParameter("projectCode");
         String factoryId = request.getParameter("factoryId");
+        String ddbLength = request.getParameter("ddbLength");
+        String ddbWidth = request.getParameter("ddbWidth");
+        String ddbHeight = request.getParameter("ddbHeight");
+        String yjbLength = request.getParameter("yjbLength");
+        String yjbWidth = request.getParameter("yjbWidth");
+        String yjbHeight = request.getParameter("yjbHeight");
 
         if(StringUtils.isBlank(id))
             return JSONResult.errorMsg("项目不存在!");
@@ -148,12 +173,24 @@ public class ProjectController {
         if(StringUtils.isBlank(projectCode))
             return JSONResult.errorMsg("项目编码不能为空!");
 
+        if(StringUtils.isBlank(ddbLength) || StringUtils.isBlank(ddbWidth) || StringUtils.isBlank(ddbHeight))
+            return JSONResult.errorMsg("导电棒尺寸不能为空!");
+
+        if(StringUtils.isBlank(yjbLength) || StringUtils.isBlank(yjbWidth) || StringUtils.isBlank(yjbHeight))
+            return JSONResult.errorMsg("阴极板尺寸不能为空!");
+
         Project project = new Project();
         project.setId(Integer.valueOf(id));
         project.setProjectName(projectName);
         project.setProjectCode(projectCode);
         if(StringUtils.isNotBlank(factoryId))
             project.setFactoryId(factoryId);
+        project.setDdbLength(Double.valueOf(ddbLength));
+        project.setDdbWidth(Double.valueOf(ddbWidth));
+        project.setDdbHeight(Double.valueOf(ddbHeight));
+        project.setYjbLength(Double.valueOf(yjbLength));
+        project.setYjbWidth(Double.valueOf(yjbWidth));
+        project.setYjbHeight(Double.valueOf(yjbHeight));
 
         if(projectService.checkNameAndCode(project)){
             return JSONResult.errorMsg("项目名或编码已存在!");

@@ -24,6 +24,42 @@ public class Project {
     private String projectCode;
 
     /**
+     * 导电棒长
+     */
+    @Column(name = "ddb_length")
+    private Double ddbLength;
+
+    /**
+     * 导电棒宽
+     */
+    @Column(name = "ddb_width")
+    private Double ddbWidth;
+
+    /**
+     * 导电棒高
+     */
+    @Column(name = "ddb_height")
+    private Double ddbHeight;
+
+    /**
+     * 阴极板长
+     */
+    @Column(name = "yjb_length")
+    private Double yjbLength;
+
+    /**
+     * 阴极板宽
+     */
+    @Column(name = "yjb_width")
+    private Double yjbWidth;
+
+    /**
+     * 阴极板高
+     */
+    @Column(name = "yjb_height")
+    private Double yjbHeight;
+
+    /**
      * 厂家id
      */
     @Column(name = "factory_id")
@@ -183,5 +219,53 @@ public class Project {
      */
     public void setDeleteMark(Byte deleteMark) {
         this.deleteMark = deleteMark;
+    }
+
+    public Double getDdbLength() {
+        return ddbLength;
+    }
+
+    public void setDdbLength(Double ddbLength) {
+        this.ddbLength = ddbLength;
+    }
+
+    public Double getDdbWidth() {
+        return ddbWidth;
+    }
+
+    public void setDdbWidth(Double ddbWidth) {
+        this.ddbWidth = ddbWidth;
+    }
+
+    public Double getDdbHeight() {
+        return ddbHeight;
+    }
+
+    public void setDdbHeight(Double ddbHeight) {
+        this.ddbHeight = ddbHeight;
+    }
+
+    public Double getYjbLength() {
+        return yjbLength;
+    }
+
+    public void setYjbLength(Double yjbLength) {
+        this.yjbLength = yjbLength;
+    }
+
+    public Double getYjbWidth() {
+        return yjbWidth;
+    }
+
+    public void setYjbWidth(Double yjbWidth) {
+        this.yjbWidth = yjbWidth;
+    }
+
+    public Double getYjbHeight() {
+        return yjbHeight;
+    }
+
+    public void setYjbHeight(Double yjbHeight) {
+        this.yjbHeight = yjbHeight;
     }
 }

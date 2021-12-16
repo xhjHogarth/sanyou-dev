@@ -19,7 +19,7 @@ public class CollectHistory {
     @Column(name = "user_id")
     private String userId;
 
-    private Float verticality;
+    private Double verticality;
 
     /**
      * @return id
@@ -80,14 +80,14 @@ public class CollectHistory {
     /**
      * @return verticality
      */
-    public Float getVerticality() {
+    public Double getVerticality() {
         return verticality;
     }
 
     /**
      * @param verticality
      */
-    public void setVerticality(Float verticality) {
+    public void setVerticality(Double verticality) {
         this.verticality = verticality;
     }
 }
