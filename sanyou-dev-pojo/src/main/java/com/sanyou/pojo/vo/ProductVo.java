@@ -50,6 +50,9 @@ public class ProductVo {
 
     private String username;
 
+    private String startProductCode;
+    private String endProductCode;
+
     /**
      * 阴极板动态检测数据
      */
@@ -234,5 +237,21 @@ public class ProductVo {
 
     public void setCollectStatus(int collectStatus) {
         this.collectStatus = collectStatus;
+    }
+
+    public String getStartProductCode() {
+        return startProductCode;
+    }
+
+    public void setStartProductCode(String startProductCode) {
+        this.startProductCode = startProductCode;
+    }
+
+    public String getEndProductCode() {
+        return endProductCode;
+    }
+
+    public void setEndProductCode(String endProductCode) {
+        this.endProductCode = endProductCode;
     }
 }

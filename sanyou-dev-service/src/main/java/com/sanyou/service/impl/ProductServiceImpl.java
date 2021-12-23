@@ -3,10 +3,7 @@ package com.sanyou.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sanyou.mapper.*;
-import com.sanyou.pojo.CollectHistory;
-import com.sanyou.pojo.IndustryData;
-import com.sanyou.pojo.Product;
-import com.sanyou.pojo.SearchHistory;
+import com.sanyou.pojo.*;
 import com.sanyou.pojo.vo.ProductVo;
 import com.sanyou.service.ProductService;
 import com.sanyou.utils.PagedResult;
@@ -42,6 +39,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     private OrderProductMapper orderProductMapper;
+
+    @Autowired
+    private VerticalityDataMapper verticalityDataMapper;
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
@@ -159,5 +159,44 @@ public class ProductServiceImpl implements ProductService {
 
             productMapper.updateProduct(product);
         }
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void addProduct(Product product) {
+        product.setCreatetime(new Date());
+        productMapper.insertSelective(product);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void deleteProduct(Integer id) {
+        productMapper.deleteByPrimaryKey(id);
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public int checkCount(String startProductCode, String endProductCode) {
+
+        Example example = new Example(Product.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andBetween("productCode", startProductCode, endProductCode);
+        List<Product> productList = productMapper.selectByExample(example);
+
+        return productList==null?0:productList.size();
+    }
+
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<VerticalityData> getList() {
+        List<VerticalityData> list = verticalityDataMapper.selectAll();
+        return list;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void copyData(List<Product> productList) {
+        productMapper.insertList(productList);
     }
 }

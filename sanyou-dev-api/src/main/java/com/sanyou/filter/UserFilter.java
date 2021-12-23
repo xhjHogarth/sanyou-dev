@@ -40,7 +40,7 @@ public class UserFilter implements Filter {
                 "/resource/getAll",
                 "/equipment/getEquipmentTree","/equipment/getUserEquip","/equipment/getEquip","/equipment/getEquipById",
                 "/userLog/download","/user/login","/user/updatePwd","/user/download","/user/register",
-                "/project/getAll"
+                "/project/getAll","/product/copyData"
         );
 
     }

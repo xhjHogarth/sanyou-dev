@@ -57,6 +57,7 @@
     <if test="factoryId != null and factoryId != ''">
       and pr.factory_id=#{factoryId}
     </if>
+    order by p.product_code asc
   </select>
 
   <update id="updateProduct" parameterType="com.sanyou.pojo.Product">

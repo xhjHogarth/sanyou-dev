@@ -1,8 +1,11 @@
 package com.sanyou.service;
 
 import com.sanyou.pojo.Product;
+import com.sanyou.pojo.VerticalityData;
 import com.sanyou.pojo.vo.ProductVo;
 import com.sanyou.utils.PagedResult;
+
+import java.util.List;
 
 /**
  * User: asus
@@ -27,4 +30,15 @@ public interface ProductService {
     Product query(String code);
 
     void updateState(ProductVo productVo);
+
+    void addProduct(Product product);
+
+    void deleteProduct(Integer id);
+
+    int checkCount(String startProductCode, String endProductCode);
+
+    List<VerticalityData> getList();
+
+    void copyData(List<Product> productList);
+
 }
