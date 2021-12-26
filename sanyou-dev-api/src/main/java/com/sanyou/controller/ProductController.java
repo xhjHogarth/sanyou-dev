@@ -33,6 +33,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    //这是一个测试提交
 
     @GetMapping("/query")
     public JSONResult query(String query,Integer page, Integer pageSize,Integer state,Integer maintainType,String factoryId){
