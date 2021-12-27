@@ -91,4 +91,8 @@
       and p.product_code=#{scanCode}
     </if>
   </select>
+
+  <select id="getExistList" parameterType="String" resultType="com.sanyou.pojo.Product">
+    select id,product_code as productCode from product where product_code BETWEEN  #{start} and #{end} order by product_code asc;
+  </select>
 </mapper>

@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -197,6 +199,68 @@ public class ProductServiceImpl implements ProductService {
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void copyData(List<Product> productList) {
+        productMapper.insertList(productList);
+    }
+
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public List<Product> getAbsentList(String startProductCode, String endProductCode) {
+        List<Product> absentList = new ArrayList<>();
+        int length = startProductCode.length();
+
+        List<Product> existList = productMapper.getExistList(startProductCode,endProductCode);
+        Long startCode = Long.valueOf(startProductCode);
+        Long endCode = Long.valueOf(endProductCode);
+        if(existList == null || existList.size() == 0){
+            for(long i = startCode;i<=endCode;i++){
+                addProduct(absentList,i,length);
+            }
+        }else{
+            for(long i = startCode;i<=endCode;i++){
+                if(existList.size() == 0){
+                    addProduct(absentList,i,length);
+                }else{
+                    Product exist = existList.get(0);
+                    if(i == Long.valueOf(exist.getProductCode())){
+                        existList.remove(0);
+                    }else{
+                        addProduct(absentList,i,length);
+                    }
+                }
+            }
+        }
+
+
+        return absentList;
+    }
+
+    private void addProduct(List<Product> list,long code,int length){
+        Product addProduct = new Product();
+        int len = 0;
+        long temp = code;
+        while(temp/10 > 0){
+            len++;
+            temp = temp/10;
+        }
+        if(temp>0)
+            len++;
+        if(temp == length)
+            addProduct.setProductCode(String.valueOf(code));
+        else{
+            String resultCode = String.valueOf(code);
+            for(int i=0;i<length-len;i++){
+                resultCode = "0" + resultCode;
+            }
+            addProduct.setProductCode(resultCode);
+        }
+        addProduct.setCreatetime(new Date());
+        list.add(addProduct);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    @Override
+    public void addProductList(List<Product> productList) {
         productMapper.insertList(productList);
     }
 }

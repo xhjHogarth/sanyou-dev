@@ -12,6 +12,7 @@ package com.sanyou.utils;
  * 				502：拦截器拦截到用户token出错
  * 			    503: 没有权限
  * 				555：异常抛出信息
+ * 			    504：阴极板编码缺失专用
  */
 public class JSONResult {
 

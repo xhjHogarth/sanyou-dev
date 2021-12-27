@@ -121,6 +121,9 @@ public class ProductController {
         if(Long.valueOf(productVo.getStartProductCode()) > Long.valueOf(productVo.getEndProductCode()))
             return JSONResult.errorMsg("起始编码不能大于截止编码!");
 
+        if(Long.valueOf(productVo.getEndProductCode()) - Long.valueOf(productVo.getStartProductCode()) > 5000)
+            return JSONResult.errorMsg("编码区间长度不能超过5000!");
+
         int count = productService.checkCount(productVo.getStartProductCode(),productVo.getEndProductCode());
         if(count==0)
             return JSONResult.errorMsg("当前编码区间不存在阴极板!");
@@ -129,7 +132,13 @@ public class ProductController {
         if(rcount == count)
             return JSONResult.ok();
 
-        return JSONResult.errorMsg("阴极板编码缺失!");
+        List<Product> productList = productService.getAbsentList(productVo.getStartProductCode(),productVo.getEndProductCode());
+
+        JSONResult jsonResult = new JSONResult();
+        jsonResult.setStatus(504);
+        jsonResult.setMsg("阴极板编码缺失!");
+        jsonResult.setData(productList);
+        return jsonResult;
     }
 
     /**
@@ -152,6 +161,23 @@ public class ProductController {
             productList.add(product);
         }
         productService.copyData(productList);
+
+        return JSONResult.ok();
+    }
+
+    /**
+     * 创建缺失的阴极板
+     * @return
+     */
+    @PostMapping("/addProductList")
+    public JSONResult addProductList(@RequestBody List<Product> productList){
+        if(productList == null)
+            return JSONResult.errorMsg("阴极板数据为空!");
+
+        for (Product product : productList) {
+            product.setProductState(0);
+        }
+        productService.addProductList(productList);
 
         return JSONResult.ok();
     }

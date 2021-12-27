@@ -41,4 +41,7 @@ public interface ProductService {
 
     void copyData(List<Product> productList);
 
+    List<Product> getAbsentList(String startProductCode, String endProductCode);
+
+    void addProductList(List<Product> productList);
 }

@@ -19,4 +19,6 @@ public interface ProductMapper extends MyMapper<Product> {
     List<Product> getProjectProducts(@Param("pid") Integer projectId);
 
     ProductVo selectByCode(@Param("scanCode") String scanCode);
+
+    List<Product> getExistList(String start, String end);
 }
